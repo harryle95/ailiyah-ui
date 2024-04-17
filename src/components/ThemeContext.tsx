@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ITailwindTheme, isThemeKey } from "./style";
+import { ITailwindTheme, isTailwindKey } from "./utils/types";
 
 interface PresetTheme {
   [key: string]: ITailwindTheme;
@@ -53,7 +53,7 @@ export class Theme {
     const rest: Record<string, any> = {};
 
     Object.keys(values).forEach((key) => {
-      if (isThemeKey(key)) {
+      if (isTailwindKey(key)) {
         tailwindTheme[key] = values[key];
       } else {
         rest[key] = values[key];

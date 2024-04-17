@@ -1,22 +1,25 @@
-import { AiOutlineDoubleRight as RightIcon, AiOutlineDoubleLeft as LeftIcon } from "react-icons/ai";
-import { ToggleButton } from "./components/IconButton";
-import { useThemeContext, Theme } from "./components/ThemeContext";
-import { useState } from "react";
+import {
+  AiOutlineDoubleRight as RightIcon,
+  AiOutlineDoubleLeft as LeftIcon,
+} from "react-icons/ai";
+import { useState} from "react";
+import {styled} from "./components/utils/factory"
+
 
 function App() {
-  const [state, setState] = useState(false);
-  const theme = useThemeContext();
-  const iconClass = Theme.toString(theme['icons'])
+  const [visible, setVisible] = useState(false);
+  const SLeftIcon = styled(LeftIcon)
+  const SRightIcon = styled(RightIcon)
+  const Button = styled.button
+  
+  
   return (
-    <ToggleButton
-      onIcon={<RightIcon className={iconClass} />}
-      offIcon={<LeftIcon className={iconClass} />}
-      width="w-10"
-      height="h-10"
-      state={state}
-      onClick={() => setState(!state)}
-    />
+    <Button themeName={"toggleButton"} onClick={()=>setVisible(!visible)}>
+      {visible? <SLeftIcon themeName={"icons"}/>:<SRightIcon themeName={"icons"}/>}
+    </Button>
   )
+
+
 }
 
 export default App;
