@@ -1,23 +1,22 @@
 import * as React from "react";
-import { ITailwindTheme, isTailwindKey } from "./utils/types";
+import { ITailwindTheme, isTailwindKey } from "./types";
 
 interface PresetTheme {
   [key: string]: ITailwindTheme;
 }
 
-const defaultTheme = {
+type keys = keyof ITailwindTheme;
+
+const defaultTheme: PresetTheme = {
   toggleButton: {
-    width: "w-10",
-    height: "h-10",
-    opacity: "hover:opacity-50",
-    background: "bg-black",
-    textColor: "text-white",
+    twWidth: "w-10",
+    twHeight: "h-10"
   },
 
   icons: {
-    width: "w-full",
-    height: "h-full",
-    padding: "p-2",
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twPadding: "p-2",
   },
 };
 

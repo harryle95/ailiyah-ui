@@ -3,7 +3,7 @@ import {
   AiOutlineDoubleLeft as LeftIcon,
 } from "react-icons/ai";
 import { useState} from "react";
-import {styled} from "./components/utils/factory"
+import { styled } from "./components/context/factory";
 
 
 function App() {

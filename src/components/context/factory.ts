@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useThemeContext, Theme } from "../ThemeContext";
-import { ITailwindTheme } from "./types";
+import { useThemeContext, Theme } from "./ThemeContext";
+import { ITailwindTheme } from "./types"
 import { FunctionComponent, ElementType } from "react";
 
 export type TailwindProps<T extends ElementType> =
