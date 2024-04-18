@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
-  AiOutlineDoubleRight as RightIcon,
-  AiOutlineDoubleLeft as LeftIcon,
-} from "react-icons/ai";
+  DoubleArrowLeftIcon as LeftIcon,
+  DoubleArrowRightIcon as RightIcon,
+} from "@radix-ui/react-icons";
 import * as PNavBar from "../primitives/NavBar";
 import { Tooltip } from "@radix-ui/themes";
 import { styled } from "../context/factory";
@@ -18,7 +18,6 @@ export function NavBar() {
           themeName="icons"
           twPadding="p-0"
           twTopRightBottomLeft="top-1/2"
-          twOpacity="hover:opacity-50"
         />
       </div>
     </Tooltip>
@@ -31,12 +30,11 @@ export function NavBar() {
           themeName="icons"
           twPadding="p-0"
           twTopRightBottomLeft="top-1/2"
-          twOpacity="hover:opacity-50"
         />
       </div>
     </Tooltip>
   );
-
+  
   return (
     <div className="flex">
       <PNavBar.Root
