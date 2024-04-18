@@ -8,16 +8,16 @@ interface PresetTheme {
 type keys = keyof ITailwindTheme;
 
 const defaultTheme: PresetTheme = {
-  toggleButton: {
-    twWidth: "w-10",
-    twHeight: "h-10"
-  },
+  // toggleButton: {
+  //   twWidth: "w-10",
+  //   twHeight: "h-10",
+  // },
 
-  icons: {
-    twWidth: "w-full",
-    twHeight: "h-full",
-    twPadding: "p-2",
-  },
+  // icons: {
+  //   twWidth: "w-full",
+  //   twHeight: "h-full",
+  //   twPadding: "p-2",
+  // },
 };
 
 export const ThemeContext = React.createContext<PresetTheme | undefined>(
@@ -72,11 +72,15 @@ export class Theme {
     theme: PresetTheme
   ): { className: string; rest: Record<string, any> } {
     const { tailwindTheme, rest } = Theme.extract(props);
+    const appliedTheme =
+      tailwindTheme.themeName && theme[tailwindTheme.themeName]
+        ? { ...theme[tailwindTheme.themeName], ...tailwindTheme }
+        : tailwindTheme;
+
+    const stringTheme = Theme.toString(appliedTheme)
     const className = rest.className
-      ? rest.className
-      : tailwindTheme.themeName
-      ? Theme.toString(theme[tailwindTheme.themeName])
-      : Theme.toString(tailwindTheme);
+      ? rest.className + " " + stringTheme
+      : stringTheme
     return { className: className, rest: rest };
   }
 }

@@ -326,6 +326,8 @@ export class TailwindTheme {
   twScreenReaders?: string = ''
   /** twForcedColorAdjust - https://tailwindcss.com/docs/forced-color-adjust*/
   twForcedColorAdjust?: string = ''
+  /** Other variables */
+  twOther?:string=''
 }
 
 export interface ITailwindTheme extends TailwindTheme { }
