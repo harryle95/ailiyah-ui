@@ -13,11 +13,12 @@ const defaultTheme: PresetTheme = {
   //   twHeight: "h-10",
   // },
 
-  // icons: {
-  //   twWidth: "w-full",
-  //   twHeight: "h-full",
-  //   twPadding: "p-2",
-  // },
+  icons: {
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twPadding: "p-2",
+    twOpacity: "opacity-100 hover:opacity-50",
+  },
 };
 
 export const ThemeContext = React.createContext<PresetTheme | undefined>(
@@ -77,10 +78,10 @@ export class Theme {
         ? { ...theme[tailwindTheme.themeName], ...tailwindTheme }
         : tailwindTheme;
 
-    const stringTheme = Theme.toString(appliedTheme)
+    const stringTheme = Theme.toString(appliedTheme);
     const className = rest.className
       ? rest.className + " " + stringTheme
-      : stringTheme
+      : stringTheme;
     return { className: className, rest: rest };
   }
 }
