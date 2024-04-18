@@ -13,13 +13,14 @@ import {
 import { Tooltip } from "@radix-ui/themes";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { styled } from "../context/factory";
+import { Popover } from "@radix-ui/themes";
 
 export type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
 export type TailwindButtonProps = ButtonProps & ITailwindTheme;
 
 export interface TooltipTailwindButtonProps extends TailwindButtonProps {
-  tooltipContent: string;
+  tooltipContent?: string;
 }
 
 interface DeleteAlertProps extends TooltipTailwindButtonProps {
@@ -140,17 +141,50 @@ const DotsVerticalButton = createButton(
   <DotsVerticalIcon themeName="icons" />
 );
 
+interface PopOverButtonContentProps
+  extends Omit<Popover.ContentProps, "asChild">,
+    ITailwindTheme {
+  icon?: React.JSX.Element;
+}
+
+const PopOverButtonGroup = React.forwardRef<
+  HTMLDivElement,
+  PopOverButtonContentProps
+>((props, ref) => {
+  const { icon = <DotsHorizontalButton />, children, ...rest } = props;
+  const Content = styled(Popover.Content);
+  return (
+    <Popover.Root>
+      <Popover.Trigger>{icon}</Popover.Trigger>
+      <Content {...rest} ref={ref}>
+        {children}
+      </Content>
+    </Popover.Root>
+  );
+});
+
 type DivProps = React.ComponentPropsWithoutRef<"div">;
-type TailwindDivProps = 
 
-const PopOverButtonGroup = React.forwardRef<HTMLDivElement, >
+interface InvisibleButtonGroupProps extends DivProps, ITailwindTheme {
+  state?: boolean;
+  defaultState?: boolean;
+}
 
+const InvisibleButtonGroup = React.forwardRef<
+  HTMLDivElement,
+  InvisibleButtonGroupProps
+>((props, ref) => {
+  const { state = null, defaultState = true, children, style, ...rest } = props;
+  const displayState = state !== null ? state : defaultState;
+  const displayStyle = displayState ? style : { ...style, display: "none" };
+  return (
+    <styled.div ref={ref} {...rest} style={displayStyle}>
+      {children}
+    </styled.div>
+  );
+});
 
-
-
-
-
-
+InvisibleButtonGroup.displayName = "InvisibleButtonGroup";
 
 export {
   AddButton,
@@ -162,4 +196,6 @@ export {
   DeleteAlertButton,
   DotsHorizontalButton,
   DotsVerticalButton,
+  PopOverButtonGroup,
+  InvisibleButtonGroup,
 };
