@@ -6,13 +6,26 @@ import "./index.css"
 import { ThemeProvider } from './components/context/ThemeContext.tsx'
 import { Theme as RadixTheme } from '@radix-ui/themes';
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ThemeProvider>
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ThemeProvider>
       <RadixTheme>
         <App />
       </RadixTheme>
-    </ThemeProvider>
+    </ThemeProvider>,
+  },
+]);
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

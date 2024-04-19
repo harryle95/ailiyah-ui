@@ -5,8 +5,6 @@ interface PresetTheme {
   [key: string]: ITailwindTheme;
 }
 
-type keys = keyof ITailwindTheme;
-
 const defaultTheme: PresetTheme = {
   // toggleButton: {
   //   twWidth: "w-10",
@@ -28,7 +26,8 @@ export const ThemeContext = React.createContext<PresetTheme | undefined>(
 export const useThemeContext = () => {
   const context = React.useContext(ThemeContext);
   if (!context) {
-    throw new Error("useThemeContext must be used within a Provider");
+    console.error("useThemeContext must be used within a Provider");
+    return {};
   }
   return context;
 };

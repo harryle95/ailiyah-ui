@@ -166,7 +166,7 @@ const PopOverButtonGroup = React.forwardRef<
 type DivProps = React.ComponentPropsWithoutRef<"div">;
 
 interface InvisibleButtonGroupProps extends DivProps, ITailwindTheme {
-  state?: boolean;
+  visibleState?: boolean;
   defaultState?: boolean;
 }
 
@@ -174,8 +174,8 @@ const InvisibleButtonGroup = React.forwardRef<
   HTMLDivElement,
   InvisibleButtonGroupProps
 >((props, ref) => {
-  const { state = null, defaultState = true, children, style, ...rest } = props;
-  const displayState = state !== null ? state : defaultState;
+  const { visibleState = null, defaultState = true, children, style, ...rest } = props;
+  const displayState = visibleState !== null ? visibleState : defaultState;
   const displayStyle = displayState ? style : { ...style, display: "none" };
   return (
     <styled.div ref={ref} {...rest} style={displayStyle}>
