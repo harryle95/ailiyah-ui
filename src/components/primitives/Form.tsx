@@ -2,6 +2,7 @@ import * as React from "react";
 import { ITailwindTheme } from "../context/types";
 import { styled } from "../context/factory";
 import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
+import * as Upload from "./Upload";
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -180,4 +181,4 @@ const Root = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
 
 Root.displayName = "FormRoot";
 
-export { Root, Input, useFormContext };
+export { Root, Input, Upload, useFormContext };
