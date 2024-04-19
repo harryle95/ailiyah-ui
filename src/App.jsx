@@ -1,17 +1,7 @@
-import * as SButton from "./components/built/Buttons"
-
+import { Demo } from "./examples/UploadAndRemoveWithHook";
 
 function App() {
-  
-  return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <SButton.InvisibleButtonGroup state={true}>
-        <SButton.UploadButton tooltipContent="Upload"/>
-        <SButton.DownloadButton tooltipContent="Download"/>
-      </SButton.InvisibleButtonGroup>
-    </div>
-
-  )
+  return <Demo/>
 }
 
-export default App;
+export default App; 

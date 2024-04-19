@@ -15,13 +15,15 @@ import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { styled } from "../context/factory";
 import { Popover } from "@radix-ui/themes";
 
-export type ButtonProps = React.ComponentPropsWithoutRef<"button">;
+type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
-export type TailwindButtonProps = ButtonProps & ITailwindTheme;
+type TailwindButtonProps = ButtonProps & ITailwindTheme;
 
-export interface TooltipTailwindButtonProps extends TailwindButtonProps {
+export interface TooltipProps{
   tooltipContent?: string;
 }
+
+export interface TooltipTailwindButtonProps extends TailwindButtonProps, TooltipProps{}
 
 interface DeleteAlertProps extends TooltipTailwindButtonProps {
   dialogTitle: string;
@@ -198,4 +200,12 @@ export {
   DotsVerticalButton,
   PopOverButtonGroup,
   InvisibleButtonGroup,
+  AddIcon,
+  DeleteIcon,
+  EditIcon,
+  UploadIcon,
+  DownloadIcon,
+  SubmitIcon,
+  DotsHorizontalIcon,
+  DotsVerticalIcon,
 };
