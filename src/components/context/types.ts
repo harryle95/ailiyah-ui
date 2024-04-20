@@ -331,6 +331,7 @@ export class TailwindTheme {
 }
 
 export interface ITailwindTheme extends TailwindTheme { }
+export type ITailwindKey = keyof ITailwindTheme;
 
 const keys = Object.keys(new TailwindTheme());
 
