@@ -15,7 +15,6 @@ function Demo() {
         twBorderWidth="border-2"
         twBackgroundColor="bg-white data-[state=active]:bg-slate-200"
         twBorderRadius="rounded-md"
-        twPosition="relative"
       >
         <Text.Content twPadding="px-2">
           Long Text that will not be fully displayed and will be clipped

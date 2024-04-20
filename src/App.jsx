@@ -1,4 +1,4 @@
-import { Demo } from "./examples/UploadAndRemoveWithHook";
+import { Demo } from "./examples/ScrollAreaText";
 
 function App() {
   return <Demo/>

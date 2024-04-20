@@ -16,7 +16,6 @@ const defaultTheme: PresetTheme = {
   icons: {
     twWidth: "w-full",
     twHeight: "h-full",
-    twPadding: "p-2",
     twOpacity: "opacity-100 hover:opacity-50",
   },
 };
