@@ -77,17 +77,13 @@ Input.displayName = "Input";
  */
 
 interface IFormContext {
-  formState?: boolean;
-  setFormState?: (formState: boolean) => void;
   submitForm?:
     | React.FormEvent<HTMLFormElement>
     | React.MouseEventHandler<HTMLButtonElement>
     | React.KeyboardEventHandler<HTMLInputElement>;
 }
 
-interface FormProps
-  extends Omit<_FormProps, "defaultFormState" | "children" | "onSubmit"> {
-  defaultFormState?: boolean;
+interface FormProps extends Omit<_FormProps, "children" | "onSubmit"> {
   children: React.ReactNode | ((formContext: IFormContext) => React.ReactNode);
   onSubmit:
     | React.FormEvent<HTMLFormElement>
@@ -109,11 +105,10 @@ const useFormContext: () => IFormContext = () => {
 
 /**
  * Wrapper of Remix/React-Router-Dom's `Form` component, which provides an accompanying
- * `useFormContext` hook to access `formState`, `setFormState` and `submitForm`
+ * `useFormContext` hook to access`submitForm`
  *
  * Parameters:
  *
- * @param defaultFormState - initial formState. Defaults to true
  *
  * Use case:
  * children of Root can call `useFormContext` to get `submitForm`, which is a reference to
@@ -152,15 +147,12 @@ const useFormContext: () => IFormContext = () => {
  *
  */
 const Root = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
-  const { defaultFormState = true, children, onSubmit, ...rest } = props;
-  const [formState, setFormState] = React.useState(defaultFormState);
+  const { children, onSubmit, ...rest } = props;
   const contextValue = React.useMemo(
     () => ({
-      formState: formState,
-      setFormState: setFormState,
       submitForm: onSubmit,
     }),
-    [formState, onSubmit]
+    [onSubmit]
   );
   return (
     <FormContext.Provider value={contextValue as unknown as IFormContext}>
