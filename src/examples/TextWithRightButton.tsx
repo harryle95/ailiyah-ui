@@ -3,7 +3,7 @@ import * as React from "react";
 import { DeleteButton } from "../components/built/Buttons";
 
 /**
- * Text box with delete button that appears when hovered over 
+ * Text box with delete button that appears when hovered
  * @returns 
  */
 function Demo() {
