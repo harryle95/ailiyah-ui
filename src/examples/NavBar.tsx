@@ -5,7 +5,8 @@ import { styled } from "../components/context/factory";
 import { Link } from "react-router-dom";
 import * as Form from "../components/primitives/Form";
 import * as NavBar from "../components/built/NavBar";
-import ReactLogo from "../assets/react.svg";
+// @ts-ignore
+import ReactLogo from "../assets/react.svg"; 
 
 interface TextBoxUpdateFormProps
   extends React.ComponentPropsWithoutRef<"form"> {
@@ -62,52 +63,7 @@ function IconPanel() {
   );
 }
 
-function ListItem({ projectName, projectURL = "#", activeState = false }) {
-  const [editingState, setEditingState] = React.useState(false);
-  const [name, setName] = React.useState(projectName);
-  return (
-    <Text.Root
-      themeName="NavBarTextBoxRoot"
-      activeState={activeState || editingState}
-      hoverSetActive={true}
-    >
-      <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
-        {!editingState ? (
-          <>
-            <Text.Content>
-              <Link to={projectURL}>{name}</Link>
-            </Text.Content>
 
-            <Text.Component
-              compLocation="right"
-              themeName="NavBarTextBoxMask"
-            ></Text.Component>
-
-            <Text.Component
-              compLocation="right"
-              themeName="NavBarInvisibleTextBoxButtons"
-            >
-              <Button.InvisibleButtonGroup themeName="InvisibleButtonsLayout">
-                <Button.EditButton
-                  tooltipContent="Edit"
-                  onClick={() => setEditingState(!editingState)}
-                />
-                <Button.DeleteButton tooltipContent="Delete" />
-              </Button.InvisibleButtonGroup>
-            </Text.Component>
-          </>
-        ) : (
-          <TextBoxUpdateForm
-            id="#"
-            projectName={name}
-            setProjectName={setName}
-            setEditingState={setEditingState}
-          />
-        )}
-      </styled.div>
-    </Text.Root>
-  );
-}
 
 const TAGS = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
