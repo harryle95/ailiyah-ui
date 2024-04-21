@@ -61,8 +61,6 @@ function ListItem({ projectName, projectURL = "#", activeState = false }) {
     <Text.Root
       activeState={activeState}
       hoverSetActive={true}
-      twBorderWidth="data-[state=active]:border-2"
-      twBorderColor="data-[state=active]:border-slate-400"
       twTextColor="text-gray-800 data-[state=active]:text-white"
       twBackgroundColor="data-[state=active]:bg-slate-400"
       twBorderRadius="rounded-md"
