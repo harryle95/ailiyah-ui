@@ -28,6 +28,7 @@ export const defaultTheme: PresetTheme = {
     twHeight: "h-full",
     twOverflow: "overflow-auto",
     twFlex: "flex flex-col",
+    twGap: "gap-y-3"
   },
   NavBarContentHeader: {
     twFlexShrink: "flex-shrink-0",

@@ -5,8 +5,10 @@ import { styled } from "../components/context/factory";
 import { Link } from "react-router-dom";
 import * as Form from "../components/primitives/Form";
 import * as NavBar from "../components/built/NavBar";
+import ReactLogo from "../assets/react.svg";
 
-interface TextBoxUpdateFormProps extends React.ComponentPropsWithoutRef<"form"> {
+interface TextBoxUpdateFormProps
+  extends React.ComponentPropsWithoutRef<"form"> {
   id: string;
   projectName: string;
   setProjectName: Function;
@@ -50,6 +52,15 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
     </Form.Root>
   );
 };
+
+function IconPanel() {
+  return (
+    <div className="flex items-center gap-4">
+      <img className="w-14 h-14" src={ReactLogo} alt="logo" />
+      <div className="font-sans font-bold leading-8 text-xl">AILYAH</div>
+    </div>
+  );
+}
 
 function ListItem({ projectName, projectURL = "#", activeState = false }) {
   const [editingState, setEditingState] = React.useState(false);
@@ -98,7 +109,7 @@ function ListItem({ projectName, projectURL = "#", activeState = false }) {
   );
 }
 
-const TAGS = Array.from({ length: 10 }).map(
+const TAGS = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
 );
 
@@ -108,7 +119,10 @@ export function Demo() {
       <NavBar.Root>
         <NavBar.Trigger />
         <NavBar.Content>
-          <NavBar.Body>
+          <NavBar.Header>
+            <IconPanel />
+          </NavBar.Header>
+          <NavBar.Body twOther="scrollbar-thin">
             <ListItem activeState={true} projectName={"New Project"} />
             {TAGS ? (
               TAGS.map((item) => <ListItem key={item} projectName={item} />)
@@ -116,6 +130,9 @@ export function Demo() {
               <></>
             )}
           </NavBar.Body>
+          <NavBar.Footer>
+            <IconPanel/>
+          </NavBar.Footer>
         </NavBar.Content>
       </NavBar.Root>
     </div>

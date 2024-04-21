@@ -1,4 +1,5 @@
-import { Demo } from "./examples/PopoverButtonDemo";
+import { Demo } from "./examples/NavBar";
+
 
 function App() {
   return <Demo/>
