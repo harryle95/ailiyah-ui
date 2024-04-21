@@ -2,7 +2,8 @@ import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import { TooltipTailwindButtonProps, TooltipProps } from "../built/Buttons";
-import { Tooltip } from "@radix-ui/themes";
+import { Tooltip } from "../built/Tooltip";
+
 /**
  * ------------------------------------------------------------------------------------------------
  * Upload
@@ -136,7 +137,7 @@ const Trigger = React.forwardRef<HTMLLabelElement, UploadTriggerProps>(
     const _htmlFor = htmlFor ? htmlFor : id;
 
     return tooltipContent ? (
-      <Tooltip content={tooltipContent}>
+      <Tooltip tooltipContent={tooltipContent}>
         <styled.label htmlFor={_htmlFor} {...rest} ref={ref}>
           {children}
         </styled.label>
@@ -169,7 +170,7 @@ const Cancel = React.forwardRef<HTMLButtonElement, TooltipTailwindButtonProps>(
     };
 
     return tooltipContent ? (
-      <Tooltip content={tooltipContent}>
+      <Tooltip tooltipContent={tooltipContent}>
         <styled.button {...rest} ref={ref} onClick={removeFile}>
           {children}
         </styled.button>
