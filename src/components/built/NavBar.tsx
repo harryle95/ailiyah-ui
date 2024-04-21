@@ -16,16 +16,18 @@ const Root: React.FC<NavBar.NavBarProps> = (props)=>{
 const Trigger: React.FC<ITailwindTheme> = (props)=>{
   const {themeName,...rest} = props
   let appliedTheme = themeName?themeName:"NavBarTrigger"
+  const LeftButton = Button.createButton("Collapse", <Button.LeftIcon themeName="NavBarIcons"/>)
+  const RightButton = Button.createButton("Collapse", <Button.RightIcon themeName="NavBarIcons"/>)
   return (
   <NavBar.Trigger {...rest} themeName={appliedTheme}> 
     {(state, onClick) => (state ? 
     (
-        <Button.LeftButton tooltipContent="Collapse"
+        <LeftButton tooltipContent="Collapse"
             twTopRightBottomLeft="top-1/2"
             onClick={onClick}
         /> 
       ) : (
-        <Button.RightButton tooltipContent="Expand"
+        <RightButton tooltipContent="Expand"
             twTopRightBottomLeft="top-1/2"
             onClick={onClick}
         />
@@ -33,7 +35,7 @@ const Trigger: React.FC<ITailwindTheme> = (props)=>{
 </NavBar.Trigger>)
 }
 
-const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref=null)=>{
+const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
   const {children, themeName, ...rest} = props; 
   let appliedThemeName = themeName?themeName:"NavBarContent";
   return (
@@ -43,8 +45,41 @@ const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref=
   )
 })
 
+const Body = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+  const {children, themeName, ...rest} = props; 
+  let appliedThemeName = themeName?themeName:"NavBarContentBody";
+  return (
+    <NavBar.Body ref={ref} {...rest} themeName={appliedThemeName}>
+      {children}
+    </NavBar.Body>
+  )
+})
+
+const Header = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+  const {children, themeName, ...rest} = props; 
+  let appliedThemeName = themeName?themeName:"NavBarContentHeader";
+  return (
+    <NavBar.Header ref={ref} {...rest} themeName={appliedThemeName}>
+      {children}
+    </NavBar.Header>
+  )
+})
+
+const Footer = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+  const {children, themeName, ...rest} = props; 
+  let appliedThemeName = themeName?themeName:"NavBarContentFooter";
+  return (
+    <NavBar.Footer ref={ref} {...rest} themeName={appliedThemeName}>
+      {children}
+    </NavBar.Footer>
+  )
+})
+
 export {
   Root,
   Trigger,
-  Content
+  Content,
+  Header, 
+  Body,
+  Footer
 }
