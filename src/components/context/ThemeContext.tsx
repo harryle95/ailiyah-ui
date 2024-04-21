@@ -6,15 +6,36 @@ interface PresetTheme {
 }
 
 const defaultTheme: PresetTheme = {
-  // toggleButton: {
-  //   twWidth: "w-10",
-  //   twHeight: "h-10",
-  // },
+  NavBarRoot: {
+    twHeight: "h-screen",
+    twWidth: "w-fit",
+    twFlex: "flex",
+    twFlexDirection: "flex-row-reverse",
+    twBorderRadius: "rounded-r-md",
+    twBackgroundColor: "bg-slate-100 dark:bg-slate-950",
+  },
+
+  NavBarTrigger: {
+    twHeight: "h-full",
+    twWidth: "w-fit",
+    twPadding: "px-1",
+    twFlex: "flex",
+    twAlignItems: "items-center",
+    twBorderRadius: "rounded-r-md",
+    twBackgroundColor: "bg-transparent",
+  },
+
+  NavBarContent: {
+    twWidth: "w-[260px]",
+    twHeight: "h-full",
+  },
 
   Icons: {
     twWidth: "w-full",
     twHeight: "h-full",
     twOpacity: "opacity-100 hover:opacity-50",
+    twStrokeWidth: "stroke-1",
+    twStroke: "stroke-slate-500 dark:stroke-slate-100"
   },
 
   TooltipContent: {

@@ -2,8 +2,11 @@ import * as React from "react";
 import { ITailwindTheme } from "../context/types";
 import { styled, createElement } from "../context/factory";
 
-type DivProps = React.ComponentPropsWithoutRef<"div"> & ITailwindTheme;
-type DivRef = React.ElementRef<"div">;
+type DivProps = React.ComponentPropsWithoutRef<"div">;
+
+type DivRef = React.ElementRef<"div"> | null;
+
+interface NavBarProps extends DivProps, ITailwindTheme{};
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -26,7 +29,7 @@ const useNavBarContext = () => {
   return context;
 };
 
-const NavBar = React.forwardRef<DivRef, DivProps>((props, ref) => {
+const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
 
@@ -47,8 +50,8 @@ NavBar.displayName = "NavBar";
  * ------------------------------------------------------------------------------------------------
  */
 
-interface NavBarTriggerProps extends Omit<DivProps, "children"> {
-  children?: React.ReactNode | ((state: boolean) => React.ReactNode);
+interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
+  children?: React.ReactNode | ((state: boolean, trigger: React.MouseEventHandler<HTMLButtonElement>) => React.ReactNode);
 }
 
 /**
@@ -63,8 +66,8 @@ const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
       onClick(e);
     };
     return (
-      <styled.div onClick={onClickHandler} {...rest} ref={ref}>
-        {typeof children === "function" ? children(state) : children}
+      <styled.div {...rest} ref={ref}>
+        {typeof children === "function" ? children(state, onClickHandler) : children}
       </styled.div>
     );
   }
@@ -76,7 +79,7 @@ NavBarTrigger.displayName = "NavBarTrigger";
  * NavBarContent
  * ------------------------------------------------------------------------------------------------
  */
-const NavBarContent = React.forwardRef<DivRef, DivProps>(
+const NavBarContent = React.forwardRef<DivRef, NavBarProps>(
   (props, ref = null) => {
     const { children, ...rest } = props;
     const { state } = useNavBarContext();
@@ -140,4 +143,7 @@ export {
   Header,
   Body,
   Footer,
+  //
+  NavBarProps,
+  DivRef
 };

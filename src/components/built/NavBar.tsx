@@ -1,67 +1,50 @@
 import * as React from "react";
-import {
-  DoubleArrowLeftIcon as LeftIcon,
-  DoubleArrowRightIcon as RightIcon,
-} from "@radix-ui/react-icons";
-import * as PNavBar from "../primitives/NavBar";
-import { Tooltip } from "@radix-ui/themes";
-import { styled } from "../context/factory";
+import * as Button from "./Buttons"
+import * as NavBar from "../primitives/NavBar";
+import { ITailwindTheme } from "../context/types";
 
-export function NavBar() {
-  const SLeftIcon = styled(LeftIcon);
-  const SRightIcon = styled(RightIcon);
-
-  const leftIcon = (
-    <Tooltip content="Collapse">
-      <div>
-        <SLeftIcon
-          themeName="Icons"
-          twPadding="p-0"
-          twTopRightBottomLeft="top-1/2"
-        />
-      </div>
-    </Tooltip>
-  );
-
-  const rightIcon = (
-    <Tooltip content="Expand">
-      <div>
-        <SRightIcon
-          themeName="Icons"
-          twPadding="p-0"
-          twTopRightBottomLeft="top-1/2"
-        />
-      </div>
-    </Tooltip>
-  );
-
+const Root: React.FC<NavBar.NavBarProps> = (props)=>{
+  const {children, themeName, ...rest} = props;
+  let appliedTheme = themeName?themeName:"NavBarRoot";
   return (
-    <div className="flex">
-      <PNavBar.Root
-        twBackgroundColor="bg-black"
-        twHeight="h-screen"
-        twWidth="w-fit"
-        twFlex="flex"
-        twFlexDirection="flex-row-reverse"
-        twBorderRadius="rounded-r-md"
-      >
-        <PNavBar.Trigger
-          twHeight="h-full"
-          twWidth="w-fit"
-          twTextColor="text-gray-500"
-          twBackgroundColor="bg-gray-300"
-          twBorderRadius="rounded-r-md"
-          twFlex="flex"
-          twAlignItems="items-center"
-        >
-          {(state) => (state ? leftIcon : rightIcon)}
-        </PNavBar.Trigger>
+    <NavBar.Root {...rest} themeName={appliedTheme}>
+      {children}
+    </NavBar.Root>
+  )
+}
 
-        <PNavBar.Content
-          twWidth="w-[260px]"
-          twHeight="h-full"
-        ></PNavBar.Content>
-      </PNavBar.Root>
-    </div>
-  );
+const Trigger: React.FC<ITailwindTheme> = (props)=>{
+  const {themeName,...rest} = props
+  let appliedTheme = themeName?themeName:"NavBarTrigger"
+  return (
+  <NavBar.Trigger {...rest} themeName={appliedTheme}> 
+    {(state, onClick) => (state ? 
+    (
+        <Button.LeftButton tooltipContent="Collapse"
+            twTopRightBottomLeft="top-1/2"
+            onClick={onClick}
+        /> 
+      ) : (
+        <Button.RightButton tooltipContent="Expand"
+            twTopRightBottomLeft="top-1/2"
+            onClick={onClick}
+        />
+    ))}
+</NavBar.Trigger>)
+}
+
+const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref=null)=>{
+  const {children, themeName, ...rest} = props; 
+  let appliedThemeName = themeName?themeName:"NavBarContent";
+  return (
+    <NavBar.Content ref={ref} {...rest} themeName={appliedThemeName}>
+      {children}
+    </NavBar.Content>
+  )
+})
+
+export {
+  Root,
+  Trigger,
+  Content
 }
