@@ -1,54 +1,6 @@
 import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
-
-interface PresetTheme {
-  [key: string]: ITailwindTheme;
-}
-
-const defaultTheme: PresetTheme = {
-  NavBarRoot: {
-    twHeight: "h-screen",
-    twWidth: "w-fit",
-    twFlex: "flex",
-    twFlexDirection: "flex-row-reverse",
-    twBorderRadius: "rounded-r-md",
-    twBackgroundColor: "bg-slate-100 dark:bg-slate-950",
-  },
-
-  NavBarTrigger: {
-    twHeight: "h-full",
-    twWidth: "w-fit",
-    twPadding: "px-1",
-    twFlex: "flex",
-    twAlignItems: "items-center",
-    twBorderRadius: "rounded-r-md",
-    twBackgroundColor: "bg-transparent",
-  },
-
-  NavBarContent: {
-    twWidth: "w-[260px]",
-    twHeight: "h-full",
-  },
-
-  Icons: {
-    twWidth: "w-full",
-    twHeight: "h-full",
-    twOpacity: "opacity-100 hover:opacity-50",
-    twStrokeWidth: "stroke-1",
-    twStroke: "stroke-slate-500 dark:stroke-slate-100"
-  },
-
-  TooltipContent: {
-    twTextColor: "text-gray-100 dark:text-violet-800",
-    twBackgroundColor: "bg-gray-900 dark:bg-gray-50",
-    twBoxShadow: "shadow-md",
-    twBoxShadowColor: "shadow-gray-100 dark:shadow-gray-900"
-  },
-
-  TooltipArrow: {
-    twFill: "fill-gray-900 dark:fill-gray-50",
-  },
-};
+import { PresetTheme, defaultTheme } from "./default";
 
 export const ThemeContext = React.createContext<PresetTheme | undefined>(
   undefined
