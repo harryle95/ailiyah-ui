@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import * as Form from "../components/primitives/Form";
 import * as NavBar from "../components/built/NavBar";
 
-interface NameUpdateFormProps extends React.ComponentPropsWithoutRef<"form"> {
+interface TextBoxUpdateFormProps extends React.ComponentPropsWithoutRef<"form"> {
   id: string;
   projectName: string;
   setProjectName: Function;
   setEditingState: Function;
 }
 
-const NameUpdateForm: React.FC<NameUpdateFormProps> = (props) => {
+const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
   const [name, setName] = React.useState(projectName);
   const onSubmit = (e) => {
@@ -57,7 +57,7 @@ function ListItem({ projectName, projectURL = "#", activeState = false }) {
   return (
     <Text.Root
       themeName="NavBarTextBoxRoot"
-      activeState={activeState}
+      activeState={activeState || editingState}
       hoverSetActive={true}
     >
       <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
@@ -86,7 +86,7 @@ function ListItem({ projectName, projectURL = "#", activeState = false }) {
             </Text.Component>
           </>
         ) : (
-          <NameUpdateForm
+          <TextBoxUpdateForm
             id="#"
             projectName={name}
             setProjectName={setName}
