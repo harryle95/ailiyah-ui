@@ -15,7 +15,7 @@ export function NavBar() {
     <Tooltip content="Collapse">
       <div>
         <SLeftIcon
-          themeName="icons"
+          themeName="Icons"
           twPadding="p-0"
           twTopRightBottomLeft="top-1/2"
         />
@@ -27,14 +27,14 @@ export function NavBar() {
     <Tooltip content="Expand">
       <div>
         <SRightIcon
-          themeName="icons"
+          themeName="Icons"
           twPadding="p-0"
           twTopRightBottomLeft="top-1/2"
         />
       </div>
     </Tooltip>
   );
-  
+
   return (
     <div className="flex">
       <PNavBar.Root

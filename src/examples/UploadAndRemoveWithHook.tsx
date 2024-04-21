@@ -18,10 +18,10 @@ function Demo() {
           tooltipContent="Upload"
           onClick={() => console.log("Clicked")}
         >
-          <UploadIcon themeName="icons" />
+          <UploadIcon themeName="Icons" />
         </Form.Upload.Trigger>
         <Form.Upload.Cancel tooltipContent="Remove">
-          <DeleteIcon themeName="icons" />
+          <DeleteIcon themeName="Icons" />
         </Form.Upload.Cancel>
       </Form.Upload.Root>
     </div>

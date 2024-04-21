@@ -1,4 +1,4 @@
-import { Demo } from "./examples/ScrollAreaText";
+import { Demo } from "./examples/PopoverButtonDemo";
 
 function App() {
   return <Demo/>

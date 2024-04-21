@@ -20,7 +20,7 @@ function Demo() {
           Long Text that will not be fully displayed and will be clipped
         </Text.Content>
         <Text.Component compLocation="right" twDisplay="hidden data-[state=active]:flex">
-          <DeleteButton tooltipContent="Delete" themeName="icons" twPadding="p-0" />
+          <DeleteButton tooltipContent="Delete" themeName="Icons" twPadding="p-0" />
         </Text.Component>
       </Text.Root>
     </div>

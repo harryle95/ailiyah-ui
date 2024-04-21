@@ -68,7 +68,7 @@ const useTextBoxContext: () => ITextBoxContext = () => {
           Long Text that will not be fully displayed and will be clipped
         </Text.Content>
         <Text.Component compLocation="right" twBorderWidth="border-l-2">
-          <DeleteIcon themeName="icons" />
+          <DeleteIcon themeName="Icons" />
         </Text.Component>
       </Text.Root>
  * ```
@@ -87,7 +87,7 @@ const useTextBoxContext: () => ITextBoxContext = () => {
           Long Text that will not be fully displayed and will be clipped
         </Text.Content>
         <Text.Component compLocation="right" twBorderWidth="border-l-2">
-          <DeleteIcon themeName="icons" />
+          <DeleteIcon themeName="Icons" />
         </Text.Component>
       </Text.Root>
     ```

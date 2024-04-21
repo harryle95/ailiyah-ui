@@ -22,7 +22,7 @@ function Demo() {
                 tooltipContent="Upload"
                 onClick={() => console.log("Clicked")}
               >
-                <UploadIcon themeName="icons" />
+                <UploadIcon themeName="Icons" />
               </Form.Upload.Trigger>
             </>
           );

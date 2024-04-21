@@ -44,7 +44,7 @@ function Demo() {
           >
             <DeleteButton
               tooltipContent="Delete"
-              themeName="icons"
+              themeName="Icons"
               twPadding="p-1"
             />
           </Text.Component>

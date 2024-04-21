@@ -10,20 +10,22 @@ import {
   DotsHorizontalIcon as _DotsHorizontalIcon,
   DotsVerticalIcon as _DotsVerticalIcon,
 } from "@radix-ui/react-icons";
-import { Tooltip } from "@radix-ui/themes";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { styled } from "../context/factory";
 import { Popover } from "@radix-ui/themes";
+import { Tooltip } from "./Tooltip";
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
 type TailwindButtonProps = ButtonProps & ITailwindTheme;
 
-export interface TooltipProps{
+export interface TooltipProps {
   tooltipContent?: string;
 }
 
-export interface TooltipTailwindButtonProps extends TailwindButtonProps, TooltipProps{}
+export interface TooltipTailwindButtonProps
+  extends TailwindButtonProps,
+    TooltipProps {}
 
 interface DeleteAlertProps extends TooltipTailwindButtonProps {
   dialogTitle: string;
@@ -51,10 +53,10 @@ const DeleteAlertButton = React.forwardRef<HTMLButtonElement, DeleteAlertProps>(
 
     return (
       <AlertDialog.Root>
-        <Tooltip content={tooltipContent}>
+        <Tooltip tooltipContent={tooltipContent}>
           <AlertDialog.Trigger>
             <styled.button {...rest} ref={ref}>
-              <DeleteIcon themeName="icons" />
+              <DeleteIcon themeName="Icons" />
             </styled.button>
           </AlertDialog.Trigger>
         </Tooltip>
@@ -92,7 +94,7 @@ const createButton = (buttonName: string, icon: React.JSX.Element) => {
   >((props, ref) => {
     const { tooltipContent, ...rest } = props;
     const rendered = tooltipContent ? (
-      <Tooltip content={tooltipContent}>
+      <Tooltip tooltipContent={tooltipContent}>
         <styled.button ref={ref} {...rest}>
           {icon}
         </styled.button>
@@ -116,31 +118,31 @@ const SubmitIcon = styled(ThickArrowUpIcon);
 const DotsHorizontalIcon = styled(_DotsHorizontalIcon);
 const DotsVerticalIcon = styled(_DotsVerticalIcon);
 
-const EditButton = createButton("EditButton", <EditIcon themeName="icons" />);
-const AddButton = createButton("AddButton", <AddIcon themeName="icons" />);
+const EditButton = createButton("EditButton", <EditIcon themeName="Icons" />);
+const AddButton = createButton("AddButton", <AddIcon themeName="Icons" />);
 const UploadButton = createButton(
   "UploadButton",
-  <UploadIcon themeName="icons" />
+  <UploadIcon themeName="Icons" />
 );
 const DownloadButton = createButton(
   "DownloadButton",
-  <DownloadIcon themeName="icons" />
+  <DownloadIcon themeName="Icons" />
 );
 const SubmitButton = createButton(
   "SubmitButton",
-  <SubmitIcon themeName="icons" />
+  <SubmitIcon themeName="Icons" />
 );
 const DeleteButton = createButton(
   "DeleteButton",
-  <DeleteIcon themeName="icons" />
+  <DeleteIcon themeName="Icons" />
 );
 const DotsHorizontalButton = createButton(
   "DotsHorizontalButton",
-  <DotsHorizontalIcon themeName="icons" />
+  <DotsHorizontalIcon themeName="Icons" />
 );
 const DotsVerticalButton = createButton(
   "DotsVerticalButton",
-  <DotsVerticalIcon themeName="icons" />
+  <DotsVerticalIcon themeName="Icons" />
 );
 
 interface PopOverButtonContentProps
@@ -176,7 +178,13 @@ const InvisibleButtonGroup = React.forwardRef<
   HTMLDivElement,
   InvisibleButtonGroupProps
 >((props, ref) => {
-  const { visibleState = null, defaultState = true, children, style, ...rest } = props;
+  const {
+    visibleState = null,
+    defaultState = true,
+    children,
+    style,
+    ...rest
+  } = props;
   const displayState = visibleState !== null ? visibleState : defaultState;
   const displayStyle = displayState ? style : { ...style, display: "none" };
   return (

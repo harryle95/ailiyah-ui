@@ -1,8 +1,6 @@
 import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
 
-
-
 interface PresetTheme {
   [key: string]: ITailwindTheme;
 }
@@ -13,10 +11,21 @@ const defaultTheme: PresetTheme = {
   //   twHeight: "h-10",
   // },
 
-  icons: {
+  Icons: {
     twWidth: "w-full",
     twHeight: "h-full",
     twOpacity: "opacity-100 hover:opacity-50",
+  },
+
+  TooltipContent: {
+    twTextColor: "text-gray-100 dark:text-violet-800",
+    twBackgroundColor: "bg-gray-900 dark:bg-gray-50",
+    twBoxShadow: "shadow-md",
+    twBoxShadowColor: "shadow-gray-100 dark:shadow-gray-900"
+  },
+
+  TooltipArrow: {
+    twFill: "fill-gray-900 dark:fill-gray-50",
   },
 };
 
