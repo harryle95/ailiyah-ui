@@ -14,6 +14,11 @@ import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { styled } from "../context/factory";
 import { Popover } from "@radix-ui/themes";
 import { Tooltip } from "./Tooltip";
+import {
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons";
+
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
@@ -145,6 +150,11 @@ const DotsVerticalButton = createButton(
   <DotsVerticalIcon themeName="Icons" />
 );
 
+const LeftIcon = styled(DoubleArrowLeftIcon);
+const LeftButton = createButton("LeftButton", <LeftIcon themeName="Icons"/>)
+const RightIcon = styled(DoubleArrowRightIcon);
+const RightButton = createButton("RightButton", <RightIcon themeName="Icons"/>)
+
 interface PopOverButtonContentProps
   extends Omit<Popover.ContentProps, "asChild">,
     ITailwindTheme {
@@ -196,6 +206,8 @@ const InvisibleButtonGroup = React.forwardRef<
 
 InvisibleButtonGroup.displayName = "InvisibleButtonGroup";
 
+
+
 export {
   AddButton,
   DeleteButton,
@@ -216,4 +228,9 @@ export {
   SubmitIcon,
   DotsHorizontalIcon,
   DotsVerticalIcon,
+  LeftIcon,
+  LeftButton,
+  RightIcon,
+  RightButton,
+  createButton
 };
