@@ -1,8 +1,7 @@
 import * as Text from "../components/primitives/TextBox";
 import * as React from "react";
-import { DeleteButton } from "../components/built/Buttons";
 import { styled } from "../components/context/factory";
-
+import { Button } from "../components/themed";
 /**
  * Text box with delete button that appears when hovered over and gradient masking at the end
  * @returns
@@ -42,7 +41,7 @@ function Demo() {
             twPosition="absolute"
             twTopRightBottomLeft="top-0 bottom-0 right-0"
           >
-            <DeleteButton
+            <Button.DeleteButton
               tooltipContent="Delete"
               themeName="Icons"
               twPadding="p-1"

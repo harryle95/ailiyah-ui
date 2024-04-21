@@ -1,13 +1,13 @@
-import * as SButton from "../components/built/Buttons";
 import * as React from "react";
+import { Button } from "../components/themed";
 
 function Demo({ state }) {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <SButton.InvisibleButtonGroup visibleState={state}>
-        <SButton.UploadButton tooltipContent="Upload" />
-        <SButton.DownloadButton tooltipContent="Download" />
-      </SButton.InvisibleButtonGroup>
+      <Button.InvisibleButtonGroup visibleState={state}>
+        <Button.UploadButton tooltipContent="Upload" />
+        <Button.DownloadButton tooltipContent="Download" />
+      </Button.InvisibleButtonGroup>
     </div>
   );
 }

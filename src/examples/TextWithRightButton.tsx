@@ -1,6 +1,6 @@
 import * as Text from "../components/primitives/TextBox";
 import * as React from "react";
-import { DeleteButton } from "../components/built/Buttons";
+import {Button} from "../components/themed"
 
 /**
  * Text box with delete button that appears when hovered
@@ -20,7 +20,7 @@ function Demo() {
           Long Text that will not be fully displayed and will be clipped
         </Text.Content>
         <Text.Component compLocation="right" twDisplay="hidden data-[state=active]:flex">
-          <DeleteButton tooltipContent="Delete" themeName="Icons" twPadding="p-0" />
+          <Button.DeleteButton tooltipContent="Delete" themeName="Icons" twPadding="p-0" />
         </Text.Component>
       </Text.Root>
     </div>

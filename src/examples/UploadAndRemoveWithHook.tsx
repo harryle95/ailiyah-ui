@@ -1,6 +1,6 @@
 import * as Form from "../components/primitives/Form";
 import * as React from "react";
-import { UploadIcon, DeleteIcon } from "../components/built/Buttons";
+import { Button } from "../components/themed";
 
 function Demo() {
   return (
@@ -18,10 +18,10 @@ function Demo() {
           tooltipContent="Upload"
           onClick={() => console.log("Clicked")}
         >
-          <UploadIcon themeName="Icons" />
+          <Button.UploadIcon themeName="Icons" />
         </Form.Upload.Trigger>
         <Form.Upload.Cancel tooltipContent="Remove">
-          <DeleteIcon themeName="Icons" />
+          <Button.DeleteIcon themeName="Icons" />
         </Form.Upload.Cancel>
       </Form.Upload.Root>
     </div>

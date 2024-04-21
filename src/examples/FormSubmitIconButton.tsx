@@ -1,5 +1,5 @@
-import * as Form from "../components/primitives/Form";
-import { SubmitButton } from "../components/built/Buttons";
+import { Button } from "../components/themed";
+import {Form} from "../components/primitives"
 import * as React from "react";
 
 function Demo() {
@@ -13,7 +13,7 @@ function Demo() {
           e.preventDefault();
         }}
       >
-        <SubmitButton type="submit" />
+        <Button.SubmitButton type="submit" />
       </Form.Root>
     </div>
   );

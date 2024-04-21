@@ -1,6 +1,6 @@
 import * as Form from "../components/primitives/Form";
 import * as React from "react";
-import { UploadIcon, DeleteButton } from "../components/built/Buttons";
+import { Button } from "../components/themed";
 
 function Demo() {
   return (
@@ -17,12 +17,12 @@ function Demo() {
         {({ onFileRemoved }) => {
           return (
             <>
-              <DeleteButton tooltipContent="Delete" onClick={onFileRemoved} />
+              <Button.DeleteButton tooltipContent="Delete" onClick={onFileRemoved} />
               <Form.Upload.Trigger
                 tooltipContent="Upload"
                 onClick={() => console.log("Clicked")}
               >
-                <UploadIcon themeName="Icons" />
+                <Button.UploadIcon themeName="Icons" />
               </Form.Upload.Trigger>
             </>
           );

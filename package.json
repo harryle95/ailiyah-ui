@@ -1,6 +1,5 @@
 {
   "name": "ailiyah-ui",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -17,6 +16,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "tailwind-scrollbar": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.22.3",
@@ -32,7 +32,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.38",
-    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
   },
