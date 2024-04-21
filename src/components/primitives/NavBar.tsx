@@ -32,10 +32,10 @@ const useNavBarContext = () => {
 const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
-
+  const stateName = visible?"active":"inactive"
   return (
     <NavBarContext.Provider value={{ state: visible, setState: setVisible }}>
-      <styled.div ref={ref} {...rest}>
+      <styled.div ref={ref} {...rest} data-state={stateName}>
         {children}
       </styled.div>
     </NavBarContext.Provider>
@@ -58,7 +58,7 @@ interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
  * Trigger to expand/collapse navigation bar
  */
 const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
-  (props, ref = null) => {
+  (props, ref) => {
     const { children, onClick = (e) => {}, ...rest } = props;
     const { state, setState } = useNavBarContext();
     const onClickHandler = (e) => {
@@ -80,9 +80,10 @@ NavBarTrigger.displayName = "NavBarTrigger";
  * ------------------------------------------------------------------------------------------------
  */
 const NavBarContent = React.forwardRef<DivRef, NavBarProps>(
-  (props, ref = null) => {
+  (props, ref) => {
     const { children, ...rest } = props;
     const { state } = useNavBarContext();
+    
     return state ? (
       <styled.div ref={ref} {...rest}>
         {children}
