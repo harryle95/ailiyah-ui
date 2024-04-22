@@ -25,11 +25,11 @@ type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
 type TailwindButtonProps = ButtonProps & ITailwindTheme;
 
-export interface TooltipProps {
+interface TooltipProps {
   tooltipContent?: string;
 }
 
-export interface TooltipTailwindButtonProps
+interface TooltipTailwindButtonProps
   extends TailwindButtonProps,
     TooltipProps {}
 
@@ -243,3 +243,13 @@ export {
   RightButton,
   createButton,
 };
+
+export type{
+  TooltipProps,
+  TooltipTailwindButtonProps,
+  InvisibleButtonGroupProps,
+  PopOverButtonContentProps,
+  TailwindButtonProps,
+  DeleteAlertProps,
+  ButtonProps
+}

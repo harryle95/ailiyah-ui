@@ -330,10 +330,14 @@ export class TailwindTheme {
   twOther?:string=''
 }
 
-export interface ITailwindTheme extends TailwindTheme { }
-export type ITailwindKey = keyof ITailwindTheme;
+interface ITailwindTheme extends TailwindTheme { }
+type ITailwindKey = keyof ITailwindTheme;
 
 const keys = Object.keys(new TailwindTheme());
 
 export const isTailwindKey = (propName: string) => keys.includes(propName);
 
+export type{
+  ITailwindTheme,
+  ITailwindKey
+}

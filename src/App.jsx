@@ -1,4 +1,4 @@
-import { Demo } from "./examples/UploadAndRemoveFunctional"
+import { Demo } from "./examples/NavBar"
 
 
 function App() {

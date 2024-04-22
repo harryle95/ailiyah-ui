@@ -145,6 +145,9 @@ export {
   Body,
   Footer,
   //
+
+};
+export type{
   NavBarProps,
   DivRef
-};
+}
