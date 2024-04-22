@@ -1,4 +1,4 @@
-import * as Text from "../components/primitives/TextBox";
+import * as Text from "../components/primitives/TextInput";
 import * as React from "react";
 import { styled } from "../components/context/factory";
 import { Button } from "../components/themed";
