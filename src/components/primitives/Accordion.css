@@ -1,0 +1,27 @@
+.AccordionHeader[data-state="open"] svg[data-rotate="45"] {
+  transform: rotate(45deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="90"] {
+  transform: rotate(90deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="135"] {
+  transform: rotate(135deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="180"] {
+  transform: rotate(180deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="225"] {
+  transform: rotate(225deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="270"] {
+  transform: rotate(270deg);
+}
+
+.AccordionHeader[data-state="open"] svg[data-rotate="315"] {
+  transform: rotate(315deg);
+}
