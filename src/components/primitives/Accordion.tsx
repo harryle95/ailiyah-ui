@@ -16,10 +16,10 @@ type TriggerProps = Accordion.AccordionTriggerProps & ITailwindTheme;
  */
 const Trigger = React.forwardRef<HTMLButtonElement, TriggerProps>(
   (props, ref) => {
-    const { children, ...rest } = props;
+    const { children, key, ...rest } = props;
     const _Trigger = styled(Accordion.Trigger)
     return (
-      <Accordion.Header className="AccordionHeader">
+      <Accordion.Header className="AccordionHeader" key={key}>
         <_Trigger {...rest} ref={ref}>
           {children}
         </_Trigger>
