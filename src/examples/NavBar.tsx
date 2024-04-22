@@ -4,7 +4,7 @@ import { Primitive, Themed, Context } from "../index";
 import { Link } from "react-router-dom";
 
 const NavBar = Themed.NavBar;
-const Text = Primitive.TextInput;
+const Text = Primitive.TextBox;
 const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
@@ -19,14 +19,14 @@ const theme = {
     twBorderWidth: "border-none",
     twOutlineColor: "outline-none",
   },
-  NavBarTextInputRoot: {
+  NavBarTextBoxRoot: {
     // Different bg color for active/inactive and light/dark modes
     twBackgroundColor:
       "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
     twBorderRadius: "rounded-md",
     twPadding: "px-2",
   },
-  NavBarTextInputMask: {
+  NavBarTextBoxMask: {
     twPosition: "absolute",
     twHeight: "max-h-full",
     twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
@@ -36,7 +36,7 @@ const theme = {
       "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
     twBackgroundColor: "bg-gradient-to-l",
   },
-  NavBarInvisibleTextInputButtons: {
+  NavBarInvisibleTextBoxButtons: {
     twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
     twPosition: "absolute",
     twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
@@ -82,7 +82,7 @@ const Root = (props) => {
           <NavBar.Body twOther="scrollbar-thin">
             {projects ? (
               projects.map((value) => (
-                <TextInputItem key={value} id={value} name={value} />
+                <TextBoxItem key={value} id={value} name={value} />
               ))
             ) : (
               <></>
@@ -94,7 +94,7 @@ const Root = (props) => {
   );
 };
 
-interface TextInputUpdateFormProps
+interface TextBoxUpdateFormProps
   extends React.ComponentPropsWithoutRef<"form"> {
   id: string;
   projectName: string;
@@ -102,7 +102,7 @@ interface TextInputUpdateFormProps
   setEditingState: Function;
 }
 
-const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
+const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
   const [name, setName] = React.useState(projectName);
 
@@ -138,7 +138,7 @@ const TextInputUpdateForm: React.FC<TextInputUpdateFormProps> = (props) => {
   );
 };
 
-const TextInputItem: React.FC<ProjectDTO> = (props) => {
+const TextBoxItem: React.FC<ProjectDTO> = (props) => {
   const { id, name, ...rest } = props;
   const projectURL = `/project/${id}`;
   // States
@@ -149,7 +149,7 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
 
   return (
     <Text.Root
-      themeName="NavBarTextInputRoot"
+      themeName="NavBarTextBoxRoot"
       activeState={editingState}
       hoverSetActive={true}
       {...rest}
@@ -163,12 +163,12 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
 
             <Text.Component
               compLocation="right"
-              themeName="NavBarTextInputMask"
+              themeName="NavBarTextBoxMask"
             ></Text.Component>
 
             <Text.Component
               compLocation="right"
-              themeName="NavBarInvisibleTextInputButtons"
+              themeName="NavBarInvisibleTextBoxButtons"
             >
               <Button.InvisibleButtonGroup themeName="InvisibleButtonsLayout">
                 <Button.EditButton
@@ -193,7 +193,7 @@ const TextInputItem: React.FC<ProjectDTO> = (props) => {
             </Text.Component>
           </>
         ) : (
-          <TextInputUpdateForm
+          <TextBoxUpdateForm
             id={id}
             projectName={projectName}
             setProjectName={setName}

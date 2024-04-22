@@ -4,29 +4,29 @@ import { ITailwindTheme } from "../context/types";
 
 type DivProps = React.ComponentPropsWithoutRef<"div">;
 
-interface TextInputOwnProps {
+interface TextBoxOwnProps {
   activeState: boolean;
   hoverSetActive: boolean;
   children: React.ReactNode | ((internalActive: boolean) => React.ReactNode);
 }
 
-interface TextInputProps
-  extends TextInputOwnProps,
+interface TextBoxProps
+  extends TextBoxOwnProps,
     ITailwindTheme,
     Omit<DivProps, "children"> {}
 
-interface ITextInputContext {
+interface ITextBoxContext {
   activeState: "active" | "inactive";
 }
 
-const TextInputContext = React.createContext<ITextInputContext | undefined>(
+const TextBoxContext = React.createContext<ITextBoxContext | undefined>(
   undefined
 );
 
-const useTextInputContext: () => ITextInputContext = () => {
-  const context = React.useContext(TextInputContext);
+const useTextBoxContext: () => ITextBoxContext = () => {
+  const context = React.useContext(TextBoxContext);
   if (!context) {
-    console.error("useTextInputContext must be used within a Form");
+    console.error("useTextBoxContext must be used within a Form");
     return { activeState: "active" };
   }
   return context;
@@ -36,7 +36,7 @@ const useTextInputContext: () => ITextInputContext = () => {
  * Text box represent a text area that can optionally has side components -i.e
  * buttons.
  *
- * Root is the container of TextInput. This renders a div and provides an active
+ * Root is the container of TextBox. This renders a div and provides an active
  * context.
  *
  * @param activeState - state variable represent active
@@ -53,9 +53,9 @@ const useTextInputContext: () => ITextInputContext = () => {
  * Note: 
  * Styling active/inactive state can be done by providing a `data-[state=active]:` modifier.
  * Children can also be a callback that takes internalActive param and returns a ReactNode.
- * Child components inside of root can also use a `useTextInputContext` to get internalState
+ * Child components inside of root can also use a `useTextBoxContext` to get internalState
  * 
- * Example: TextInput with right button 
+ * Example: TextBox with right button 
  * ```
  *    <Text.Root
         activeState={true}
@@ -92,7 +92,7 @@ const useTextInputContext: () => ITextInputContext = () => {
       </Text.Root>
     ```
  */
-const Root = React.forwardRef<HTMLDivElement, TextInputProps>((props, ref) => {
+const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
   const {
     activeState,
     hoverSetActive,
@@ -120,7 +120,7 @@ const Root = React.forwardRef<HTMLDivElement, TextInputProps>((props, ref) => {
 
   const dataState = activeState || internalActive ? "active" : "inactive";
   return (
-    <TextInputContext.Provider value={{ activeState: dataState }}>
+    <TextBoxContext.Provider value={{ activeState: dataState }}>
       <styled.div
         twWidth={twWidth}
         twFlex={twFlex}
@@ -133,12 +133,12 @@ const Root = React.forwardRef<HTMLDivElement, TextInputProps>((props, ref) => {
       >
         {typeof children === "function" ? children(internalActive) : children}
       </styled.div>
-    </TextInputContext.Provider>
+    </TextBoxContext.Provider>
   );
 });
 
 /**
- * Content is the container of the main content of TextInput.
+ * Content is the container of the main content of TextBox.
  *
  * Default behavior:
  * @param twWhitespace - whitespace-nowrap - does not wrap to next line
@@ -158,7 +158,7 @@ const Content = React.forwardRef<HTMLDivElement, DivProps & ITailwindTheme>(
       ...rest
     } = props;
 
-    const { activeState } = useTextInputContext();
+    const { activeState } = useTextBoxContext();
     return (
       <styled.div
         twOverflow={twOverflow}
@@ -194,7 +194,7 @@ const Component = React.forwardRef<
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";
-  const { activeState } = useTextInputContext();
+  const { activeState } = useTextBoxContext();
   return (
     <styled.div twOrder={order} {...rest} data-state={activeState} ref={ref}>
       {children}

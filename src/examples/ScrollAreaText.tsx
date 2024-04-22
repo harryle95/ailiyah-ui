@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "../components/themed";
-import { TextInput as Text } from "../components/primitives";
+import { TextBox as Text } from "../components/primitives";
 import { styled } from "../components/context/factory";
 import { Link } from "react-router-dom";
 import * as Form from "../components/primitives/Form";
