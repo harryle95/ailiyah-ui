@@ -1,16 +1,52 @@
 import * as React from "react";
 import { Primitive, Themed, Context } from "../index";
 
-import {
-  Link,
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const NavBar = Themed.NavBar;
 const Text = Primitive.TextBox;
 const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
+const ThemeProvider = Context.ThemeProvider;
+
+const theme = {
+  ...Context.defaultTheme,
+  NavBarFormInput: {
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twBackgroundColor: "bg-transparent",
+    twBorderWidth: "border-none",
+    twOutlineColor: "outline-none",
+  },
+  NavBarTextBoxRoot: {
+    // Different bg color for active/inactive and light/dark modes
+    twBackgroundColor:
+      "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
+    twBorderRadius: "rounded-md",
+    twPadding: "px-2",
+  },
+  NavBarTextBoxMask: {
+    twPosition: "absolute",
+    twHeight: "max-h-full",
+    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
+    twWidth: "w-8 data-[state=active]:w-20", // Larger width when active to hold text box buttons
+    // Gradient starting color must match bg. Different active/non-active and light modes
+    twGradientColorStops:
+      "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
+    twBackgroundColor: "bg-gradient-to-l",
+  },
+  NavBarInvisibleTextBoxButtons: {
+    twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
+    twPosition: "absolute",
+    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
+  },
+  InvisibleButtonsLayout: {
+    twFlex: "flex",
+    twPadding: "py-1",
+    twGap: "gap-x-1",
+  },
+};
 
 const IconPanel: React.FC<{}> = () => {
   return (
@@ -20,70 +56,41 @@ const IconPanel: React.FC<{}> = () => {
   );
 };
 
-const ProfileButton: React.FC<{}> = () => {
-  return (
-    <styled.div themeName="NavBarButtons">
-      <a href="#" className="flex flex-row gap-2">
-        <div>My Profile</div>
-      </a>
-    </styled.div>
-  );
-};
-
-const NewProjectButton: React.FC<{}> = () => {
-  return (
-    <styled.div themeName="NavBarButtons">
-      <Form.Root method="POST">
-        <button type="submit">
-          <div className="flex flex-row gap-2">
-            <div>New Project</div>
-          </div>
-        </button>
-      </Form.Root>
-    </styled.div>
-  );
-};
-
-interface ProjectDTO{
-    id: string,
-    name: string 
+interface ProjectDTO {
+  id: string;
+  name: string;
 }
-
 
 const TAGS = Array.from({ length: 50 }).map(
-    (_, i, a) => `v1.2.0-beta.${a.length - i}`
-  );
+  (_, i, a) => `v1.2.0-beta.${a.length - i}`
+);
 
-export const Demo = ()=>{
-    return (
-        <Root projects={TAGS} />
-    )
-}
+export const Demo = () => {
+  return <Root projects={TAGS} />;
+};
 
 const Root = (props) => {
-    const {projects, ...rest} = props 
+  const { projects, ...rest } = props;
   return (
-    <NavBar.Root>
-      <NavBar.Trigger />
-      <NavBar.Content>
-        <NavBar.Header>
-          <IconPanel />
-        </NavBar.Header>
-        <NavBar.Body twOther="scrollbar-thin">
-          {projects ? (
-            projects.map((value) => (
-              <TextBoxItem key={value} id={value} name={value} />
-            ))
-          ) : (
-            <></>
-          )}
-        </NavBar.Body>
-        <NavBar.Footer twPadding="py-3" twFlex="flex flex-col" twGap="gap-y-3">
-          <NewProjectButton />
-          <ProfileButton />
-        </NavBar.Footer>
-      </NavBar.Content>
-    </NavBar.Root>
+    <ThemeProvider value={theme}>
+      <NavBar.Root>
+        <NavBar.Trigger />
+        <NavBar.Content>
+          <NavBar.Header>
+            <IconPanel />
+          </NavBar.Header>
+          <NavBar.Body twOther="scrollbar-thin">
+            {projects ? (
+              projects.map((value) => (
+                <TextBoxItem key={value} id={value} name={value} />
+              ))
+            ) : (
+              <></>
+            )}
+          </NavBar.Body>
+        </NavBar.Content>
+      </NavBar.Root>
+    </ThemeProvider>
   );
 };
 
@@ -104,7 +111,7 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
     setEditingState(false);
     if (name !== projectName) {
       setProjectName(name);
-      console.log("Submiting Form")
+      console.log("Submiting Form");
     }
   };
 
@@ -138,7 +145,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
   const [projectName, setName] = React.useState(name);
   const [editingState, setEditingState] = React.useState(false);
 
-  // Chek if current link is active and set button to appear/disappear  
+  // Chek if current link is active and set button to appear/disappear
 
   return (
     <Text.Root
@@ -179,7 +186,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
                     e.preventDefault();
                     const formData = new FormData();
                     formData.append("id", id);
-                    console.log("Deleting")
+                    console.log("Deleting");
                   }}
                 />
               </Button.InvisibleButtonGroup>
@@ -197,4 +204,3 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
     </Text.Root>
   );
 };
-

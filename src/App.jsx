@@ -1,4 +1,4 @@
-import { Demo } from "./examples/Accordion"
+import { Demo } from "./examples/NavBar"
 
 
 function App() {

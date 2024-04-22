@@ -47,54 +47,11 @@ export const defaultTheme: PresetTheme = {
     twFlexShrink: "flex-shrink-0",
     twOrder: "order-3",
   },
-  NavBarTextBoxRoot: {
-    // Different bg color for active/inactive and light/dark modes
-    twBackgroundColor:
-      "data-[state=active]:bg-neutral-300 dark:data-[state=active]:bg-neutral-700",
-    twBorderRadius: "rounded-md",
-    twPadding: "px-2",
-  },
-  NavBarTextBoxMask: {
-    twPosition: "absolute",
-    twHeight: "max-h-full",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of the text box on the right
-    twWidth: "w-8 data-[state=active]:w-20", // Larger width when active to hold text box buttons
-    // Gradient starting color must match bg. Different active/non-active and light modes
-    twGradientColorStops:
-      "from-neutral-100 data-[state=active]:from-neutral-300 from-60% dark:from-neutral-900 dark:data-[state=active]:from-neutral-700",
-    twBackgroundColor: "bg-gradient-to-l",
-  },
-  NavBarInvisibleTextBoxButtons: {
-    twDisplay: "hidden data-[state=active]:flex", // Hidden by default, shown when active
-    twPosition: "absolute",
-    twTopRightBottomLeft: "top-0 bottom-0 right-0", // Placed at the end of text box on the right
-  },
   NavBarIcons: {
     twWidth: "w-full",
     twHeight: "h-full",
     twOpacity: "opacity-100 hover:opacity-50",
     twStroke: "stroke-neutral-500 dark:stroke-neutral-100", // stroke color based on dark or light mode
-  },
-  NavBarFormInput: {
-    twWidth: "w-full",
-    twHeight: "h-full",
-    twBackgroundColor: "bg-transparent",
-    twBorderWidth: "border-none",
-    twOutlineColor: "outline-none",
-  },
-  NavBarButtons: {
-    twWidth: "w-5/6",
-    twHeight: "h-fit",
-    twMargin: "mx-auto",
-    twFlex: "flex",
-    twPadding: "py-1",
-    twAlignItems: "item-center",
-    twJustifyContent: "justify-center",
-    twBorderWidth: "border-2",
-    twBorderRadius: "rounded-md",
-    twBorderStyle: "border-solid",
-    twBackgroundColor:
-      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
   },
   Icons: {
     twWidth: "w-full",
@@ -109,10 +66,5 @@ export const defaultTheme: PresetTheme = {
   },
   TooltipPopoverArrow: {
     twFill: "fill-gray-900 dark:fill-gray-50",
-  },
-  InvisibleButtonsLayout: {
-    twFlex: "flex",
-    twPadding: "py-1",
-    twGap: "gap-x-1",
   },
 };
