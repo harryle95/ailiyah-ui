@@ -1,5 +1,5 @@
 import { styled } from "./factory";
-import { Theme, ThemeProvider, useThemeContext } from "./ThemeContext";
+import { Theme, ThemeProvider, useThemeContext, PresetTheme } from "./ThemeContext";
 import { ITailwindKey, ITailwindTheme } from "./types";
 
 export {
@@ -10,5 +10,6 @@ export {
 }
 export type{
     ITailwindKey,
-    ITailwindTheme
+    ITailwindTheme,
+    PresetTheme
 }

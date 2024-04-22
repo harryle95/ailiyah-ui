@@ -2,11 +2,9 @@ import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
 import { PresetTheme, defaultTheme } from "./default";
 
-export const ThemeContext = React.createContext<PresetTheme | undefined>(
-  undefined
-);
+const ThemeContext = React.createContext<PresetTheme | undefined>(undefined);
 
-export const useThemeContext = () => {
+const useThemeContext = () => {
   const context = React.useContext(ThemeContext);
   if (!context) {
     console.error("useThemeContext must be used within a Provider");
@@ -15,7 +13,7 @@ export const useThemeContext = () => {
   return context;
 };
 
-export const ThemeProvider: React.FC<{
+const ThemeProvider: React.FC<{
   value?: PresetTheme;
   children: React.ReactNode;
 }> = ({ value, children }) => {
@@ -26,7 +24,7 @@ export const ThemeProvider: React.FC<{
   );
 };
 
-export class Theme {
+class Theme {
   static extract(values: ITailwindTheme): {
     tailwindTheme: ITailwindTheme;
     rest: Record<string, any>;
@@ -67,3 +65,7 @@ export class Theme {
     return { className: className, rest: rest };
   }
 }
+
+export { useThemeContext, ThemeProvider, Theme };
+
+export type { PresetTheme };
