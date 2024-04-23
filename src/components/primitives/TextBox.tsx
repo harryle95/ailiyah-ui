@@ -2,25 +2,17 @@ import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import * as Primitive from "./types";
-import { createContext } from "@radix-ui/react-context";
+import { createBox, BaseBoxProps, BaseBoxContextValue } from "./Box";
 
-interface TextBoxOwnProps {
-  activeState: boolean;
-  hoverSetActive: boolean;
-  children: React.ReactNode | ((internalActive: boolean) => React.ReactNode);
-}
-
-interface TextBoxProps
-  extends TextBoxOwnProps,
-    ITailwindTheme,
-    Omit<Primitive.DivProps, "children"> {}
-
-interface TextBoxContextValue {
-  activeState: "active" | "inactive";
-}
-
-const [TextBoxProvider, useTextBoxContext] =
-  createContext<TextBoxContextValue>("TextBox");
+const [_Root, useTextBoxContext] = createBox<BaseBoxContextValue, BaseBoxProps>(
+  "TextBox",
+  undefined,
+  {
+    twWidth: "w-full",
+    twFlex: "flex",
+    twAlignItems: "items-center",
+  }
+);
 
 /**
  * Text box represent a text area that can optionally has side components -i.e
@@ -82,52 +74,7 @@ const [TextBoxProvider, useTextBoxContext] =
       </Text.Root>
     ```
  */
-const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
-  const {
-    activeState,
-    hoverSetActive,
-    children,
-    twWidth = "w-full",
-    twFlex = "flex",
-    twAlignItems = "items-center",
-    onMouseEnter,
-    onMouseLeave,
-    ...rest
-  } = props;
-  const [internalActive, setInternalActive] = React.useState(false);
-  const hoverOn = (e: React.MouseEvent<HTMLDivElement>) => {
-    onMouseEnter && onMouseEnter(e);
-    if (hoverSetActive) {
-      setInternalActive(true);
-    }
-  };
-  const hoverOff = (e: React.MouseEvent<HTMLDivElement>) => {
-    onMouseLeave && onMouseLeave(e);
-    if (hoverSetActive) {
-      setInternalActive(false);
-    }
-  };
-
-  const dataState = activeState || internalActive ? "active" : "inactive";
-  return (
-    <TextBoxProvider activeState={dataState}>
-      <styled.div
-        twWidth={twWidth}
-        twFlex={twFlex}
-        twAlignItems={twAlignItems}
-        onMouseEnter={hoverOn}
-        onMouseLeave={hoverOff}
-        {...rest}
-        ref={ref}
-        data-state={dataState}
-      >
-        {typeof children === "function"
-          ? children(activeState || internalActive)
-          : children}
-      </styled.div>
-    </TextBoxProvider>
-  );
-});
+const Root = _Root;
 
 /**
  * Content is the container of the main content of TextBox.
