@@ -11,7 +11,6 @@ import * as Primitive from "./types";
  * ------------------------------------------------------------------------------------------------
  */
 
-
 interface InteractiveInputProps extends Primitive.InputProps, ITailwindTheme {
   /**
    * Handler called when esc key is pressed. To prevent default behaviour,

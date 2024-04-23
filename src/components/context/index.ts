@@ -1,7 +1,7 @@
 import { styled } from "./factory";
-import { Theme, ThemeProvider, useThemeContext, PresetTheme } from "./ThemeContext";
+import { Theme, ThemeProvider, useThemeContext} from "./ThemeContext";
 import { ITailwindKey, ITailwindTheme } from "./types";
-import { defaultTheme } from "./default";
+import { defaultTheme, PresetTheme } from "./default";
 
 export {
     styled,

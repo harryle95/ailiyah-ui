@@ -1,28 +1,13 @@
 import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
 import { PresetTheme, defaultTheme } from "./default";
+import { createContext } from "@radix-ui/react-context";
 
-const ThemeContext = React.createContext<PresetTheme | undefined>(undefined);
+const [ThemeProvider, useThemeContext] = createContext<PresetTheme>(
+  "Theme",
+  defaultTheme
+);
 
-const useThemeContext = () => {
-  const context = React.useContext(ThemeContext);
-  if (!context) {
-    console.error("useThemeContext must be used within a Provider");
-    return {};
-  }
-  return context;
-};
-
-const ThemeProvider: React.FC<{
-  value?: PresetTheme;
-  children: React.ReactNode;
-}> = ({ value, children }) => {
-  return (
-    <ThemeContext.Provider value={value ? value : defaultTheme}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
 
 class Theme {
   static extract(values: ITailwindTheme): {

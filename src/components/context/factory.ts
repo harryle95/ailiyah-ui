@@ -22,7 +22,7 @@ export type StyledFactoryFn = JSXElement & JSXFactory;
 
 const styledFn = (element: any) => {
   const SComponent = React.forwardRef<HTMLAnchorElement, any>((props, ref) => {
-    const theme = useThemeContext();
+    const theme = useThemeContext("Theme");
     const { className, rest } = Theme.getClassName(props, theme);
 
     return React.createElement(

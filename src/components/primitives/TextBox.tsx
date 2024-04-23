@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import * as Primitive from "./types";
+import { createContext } from "@radix-ui/react-context";
 
 interface TextBoxOwnProps {
   activeState: boolean;
@@ -14,22 +15,12 @@ interface TextBoxProps
     ITailwindTheme,
     Omit<Primitive.DivProps, "children"> {}
 
-interface ITextBoxContext {
+interface TextBoxContextValue {
   activeState: "active" | "inactive";
 }
 
-const TextBoxContext = React.createContext<ITextBoxContext | undefined>(
-  undefined
-);
-
-const useTextBoxContext: () => ITextBoxContext = () => {
-  const context = React.useContext(TextBoxContext);
-  if (!context) {
-    console.error("useTextBoxContext must be used within a Form");
-    return { activeState: "active" };
-  }
-  return context;
-};
+const [TextBoxProvider, useTextBoxContext] =
+  createContext<TextBoxContextValue>("TextBox");
 
 /**
  * Text box represent a text area that can optionally has side components -i.e
@@ -119,7 +110,7 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
 
   const dataState = activeState || internalActive ? "active" : "inactive";
   return (
-    <TextBoxContext.Provider value={{ activeState: dataState }}>
+    <TextBoxProvider activeState={dataState}>
       <styled.div
         twWidth={twWidth}
         twFlex={twFlex}
@@ -134,7 +125,7 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
           ? children(activeState || internalActive)
           : children}
       </styled.div>
-    </TextBoxContext.Provider>
+    </TextBoxProvider>
   );
 });
 
@@ -162,7 +153,7 @@ const Content = React.forwardRef<
     ...rest
   } = props;
 
-  const { activeState } = useTextBoxContext();
+  const { activeState } = useTextBoxContext("TextBoxContent");
   return (
     <styled.div
       twOverflow={twOverflow}
@@ -197,7 +188,7 @@ const Component = React.forwardRef<
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";
-  const { activeState } = useTextBoxContext();
+  const { activeState } = useTextBoxContext("TextBoxComponent");
   return (
     <styled.div twOrder={order} {...rest} data-state={activeState} ref={ref}>
       {children}

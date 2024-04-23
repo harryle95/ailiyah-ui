@@ -1,11 +1,12 @@
 import * as React from "react";
 import { ITailwindTheme } from "../context/types";
 import { styled, createElement } from "../context/factory";
-import * as Primitive from "./types"
+import * as Primitive from "./types";
+import { createContext } from "@radix-ui/react-context";
 
 type DivRef = React.ElementRef<"div"> | null;
 
-interface NavBarProps extends Primitive.DivProps, ITailwindTheme{};
+interface NavBarProps extends Primitive.DivProps, ITailwindTheme {}
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -14,30 +15,24 @@ interface NavBarProps extends Primitive.DivProps, ITailwindTheme{};
  */
 
 interface NavBarState {
-  state: boolean;
-  setState: Function;
+  activeState: boolean;
+  setActiveState: Function;
 }
 
-const NavBarContext = React.createContext<NavBarState | undefined>(undefined);
-
-const useNavBarContext = () => {
-  const context = React.useContext(NavBarContext);
-  if (!context) {
-    throw new Error("useNavBarContext must be used within a Provider");
-  }
-  return context;
-};
+const [NavBarProvider, useNavBarContext] = createContext<NavBarState>("NavBar");
+function getStateName(state: boolean): string {
+  return state ? "active" : "inactive";
+}
 
 const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
-  const stateName = visible?"active":"inactive"
   return (
-    <NavBarContext.Provider value={{ state: visible, setState: setVisible }}>
-      <styled.div ref={ref} {...rest} data-state={stateName}>
+    <NavBarProvider activeState={visible} setActiveState={setVisible}>
+      <styled.div ref={ref} {...rest} data-state={getStateName(visible)}>
         {children}
       </styled.div>
-    </NavBarContext.Provider>
+    </NavBarProvider>
   );
 });
 
@@ -50,7 +45,12 @@ NavBar.displayName = "NavBar";
  */
 
 interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
-  children?: React.ReactNode | ((state: boolean, trigger: React.MouseEventHandler<HTMLButtonElement>) => React.ReactNode);
+  children?:
+    | React.ReactNode
+    | ((
+        state: boolean,
+        trigger: React.MouseEventHandler<HTMLButtonElement>
+      ) => React.ReactNode);
 }
 
 /**
@@ -59,14 +59,16 @@ interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
 const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
   (props, ref) => {
     const { children, onClick = (e) => {}, ...rest } = props;
-    const { state, setState } = useNavBarContext();
+    const { activeState, setActiveState } = useNavBarContext("NavBarTrigger");
     const onClickHandler = (e) => {
-      setState(!state);
+      setActiveState(!activeState);
       onClick(e);
     };
     return (
-      <styled.div {...rest} ref={ref}>
-        {typeof children === "function" ? children(state, onClickHandler) : children}
+      <styled.div {...rest} ref={ref} data-state={getStateName(activeState)}>
+        {typeof children === "function"
+          ? children(activeState, onClickHandler)
+          : children}
       </styled.div>
     );
   }
@@ -78,22 +80,25 @@ NavBarTrigger.displayName = "NavBarTrigger";
  * NavBarContent
  * ------------------------------------------------------------------------------------------------
  */
-const NavBarContent = React.forwardRef<DivRef, NavBarProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
-    const { state } = useNavBarContext();
-    
-    return state ? (
-      <styled.div ref={ref} {...rest}>
-        {children}
-      </styled.div>
-    ) : (
-      <styled.div ref={ref} {...rest} style={{ width: "0px" }}>
-        {children}
-      </styled.div>
-    );
-  }
-);
+const NavBarContent = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
+  const { children, ...rest } = props;
+  const { activeState } = useNavBarContext("NavBarComponent");
+
+  return activeState ? (
+    <styled.div ref={ref} {...rest} data-state={getStateName(activeState)}>
+      {children}
+    </styled.div>
+  ) : (
+    <styled.div
+      ref={ref}
+      {...rest}
+      style={{ width: "0px" }}
+      data-state={getStateName(activeState)}
+    >
+      {children}
+    </styled.div>
+  );
+});
 NavBarContent.displayName = "NavBarContent";
 
 /**
@@ -144,9 +149,5 @@ export {
   Body,
   Footer,
   //
-
 };
-export type{
-  NavBarProps,
-  DivRef
-}
+export type { NavBarProps, DivRef };
