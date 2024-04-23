@@ -2,7 +2,7 @@ import * as React from "react";
 import { ITailwindTheme } from "../context/types";
 import { styled, createElement } from "../context/factory";
 import * as Primitive from "./types";
-import { createContext } from "@radix-ui/react-context";
+import { createContext } from "../context";
 
 type DivRef = React.ElementRef<"div"> | null;
 
@@ -28,7 +28,7 @@ const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
   return (
-    <NavBarProvider activeState={visible} setActiveState={setVisible}>
+    <NavBarProvider value={{activeState: visible, setActiveState: setVisible}}>
       <styled.div ref={ref} {...rest} data-state={getStateName(visible)}>
         {children}
       </styled.div>
@@ -59,7 +59,7 @@ interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
 const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
   (props, ref) => {
     const { children, onClick = (e) => {}, ...rest } = props;
-    const { activeState, setActiveState } = useNavBarContext("NavBarTrigger");
+    const { activeState, setActiveState } = useNavBarContext();
     const onClickHandler = (e) => {
       setActiveState(!activeState);
       onClick(e);
@@ -82,7 +82,7 @@ NavBarTrigger.displayName = "NavBarTrigger";
  */
 const NavBarContent = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
-  const { activeState } = useNavBarContext("NavBarComponent");
+  const { activeState } = useNavBarContext();
 
   return activeState ? (
     <styled.div ref={ref} {...rest} data-state={getStateName(activeState)}>

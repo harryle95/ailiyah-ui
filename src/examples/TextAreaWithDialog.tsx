@@ -70,16 +70,7 @@ function Demo() {
             twPadding="p-3"
           />
           <TextArea.Component compLocation="bottom-right">
-            <Button.InvisibleButtonGroup
-              twPadding="px-[2px] py-[6px]"
-              twHeight="h-fit"
-              twFlex="flex"
-            >
-              <div>
-                <DialogMenu />
-              </div>
-              <Button.SubmitButton />
-            </Button.InvisibleButtonGroup>
+            <Button.SubmitButton />
           </TextArea.Component>
         </TextArea.Content>
       </TextArea.Root>

@@ -1,13 +1,12 @@
 import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
 import { PresetTheme, defaultTheme } from "./default";
-import { createContext } from "@radix-ui/react-context";
+import { createContext } from "./factory";
 
 const [ThemeProvider, useThemeContext] = createContext<PresetTheme>(
   "Theme",
   defaultTheme
 );
-
 
 class Theme {
   static extract(values: ITailwindTheme): {

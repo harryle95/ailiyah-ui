@@ -100,7 +100,7 @@ const Content = React.forwardRef<
     ...rest
   } = props;
 
-  const { activeState } = useTextBoxContext("TextBoxContent");
+  const { activeState } = useTextBoxContext();
   return (
     <styled.div
       twOverflow={twOverflow}
@@ -135,7 +135,7 @@ const Component = React.forwardRef<
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";
-  const { activeState } = useTextBoxContext("TextBoxComponent");
+  const { activeState } = useTextBoxContext();
   return (
     <styled.div twOrder={order} {...rest} data-state={activeState} ref={ref}>
       {children}

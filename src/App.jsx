@@ -1,5 +1,4 @@
-import { Demo } from "./examples/PreviewThumbnail"
-
+import { Demo } from "./examples/TextAreaWithDialog"
 
 function App() {
   return <Demo/>

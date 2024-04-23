@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Primitive from "./types";
-import { createContext } from "@radix-ui/react-context";
+import { createContext } from "../context";
 import { ITailwindTheme } from "../context";
 import { styled } from "../context";
 

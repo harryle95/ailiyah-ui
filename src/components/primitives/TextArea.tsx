@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Primitive from "./types";
 import { ITailwindTheme } from "../context";
 import { createElement, styled } from "../context/factory";
-
+import { useThemeContext } from "../context";
 /**
  * Renders as div styled with ITailwind parameters.
  * Container of all TextArea components.
