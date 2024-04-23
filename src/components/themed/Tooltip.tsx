@@ -1,6 +1,6 @@
 import * as _Tooltip from "@radix-ui/react-tooltip";
 import * as React from "react";
-import "./Tooltip.css";
+import "./css/Tooltip.css";
 import { styled } from "../context/factory";
 
 interface TooltipProps{

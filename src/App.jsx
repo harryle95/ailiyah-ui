@@ -1,4 +1,4 @@
-import { Demo } from "./examples/TextArea"
+import { Demo } from "./examples/TextAreaWithDialog"
 
 
 function App() {

@@ -18,8 +18,9 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import "./Alert.css";
-import "./Popover.css";
+import "./css/Alert.css";
+import "./css/Popover.css";
+import "./css/Dialog.css"
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 
@@ -63,8 +64,8 @@ const DeleteAlertButton = React.forwardRef<HTMLButtonElement, DeleteAlertProps>(
           <DeleteButton {...rest} ref={ref} tooltipContent={tooltipContent} />
         </AlertDialog.Trigger>
         <AlertDialog.Portal>
-          <AlertDialog.Overlay className="AlertDialogOverlay" />
-          <AlertDialog.Content className="AlertDialogContent">
+          <AlertDialog.Overlay className="DialogOverlay" />
+          <AlertDialog.Content className="DialogContent bg-white rounded-[6px] w-[90vw] max-w-[450px] max-h-[85vh] p-[25px]">
             <AlertDialog.Title className="AlertDialogTitle">
               {dialogTitle}
             </AlertDialog.Title>
