@@ -178,7 +178,7 @@ const PopOverButtonGroup = React.forwardRef<
     <Popover.Root>
       <Popover.Trigger asChild>{icon}</Popover.Trigger>
       <Popover.Portal>
-        <Content className="PopoverContent" themeName="TooltipPopoverContent" sideOffset={5}>
+        <Content className="PopoverContent" themeName="TooltipPopoverContent" sideOffset={5} hideWhenDetached={true}>
           <styled.div {...rest} ref={ref}>
             {children}
           </styled.div>
