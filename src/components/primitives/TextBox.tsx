@@ -1,8 +1,7 @@
 import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
-
-type DivProps = React.ComponentPropsWithoutRef<"div">;
+import * as Primitive from "./types";
 
 interface TextBoxOwnProps {
   activeState: boolean;
@@ -13,7 +12,7 @@ interface TextBoxOwnProps {
 interface TextBoxProps
   extends TextBoxOwnProps,
     ITailwindTheme,
-    Omit<DivProps, "children"> {}
+    Omit<Primitive.DivProps, "children"> {}
 
 interface ITextBoxContext {
   activeState: "active" | "inactive";
@@ -131,7 +130,9 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
         ref={ref}
         data-state={dataState}
       >
-        {typeof children === "function" ? children(activeState || internalActive) : children}
+        {typeof children === "function"
+          ? children(activeState || internalActive)
+          : children}
       </styled.div>
     </TextBoxContext.Provider>
   );
@@ -148,33 +149,34 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
  *
  * Styling active/inactive state can be done by providing a `data-[state=active]:` modifier.
  */
-const Content = React.forwardRef<HTMLDivElement, DivProps & ITailwindTheme>(
-  (props, ref) => {
-    const {
-      twWhitespace = "whitespace-nowrap",
-      twOverflow = "overflow-clip",
-      twWidth = "w-full",
-      twOrder="order-2",
-      children,
-      ...rest
-    } = props;
+const Content = React.forwardRef<
+  HTMLDivElement,
+  Primitive.DivProps & ITailwindTheme
+>((props, ref) => {
+  const {
+    twWhitespace = "whitespace-nowrap",
+    twOverflow = "overflow-clip",
+    twWidth = "w-full",
+    twOrder = "order-2",
+    children,
+    ...rest
+  } = props;
 
-    const { activeState } = useTextBoxContext();
-    return (
-      <styled.div
-        twOverflow={twOverflow}
-        twWhitespace={twWhitespace}
-        twOrder={twOrder}
-        twWidth={twWidth}
-        {...rest}
-        ref={ref}
-        data-state={activeState}
-      >
-        {children}
-      </styled.div>
-    );
-  }
-);
+  const { activeState } = useTextBoxContext();
+  return (
+    <styled.div
+      twOverflow={twOverflow}
+      twWhitespace={twWhitespace}
+      twOrder={twOrder}
+      twWidth={twWidth}
+      {...rest}
+      ref={ref}
+      data-state={activeState}
+    >
+      {children}
+    </styled.div>
+  );
+});
 
 interface LocationProps {
   compLocation: "left" | "right";
@@ -191,7 +193,7 @@ interface LocationProps {
  */
 const Component = React.forwardRef<
   HTMLDivElement,
-  DivProps & ITailwindTheme & LocationProps
+  Primitive.DivProps & ITailwindTheme & LocationProps
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";

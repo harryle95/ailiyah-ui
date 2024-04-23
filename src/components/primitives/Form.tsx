@@ -3,6 +3,7 @@ import { ITailwindTheme } from "../context/types";
 import { styled } from "../context/factory";
 import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
 import * as Upload from "./Upload";
+import * as Primitive from "./types";
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -10,9 +11,8 @@ import * as Upload from "./Upload";
  * ------------------------------------------------------------------------------------------------
  */
 
-type InputProps = React.ComponentPropsWithoutRef<"input">;
 
-interface InteractiveInputProps extends InputProps, ITailwindTheme {
+interface InteractiveInputProps extends Primitive.InputProps, ITailwindTheme {
   /**
    * Handler called when esc key is pressed. To prevent default behaviour,
    * set to (e)=>e.preventDefault().

@@ -3,6 +3,7 @@ import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import { TooltipTailwindButtonProps, TooltipProps } from "../themed/Buttons";
 import { Tooltip } from "../themed/Tooltip";
+import * as Primitive from "./types"
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ const useUploadContext: () => IUploadContext = () => {
 };
 
 interface UploadRootProps
-  extends Omit<React.ComponentPropsWithoutRef<"input">, "type" | "children">,
+  extends Omit<Primitive.InputProps, "type" | "children">,
     IUploadContext {
   children: React.ReactNode | ((context: IUploadContext) => React.ReactNode);
 }
@@ -99,7 +100,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
 Root.displayName = "Root";
 
 interface UploadTriggerProps
-  extends React.ComponentPropsWithoutRef<"label">,
+  extends Primitive.LabelProps,
     TooltipProps,
     ITailwindTheme {}
 
