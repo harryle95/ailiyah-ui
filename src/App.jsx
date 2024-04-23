@@ -1,4 +1,4 @@
-import { Demo } from "./examples/TextAreaWithDialog"
+import { Demo } from "./examples/PromptInputDialog"
 
 function App() {
   return <Demo/>

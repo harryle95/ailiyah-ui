@@ -4,9 +4,7 @@ import { Button } from "../components/themed";
 import { createBox } from "../components/primitives/Box";
 import { styled } from "../components/context";
 
-const [Box, useBoxContext] = createBox("ThumbnailBox", null, {
-  twPosition: "relative",
-});
+const [Box, useBoxContext] = createBox("ThumbnailBox");
 
 function Demo() {
   const [thumbnail, setThumbnail] = React.useState<string>("");
@@ -48,6 +46,7 @@ function Demo() {
             twWidth="w-[500px]"
             twHeight="h-[500px]"
             twBorderWidth="border-2"
+            twPosition="relative"
           >
             {(state) => (
               <>

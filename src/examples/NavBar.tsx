@@ -72,7 +72,7 @@ export const Demo = () => {
 const Root = (props) => {
   const { projects, ...rest } = props;
   return (
-    <ThemeProvider {...theme}>
+    <ThemeProvider value={theme}>
       <NavBar.Root>
         <NavBar.Trigger />
         <NavBar.Content>
