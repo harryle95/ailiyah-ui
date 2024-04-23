@@ -4,9 +4,9 @@ import { Button } from "../components/themed";
 function Demo() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <Button.PopOverButtonGroup className="flex p-0">
-        <Button.UploadButton tooltipContent="Upload" twPadding="p-0" />
-        <Button.DownloadButton tooltipContent="Download" />
+      <Button.PopOverButtonGroup className="flex p-2 border-2 gap-x-2">
+        <Button.UploadButton twPadding="p-0" />
+        <Button.DownloadButton />
       </Button.PopOverButtonGroup>
     </div>
   );
