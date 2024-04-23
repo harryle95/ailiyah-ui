@@ -131,7 +131,7 @@ const Root = React.forwardRef<HTMLDivElement, TextBoxProps>((props, ref) => {
         ref={ref}
         data-state={dataState}
       >
-        {typeof children === "function" ? children(internalActive) : children}
+        {typeof children === "function" ? children(activeState || internalActive) : children}
       </styled.div>
     </TextBoxContext.Provider>
   );
@@ -154,6 +154,7 @@ const Content = React.forwardRef<HTMLDivElement, DivProps & ITailwindTheme>(
       twWhitespace = "whitespace-nowrap",
       twOverflow = "overflow-clip",
       twWidth = "w-full",
+      twOrder="order-2",
       children,
       ...rest
     } = props;
@@ -163,7 +164,7 @@ const Content = React.forwardRef<HTMLDivElement, DivProps & ITailwindTheme>(
       <styled.div
         twOverflow={twOverflow}
         twWhitespace={twWhitespace}
-        twOrder="order-2"
+        twOrder={twOrder}
         twWidth={twWidth}
         {...rest}
         ref={ref}
