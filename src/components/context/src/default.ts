@@ -1,8 +1,4 @@
-import { TailwindProps } from "./src/tailwind.types";
-
-export interface PresetTheme {
-  [key: string]: TailwindProps;
-}
+import { PresetTheme } from "./default.types";
 
 export const defaultTheme: PresetTheme = {
   NavBarRoot: {
