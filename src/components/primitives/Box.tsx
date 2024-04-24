@@ -56,8 +56,7 @@ function createBox<
     };
     const dataState = activeState || internalActive ? "active" : "inactive";
     return (
-      // @ts-ignore
-      <BoxProvider activeState={dataState}>
+      <BoxProvider value={{activeState: dataState} as unknown as ContextValueType}>
         <styled.div
           {...defaultProps}
           onMouseEnter={hoverOn}
