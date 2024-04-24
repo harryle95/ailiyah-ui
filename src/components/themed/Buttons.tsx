@@ -9,6 +9,8 @@ import {
   PlusIcon,
   DotsHorizontalIcon as _DotsHorizontalIcon,
   DotsVerticalIcon as _DotsVerticalIcon,
+  Cross1Icon as _CrossIcon,
+  CheckIcon as _CheckIcon
 } from "@radix-ui/react-icons";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
@@ -160,6 +162,10 @@ const RightButton = createButton(
   "RightButton",
   <RightIcon themeName="Icons" />
 );
+const CrossIcon = styled(_CrossIcon)
+const CrossButton = createButton("CrossButton", <CrossIcon themeName="Icons"/>)
+const CheckIcon = styled(_CheckIcon)
+const CheckButton = createButton("CheckButton", <CheckIcon themeName="Icons"/>)
 
 interface PopOverButtonContentProps
   extends Omit<Popover.PopoverContentProps, "asChild">,
@@ -242,6 +248,10 @@ export {
   LeftButton,
   RightIcon,
   RightButton,
+  CrossIcon,
+  CrossButton,
+  CheckIcon,
+  CheckButton,
   createButton,
 };
 
