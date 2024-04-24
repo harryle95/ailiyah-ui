@@ -9,7 +9,7 @@ const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
 const ThemeProvider = Context.ThemeProvider;
-const [Box, _] = Primitive.Box.createBox("Box", null);
+const [Box, _] = Primitive.Box.createStateBox("Box");
 
 const theme = {
   ...Context.defaultTheme,

@@ -1,6 +1,6 @@
 import * as Text from "../components/primitives/TextBox";
 import * as React from "react";
-import { styled } from "../components/context/factory";
+import { styled } from "../components/context/src";
 import { Button } from "../components/themed";
 /**
  * Text box with delete button that appears when hovered over and gradient masking at the end

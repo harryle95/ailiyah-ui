@@ -2,7 +2,7 @@ import * as Form from "../components/primitives/Form";
 import * as React from "react";
 import { Button } from "../components/themed";
 import { createStateBox } from "../components/primitives/Box";
-import { ThemeProvider, defaultTheme, styled } from "../components/context";
+import { ThemeProvider, defaultTheme, styled } from "../components/context/src";
 import { Thumbnail } from "../components/themed";
 
 const [Box, useBoxContext] = createStateBox("ThumbnailBox");

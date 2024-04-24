@@ -1,6 +1,6 @@
 import * as React from "react";
-import { styled } from "../context/factory";
-import { TailwindProps } from "../context/tailwind.types";
+import { styled } from "../context/src";
+import { TailwindProps } from "../context/src";
 import {
   TooltipTailwindButtonProps,
   TooltipProps,

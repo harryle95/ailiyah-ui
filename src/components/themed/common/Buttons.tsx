@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TailwindProps } from "../../context/tailwind.types";
+import { TailwindProps } from "../../context/src";
 import {
   TrashIcon,
   Pencil1Icon,
@@ -14,7 +14,7 @@ import {
 } from "@radix-ui/react-icons";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
-import { styled } from "../../context/factory";
+import { styled } from "../../context/src";
 import { Tooltip, TooltipProps } from "./Tooltip";
 import {
   DoubleArrowLeftIcon,

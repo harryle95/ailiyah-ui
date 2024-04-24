@@ -2,8 +2,8 @@ import * as Form from "../components/primitives/Form";
 import * as React from "react";
 import { Button } from "../components/themed";
 import { createStateBox } from "../components/primitives/Box";
-import { styled } from "../components/context";
-import { TailwindProps } from "../components/context";
+import { styled } from "../components/context/src";
+import { TailwindProps } from "../components/context/src";
 
 const [Box,_] = createStateBox("ThumbnailBox");
 

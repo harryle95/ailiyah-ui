@@ -1,4 +1,4 @@
-import { createElement } from "../context/factory";
+import { createElement } from "../context/src";
 import { createBox, createLocationBox } from "./Box";
 
 /**

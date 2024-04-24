@@ -1,10 +1,10 @@
 import * as Form from "../components/primitives/Form";
 import * as React from "react";
 import { Button } from "../components/themed";
-import { createBox } from "../components/primitives/Box";
-import { styled } from "../components/context";
+import { createStateBox } from "../components/primitives/Box";
+import { styled } from "../components/context/src";
 
-const [Box, useBoxContext] = createBox("ThumbnailBox");
+const [Box, useBoxContext] = createStateBox("ThumbnailBox");
 
 function Demo() {
   const [thumbnail, setThumbnail] = React.useState<string>("");

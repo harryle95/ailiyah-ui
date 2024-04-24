@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { styled } from "../../context/factory";
+import { styled } from "../../context/src";
 import "../css/Dialog.css"
 
 const Root = Dialog.Root;

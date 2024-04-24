@@ -1,8 +1,8 @@
 import * as React from "react";
-import { TailwindProps } from "../context/tailwind.types";
-import { styled, createElement } from "../context/factory";
+import { TailwindProps } from "../context/src";
+import { styled, createElement } from "../context/src";
 import * as Primitive from "./types";
-import { createContext } from "../context";
+import { createContext } from "../context/src";
 
 type DivRef = React.ElementRef<"div"> | null;
 

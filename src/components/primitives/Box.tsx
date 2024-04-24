@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as Primitive from "./types";
-import { createContext } from "../context";
-import { TailwindProps } from "../context";
-import { styled } from "../context";
+import { createContext } from "../context/src"
+import { TailwindProps } from "../context/src";
+import { styled } from "../context/src";
 import { CornerLocationProps, LocationMap } from "./types";
 
 /*************************************************************************************************************************************

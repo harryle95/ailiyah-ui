@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TailwindProps } from "../context/tailwind.types";
-import { styled } from "../context/factory";
+import { TailwindProps } from "../context/src";
+import { styled } from "../context/src";
 import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
 import * as Upload from "./Upload";
 import * as Primitive from "./types";

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { createStateBox } from "../../primitives/Box";
 import { PrimitiveProps } from "../../primitives/";
-import { TailwindProps } from "../../context";
-import { styled } from "../../context";
+import { TailwindProps } from "../../context/src";
+import { styled } from "../../context/src";
 import { CornerLocationProps, LocationMap } from "../../primitives/types";
-import { createElement } from "../../context/factory";
+import { createElement } from "../../context/src";
 
 const [Root, useRootContext] = createStateBox("Root", undefined);
 

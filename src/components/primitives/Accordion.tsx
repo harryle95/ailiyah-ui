@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
-import { TailwindProps, styled } from "../context";
+import { TailwindProps, styled } from "../context/src";
 import "./Accordion.css"
 
 const Root = styled(Accordion.Root);

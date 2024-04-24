@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Button from "../common/Buttons"
 import * as NavBar from "../../primitives/NavBar";
-import { TailwindProps } from "../../context/tailwind.types";
+import { TailwindProps } from "../../context/src";
 
 const Root: React.FC<NavBar.NavBarProps> = (props)=>{
   const {children, themeName, ...rest} = props;
