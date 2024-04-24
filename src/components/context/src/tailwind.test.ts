@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { isTailwindKey, extractTailwindTheme } from "./tailwind";
+import { isTailwindKey, extractTailwindTheme, toClassString } from "./tailwind";
 import { TailwindProps } from "./tailwind.types";
 
 describe("Test isTailwindKey gives true for correct key and false for incorrect", () => {
@@ -46,3 +46,17 @@ describe("Test extractTailwindTheme collects correct themes", () => {
     }
   );
 });
+
+describe("Test toClassstring returns the correct tailwind classname", ()=>{
+  test.each([
+    [{twWidth: "w-10", twHeight: "h-10"}, "w-10 h-10"],
+    [{twWidth: "w-10", twHeight: "h-10", themeName: "Icons"}, "Icons w-10 h-10"],
+    [{twWidth: "w-10", twHeight: "h-10", themeName: "Icons "}, "Icons w-10 h-10"],
+    [{}, ""],
+    [{themeName: "Icons"}, "Icons"],
+    [{themeName: "Icons", twBackgroundColor: "bg-white"}, "Icons bg-white"],
+  ])("Given a prop, return the correct classname", (props, className)=>{
+    const result = toClassString(props)
+    expect(result).toStrictEqual(className)
+  })
+})
