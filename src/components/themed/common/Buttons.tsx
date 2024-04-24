@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ITailwindTheme } from "../../context/types";
+import { TailwindProps } from "../../context/tailwind.types";
 import {
   TrashIcon,
   Pencil1Icon,
@@ -25,7 +25,7 @@ import "../css/Popover.css";
 import "../css/Dialog.css";
 import { PrimitiveProps } from "../../primitives";
 
-type TailwindButtonProps = PrimitiveProps.ButtonProps & ITailwindTheme;
+type TailwindButtonProps = PrimitiveProps.ButtonProps & TailwindProps;
 
 interface TooltipTailwindButtonProps
   extends TailwindButtonProps,
@@ -170,7 +170,7 @@ const CheckButton = createButton(
 
 interface PopOverButtonContentProps
   extends Omit<Popover.PopoverContentProps, "asChild">,
-    ITailwindTheme {
+    TailwindProps {
   icon?: React.JSX.Element;
 }
 

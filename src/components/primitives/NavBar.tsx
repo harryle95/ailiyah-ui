@@ -1,12 +1,12 @@
 import * as React from "react";
-import { ITailwindTheme } from "../context/types";
+import { TailwindProps } from "../context/tailwind.types";
 import { styled, createElement } from "../context/factory";
 import * as Primitive from "./types";
 import { createContext } from "../context";
 
 type DivRef = React.ElementRef<"div"> | null;
 
-interface NavBarProps extends Primitive.DivProps, ITailwindTheme {}
+interface NavBarProps extends Primitive.DivProps, TailwindProps {}
 
 /**
  * ------------------------------------------------------------------------------------------------

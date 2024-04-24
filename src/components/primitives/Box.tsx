@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Primitive from "./types";
 import { createContext } from "../context";
-import { ITailwindTheme } from "../context";
+import { TailwindProps } from "../context";
 import { styled } from "../context";
 import { CornerLocationProps, LocationMap } from "./types";
 
@@ -23,7 +23,7 @@ interface BaseStateBoxOwnProps {
 
 interface BaseStateBoxProps
   extends BaseStateBoxOwnProps,
-    ITailwindTheme,
+    TailwindProps,
     Omit<Primitive.DivProps, "children"> {}
 
 function createStateBox<
@@ -88,11 +88,11 @@ function createStateBox<
  * Base Box
  *************************************************************************************************************************************
  */
-interface BaseBoxProps extends ITailwindTheme, Primitive.DivProps {}
+interface BaseBoxProps extends TailwindProps, Primitive.DivProps {}
 
 function createBox<BoxProps extends BaseBoxProps>(
   componentName: string,
-  defaultProps: Omit<BoxProps, "children">
+  defaultProps?: Omit<BoxProps, "children">
 ) {
   const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     const { children, ...rest } = props;

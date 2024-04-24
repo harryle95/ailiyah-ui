@@ -1,6 +1,6 @@
 import { styled } from "./factory";
 import { Theme, ThemeProvider, useThemeContext, createContext} from "./ThemeContext";
-import { ITailwindKey, ITailwindTheme } from "./types";
+import { ITailwindKey, TailwindProps } from "./tailwind.types";
 import { defaultTheme, PresetTheme } from "./default";
 
 export {
@@ -13,6 +13,6 @@ export {
 }
 export type{
     ITailwindKey,
-    ITailwindTheme,
+    TailwindProps,
     PresetTheme
 }

@@ -1,7 +1,7 @@
-import { ITailwindTheme } from "./types";
+import { TailwindProps } from "./src/tailwind.types";
 
 export interface PresetTheme {
-  [key: string]: ITailwindTheme;
+  [key: string]: TailwindProps;
 }
 
 export const defaultTheme: PresetTheme = {

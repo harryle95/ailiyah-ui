@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createStateBox } from "../../primitives/Box";
 import { PrimitiveProps } from "../../primitives/";
-import { ITailwindTheme } from "../../context";
+import { TailwindProps } from "../../context";
 import { styled } from "../../context";
 import { CornerLocationProps, LocationMap } from "../../primitives/types";
 import { createElement } from "../../context/factory";
@@ -12,14 +12,14 @@ const Content = createElement("div", "Content");
 
 const Image = React.forwardRef<
   HTMLImageElement,
-  PrimitiveProps.ImageProps & ITailwindTheme
+  PrimitiveProps.ImageProps & TailwindProps
 >((props, ref) => {
   return <styled.img {...props} ref={ref} themeName="ThumbnailImage" />;
 });
 
 const Component = React.forwardRef<
   HTMLDivElement,
-  CornerLocationProps & PrimitiveProps.DivProps & ITailwindTheme
+  CornerLocationProps & PrimitiveProps.DivProps & TailwindProps
 >((props, ref) => {
   const { compLocation, children, twPosition = "absolute", ...rest } = props;
   const twTopRightBottomLeft = rest.twTopRightBottomLeft

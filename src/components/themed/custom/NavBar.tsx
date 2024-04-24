@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Button from "../common/Buttons"
 import * as NavBar from "../../primitives/NavBar";
-import { ITailwindTheme } from "../../context/types";
+import { TailwindProps } from "../../context/tailwind.types";
 
 const Root: React.FC<NavBar.NavBarProps> = (props)=>{
   const {children, themeName, ...rest} = props;
@@ -13,7 +13,7 @@ const Root: React.FC<NavBar.NavBarProps> = (props)=>{
   )
 }
 
-const Trigger: React.FC<ITailwindTheme> = (props)=>{
+const Trigger: React.FC<TailwindProps> = (props)=>{
   const {themeName,...rest} = props
   let appliedTheme = themeName?themeName:"NavBarTrigger"
   const LeftButton = Button.createButton("Collapse", <Button.LeftIcon themeName="NavBarIcons"/>)

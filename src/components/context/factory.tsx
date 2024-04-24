@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useThemeContext, Theme } from "./ThemeContext";
-import { ITailwindTheme } from "./types";
+import { TailwindProps } from "./tailwind.types";
 import { FunctionComponent, ElementType } from "react";
 
-export type TailwindProps<T extends ElementType> =
-  React.ComponentPropsWithoutRef<T> & ITailwindTheme;
+type TailwindProps<T extends ElementType> = React.ComponentPropsWithoutRef<T> &
+  TailwindProps;
 
 export type TailwindComponent<T extends ElementType> = FunctionComponent<
   TailwindProps<T> & { ref?: any }
@@ -15,7 +15,10 @@ type JSXElement = {
 };
 
 type JSXFactory = {
-  <T extends ElementType>(component: T): TailwindComponent<T>;
+  <T extends ElementType>(
+    component: T,
+    defaultProps?: Omit<TailwindProps, "children">
+  ): TailwindComponent<T>;
 };
 
 export type StyledFactoryFn = JSXElement & JSXFactory;

@@ -1,10 +1,11 @@
 import * as Form from "../components/primitives/Form";
 import * as React from "react";
 import { Button } from "../components/themed";
-import { createBox } from "../components/primitives/Box";
+import { createStateBox } from "../components/primitives/Box";
 import { styled } from "../components/context";
-import { ITailwindTheme } from "../components/context";
-const [Box, useBoxContext] = createBox("ThumbnailBox");
+import { TailwindProps } from "../components/context";
+
+const [Box,_] = createStateBox("ThumbnailBox");
 
 interface PromptEntry {
   files?: File;
@@ -17,7 +18,7 @@ interface PromptData {
 
 const PromptInput = React.forwardRef<
   HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div"> & ITailwindTheme
+  React.ComponentPropsWithoutRef<"div"> & TailwindProps
 >((props, ref) => {
   const [formData, setFormData] = React.useState<PromptEntry>({
     files: undefined,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "../context/factory";
-import { ITailwindTheme } from "../context/types";
+import { TailwindProps } from "../context/tailwind.types";
 import {
   TooltipTailwindButtonProps,
   TooltipProps,
@@ -105,7 +105,7 @@ Root.displayName = "Root";
 interface UploadTriggerProps
   extends Primitive.LabelProps,
     Omit<TooltipProps, "children">,
-    ITailwindTheme {}
+    TailwindProps {}
 
 /**
  * Renders an HTML `label` element with an internal `htmlFor` prop linked

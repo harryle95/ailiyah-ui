@@ -1,4 +1,4 @@
-export class TailwindTheme {
+class TailwindTheme {
   themeName?: string = ''
   /** twAspectRatio - https://tailwindcss.com/docs/aspect-ratio*/
   twAspectRatio?: string = ''
@@ -330,14 +330,12 @@ export class TailwindTheme {
   twOther?:string=''
 }
 
-interface ITailwindTheme extends TailwindTheme { }
-type ITailwindKey = keyof ITailwindTheme;
+interface TailwindProps extends TailwindTheme { }
 
-const keys = Object.keys(new TailwindTheme());
-
-export const isTailwindKey = (propName: string) => keys.includes(propName);
+export {
+  TailwindTheme
+}
 
 export type{
-  ITailwindTheme,
-  ITailwindKey
+  TailwindProps,
 }

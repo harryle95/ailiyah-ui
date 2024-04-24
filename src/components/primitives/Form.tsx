@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ITailwindTheme } from "../context/types";
+import { TailwindProps } from "../context/tailwind.types";
 import { styled } from "../context/factory";
 import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
 import * as Upload from "./Upload";
@@ -11,7 +11,7 @@ import * as Primitive from "./types";
  * ------------------------------------------------------------------------------------------------
  */
 
-interface InteractiveInputProps extends Primitive.InputProps, ITailwindTheme {
+interface InteractiveInputProps extends Primitive.InputProps, TailwindProps {
   /**
    * Handler called when esc key is pressed. To prevent default behaviour,
    * set to (e)=>e.preventDefault().

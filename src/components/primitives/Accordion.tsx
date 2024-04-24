@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
-import { ITailwindTheme, styled } from "../context";
+import { TailwindProps, styled } from "../context";
 import "./Accordion.css"
 
 const Root = styled(Accordion.Root);
 const Content = styled(Accordion.Content);
 const Item = styled(Accordion.Item);
 
-type TriggerProps = Accordion.AccordionTriggerProps & ITailwindTheme;
+type TriggerProps = Accordion.AccordionTriggerProps & TailwindProps;
 
 
 /**
