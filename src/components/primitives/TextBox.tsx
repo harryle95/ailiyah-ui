@@ -2,18 +2,22 @@ import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import * as Primitive from "./types";
-import { createBox, BaseBoxProps, BaseBoxContextValue } from "./Box";
+import {
+  createStateBox,
+  BaseStateBoxProps,
+  BaseStateBoxContextValue,
+  createBox,
+} from "./Box";
 import { LRLocationProps } from "./types";
 
-const [_Root, useTextBoxContext] = createBox<BaseBoxContextValue, BaseBoxProps>(
-  "TextBox",
-  undefined,
-  {
-    twWidth: "w-full",
-    twFlex: "flex",
-    twAlignItems: "items-center",
-  }
-);
+const [_Root, useTextBoxContext] = createStateBox<
+  BaseStateBoxContextValue,
+  BaseStateBoxProps
+>("TextBox", undefined, {
+  twWidth: "w-full",
+  twFlex: "flex",
+  twAlignItems: "items-center",
+});
 
 /**
  * Text box represent a text area that can optionally has side components -i.e

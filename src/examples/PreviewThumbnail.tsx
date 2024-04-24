@@ -1,10 +1,11 @@
 import * as Form from "../components/primitives/Form";
 import * as React from "react";
 import { Button } from "../components/themed";
-import { createBox } from "../components/primitives/Box";
-import { styled } from "../components/context";
+import { createStateBox } from "../components/primitives/Box";
+import { ThemeProvider, defaultTheme, styled } from "../components/context";
+import { Thumbnail } from "../components/themed";
 
-const [Box, useBoxContext] = createBox("ThumbnailBox");
+const [Box, useBoxContext] = createStateBox("ThumbnailBox");
 
 function Demo() {
   const [thumbnail, setThumbnail] = React.useState<string>("");
@@ -40,7 +41,7 @@ function Demo() {
             Upload
           </Form.Upload.Trigger>
         ) : (
-          <Box
+          <Thumbnail.Root
             activeState={false}
             hoverSetActive={true}
             twWidth="w-[500px]"
@@ -48,39 +49,49 @@ function Demo() {
             twBorderWidth="border-2"
             twPosition="relative"
           >
-            {(state) => (
-              <>
-                <styled.img
-                  src={thumbnail}
-                  twWidth="w-full"
-                  twHeight="h-full"
-                  twAspectRatio="aspect-square"
-                />
-                <Box
-                  activeState={state}
-                  twPosition="absolute"
-                  twTopRightBottomLeft="top-2 right-2"
+            <Thumbnail.Content
+              twBackgroundColor="bg-transparent"
+              twPadding="pb-14"
+              twPosition="relative"
+            >
+              <Thumbnail.Image
+                src={thumbnail}
+                twWidth="w-full"
+                twHeight="h-full"
+                twAspectRatio="aspect-square"
+              />
+              <ThemeProvider
+                value={{
+                  ...defaultTheme,
+                  Icons: { twWidth: "w-9", twHeight: "h-9" },
+                }}
+              >
+                <Thumbnail.Component
+                  compLocation="bottom-right"
+                  twDisplay="data-[state=inactive]:hidden"
                 >
-                  <Button.PopOverButtonGroup
+                  <styled.div
                     twFlex="flex"
                     twPadding="p-2"
-                    twBorderWidth="border-2"
                     twBorderRadius="rounded-md"
                     twGap="gap-x-2"
                     twWidth="w-fit"
                     twHeight="h-fit"
                   >
-                    <Form.Upload.Trigger onClick={() => console.log("Clicked")}>
+                    <Form.Upload.Trigger
+                      tooltipContent="Upload"
+                      onClick={() => console.log("Clicked")}
+                    >
                       <Button.UploadIcon themeName="Icons" />
                     </Form.Upload.Trigger>
-                    <Form.Upload.Cancel>
+                    <Form.Upload.Cancel tooltipContent="Remove">
                       <Button.DeleteIcon themeName="Icons" />
                     </Form.Upload.Cancel>
-                  </Button.PopOverButtonGroup>
-                </Box>
-              </>
-            )}
-          </Box>
+                  </styled.div>
+                </Thumbnail.Component>
+              </ThemeProvider>
+            </Thumbnail.Content>
+          </Thumbnail.Root>
         )}
       </Form.Upload.Root>
     </div>

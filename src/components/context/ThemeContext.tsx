@@ -2,7 +2,7 @@ import * as React from "react";
 import { ITailwindTheme, isTailwindKey } from "./types";
 import { PresetTheme, defaultTheme } from "./default";
 
-export function createContext<ContextValueType extends object | null>(
+export function createContext<ContextValueType>(
   rootComponentName: string,
   defaultContext?: ContextValueType
 ) {

@@ -1,8 +1,5 @@
-import * as React from "react";
-import * as Primitive from "./types";
-import { ITailwindTheme } from "../context";
-import { createElement, styled } from "../context/factory";
-import { CornerLocationProps, LocationMap } from "./types";
+import { createElement } from "../context/factory";
+import { createBox, createLocationBox } from "./Box";
 
 /**
  * Renders as div styled with ITailwind parameters.
@@ -14,47 +11,13 @@ const Root = createElement("div", "Root");
  * Renders as div styled with ITailwind parameters
  * Container of TextArea.TextArea and TextArea.Component
  */
-const Content = React.forwardRef<
-  HTMLDivElement,
-  Primitive.DivProps & ITailwindTheme
->((props, ref) => {
-  const { children, twPosition = "relative", ...rest } = props;
-  return (
-    <styled.div {...rest} twPosition={twPosition} ref={ref}>
-      {children}
-    </styled.div>
-  );
-});
+const Content = createBox("Content", { twPosition: "relative" });
 
 /**
  * Renders as textarea with ITailwind parameters
  */
 const TextArea = createElement("textarea", "TextArea");
 
-interface ComponentProps
-  extends Primitive.DivProps,
-    ITailwindTheme,
-    CornerLocationProps {}
-
-const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
-  (props, ref) => {
-    const { compLocation, twPosition = "absolute", children, ...rest } = props;
-    const twTopRightBottomLeft = rest.twTopRightBottomLeft
-      ? rest.twTopRightBottomLeft
-      : LocationMap[compLocation];
-    return (
-      <styled.div
-        {...rest}
-        ref={ref}
-        twTopRightBottomLeft={twTopRightBottomLeft}
-        twPosition={twPosition}
-      >
-        {children}
-      </styled.div>
-    );
-  }
-);
+const Component = createLocationBox("Component");
 
 export { Root, Content, TextArea, Component };
-
-export type { ComponentProps };

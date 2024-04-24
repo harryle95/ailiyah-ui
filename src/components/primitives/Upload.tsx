@@ -1,9 +1,12 @@
 import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
-import { TooltipTailwindButtonProps, TooltipProps } from "../themed/common/Buttons";
+import {
+  TooltipTailwindButtonProps,
+  TooltipProps,
+} from "../themed/common/Buttons";
 import { Tooltip } from "../themed/common/Tooltip";
-import * as Primitive from "./types"
+import * as Primitive from "./types";
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -101,7 +104,7 @@ Root.displayName = "Root";
 
 interface UploadTriggerProps
   extends Primitive.LabelProps,
-    TooltipProps,
+    Omit<TooltipProps, "children">,
     ITailwindTheme {}
 
 /**
@@ -133,18 +136,24 @@ interface UploadTriggerProps
  */
 const Trigger = React.forwardRef<HTMLLabelElement, UploadTriggerProps>(
   (props, ref) => {
-    const { htmlFor, children, tooltipContent = "", ...rest } = props;
+    const {
+      htmlFor,
+      children,
+      tooltipContent = "",
+      twCursor = "hover:cursor-pointer",
+      ...rest
+    } = props;
     const { id } = useUploadContext();
     const _htmlFor = htmlFor ? htmlFor : id;
 
     return tooltipContent ? (
       <Tooltip tooltipContent={tooltipContent}>
-        <styled.label htmlFor={_htmlFor} {...rest} ref={ref}>
+        <styled.label htmlFor={_htmlFor} {...rest} ref={ref} twCursor={twCursor}>
           {children}
         </styled.label>
       </Tooltip>
     ) : (
-      <styled.label htmlFor={_htmlFor} {...rest} ref={ref}>
+      <styled.label htmlFor={_htmlFor} {...rest} ref={ref} twCursor={twCursor}>
         {children}
       </styled.label>
     );

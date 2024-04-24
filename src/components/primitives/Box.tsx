@@ -3,37 +3,41 @@ import * as Primitive from "./types";
 import { createContext } from "../context";
 import { ITailwindTheme } from "../context";
 import { styled } from "../context";
+import { CornerLocationProps, LocationMap } from "./types";
 
-interface BaseBoxContextValue {
+/*************************************************************************************************************************************
+ * State Box
+ *************************************************************************************************************************************
+ */
+
+interface BaseStateBoxContextValue {
   activeState: "active" | "inactive";
 }
 
-interface BaseBoxOwnProps {
+interface BaseStateBoxOwnProps {
   disabled?: boolean;
   activeState?: boolean;
   hoverSetActive?: boolean;
   children: React.ReactNode | ((internalActive: boolean) => React.ReactNode);
 }
 
-interface BaseBoxProps
-  extends BaseBoxOwnProps,
+interface BaseStateBoxProps
+  extends BaseStateBoxOwnProps,
     ITailwindTheme,
     Omit<Primitive.DivProps, "children"> {}
 
-function createBox<
-  ContextValueType extends BaseBoxContextValue | null,
-  BoxProps extends BaseBoxProps
+function createStateBox<
+  ContextValueType extends BaseStateBoxContextValue,
+  StateBoxProps extends BaseStateBoxProps
 >(
   componentName: string,
   defaultContext?: ContextValueType,
-  defaultProps?: Omit<BoxProps, "children">
+  defaultProps?: Omit<StateBoxProps, "children">
 ) {
-  const [BoxProvider, useTextBoxContext] = createContext<ContextValueType>(
-    componentName,
-    defaultContext
-  );
+  const [StateBoxProvider, useStateBoxContext] =
+    createContext<ContextValueType>(componentName, defaultContext);
 
-  const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+  const Root = React.forwardRef<HTMLDivElement, StateBoxProps>((props, ref) => {
     const {
       activeState = true,
       hoverSetActive = true,
@@ -59,7 +63,7 @@ function createBox<
     const dataState =
       (activeState || internalActive) && !disabled ? "active" : "inactive";
     return (
-      <BoxProvider
+      <StateBoxProvider
         value={{ activeState: dataState } as unknown as ContextValueType}
       >
         <styled.div
@@ -74,11 +78,81 @@ function createBox<
             ? children(activeState || internalActive)
             : children}
         </styled.div>
-      </BoxProvider>
+      </StateBoxProvider>
     );
   });
-  return [Root, useTextBoxContext] as const;
+  return [Root, useStateBoxContext] as const;
 }
 
-export { createBox };
-export type { BaseBoxProps, BaseBoxContextValue };
+/*************************************************************************************************************************************
+ * Base Box
+ *************************************************************************************************************************************
+ */
+interface BaseBoxProps extends ITailwindTheme, Primitive.DivProps {}
+
+function createBox<BoxProps extends BaseBoxProps>(
+  componentName: string,
+  defaultProps: Omit<BoxProps, "children">
+) {
+  const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+    const { children, ...rest } = props;
+
+    return (
+      <styled.div {...defaultProps} {...rest} ref={ref}>
+        {children}
+      </styled.div>
+    );
+  });
+  Root.displayName = componentName;
+  return Root;
+}
+
+/*************************************************************************************************************************************
+ * Location Box
+ *************************************************************************************************************************************
+ */
+interface BaseLocationBoxProps extends BaseBoxProps, CornerLocationProps {}
+
+function createLocationBox<BoxProps extends BaseLocationBoxProps>(
+  componentName: string,
+  defaultProps?: Omit<BoxProps, "children">
+) {
+  const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+    const {
+      children,
+      compLocation,
+      twPosition = "absolute",
+      twTopRightBottomLeft,
+      ...rest
+    } = props;
+    let location = twTopRightBottomLeft
+      ? twTopRightBottomLeft
+      : LocationMap[compLocation];
+
+    return (
+      <styled.div
+        {...defaultProps}
+        {...rest}
+        ref={ref}
+        twTopRightBottomLeft={location}
+        twPosition={twPosition}
+      >
+        {children}
+      </styled.div>
+    );
+  });
+  Root.displayName = componentName;
+  return Root;
+}
+
+/*************************************************************************************************************************************
+ * Export
+ *************************************************************************************************************************************
+ */
+export { createStateBox, createBox, createLocationBox };
+export type {
+  BaseStateBoxProps,
+  BaseStateBoxContextValue,
+  BaseBoxProps,
+  BaseLocationBoxProps,
+};
