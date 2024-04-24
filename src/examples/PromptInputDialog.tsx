@@ -51,37 +51,40 @@ const PromptInput = React.forwardRef<
     console.log("Update Text", formData);
   };
   return (
-    <styled.div {...props} ref={ref}>
+    <Box activeState={false} hoverSetActive={true} {...props} ref={ref} twPosition="relative" twPadding="pb-6">
+      {(rootState)=> {return (
+        <>
       <Form.Upload.Root
         accept="image/*"
         onFileUploaded={onFileUploaded}
         onFileRemoved={onFileRemoved}
       >
-        {thumbnail === "" ? (
-          <Form.Upload.Trigger
-            onClick={() => console.log("Clicked")}
-            twWidth="w-[200px]"
-            twHeight="h-[200px]"
-            twFlex="flex"
-            twAlignItems="items-center"
-            twJustifyContent="justify-center"
-            twFontWeight="font-bold"
-            twFontSize="text-2xl"
-            twBackgroundColor="bg-gray-100"
-            twBorderRadius="rounded-md"
-          >
-            Upload
-          </Form.Upload.Trigger>
-        ) : (
-          <Box
-            activeState={false}
-            hoverSetActive={true}
-            twWidth="w-[200px]"
-            twHeight="h-[200px]"
-            twPosition="relative"
-            twBorderRadius="rounded-md"
-          >
-            {(state) => (
+        <Box
+          activeState={false}
+          hoverSetActive={true}
+          twWidth="w-[150px]"
+          twHeight="h-[150px]"
+          twPosition="relative"
+          twBorderRadius="rounded-md"
+          twFlexShrink="flex-shrink-0"
+        >
+          {(state) => {
+            return thumbnail === "" ? (
+              <Form.Upload.Trigger
+                onClick={() => console.log("Clicked")}
+                twWidth="w-full"
+                twHeight="h-full"
+                twFlex="flex"
+                twAlignItems="items-center"
+                twJustifyContent="justify-center"
+                twFontWeight="font-bold"
+                twFontSize="text-xl"
+                twBackgroundColor="bg-gray-100"
+                twBorderRadius="rounded-md"
+              >
+                Upload
+              </Form.Upload.Trigger>
+            ) : (
               <>
                 <styled.img
                   src={thumbnail}
@@ -111,19 +114,23 @@ const PromptInput = React.forwardRef<
                   </Button.PopOverButtonGroup>
                 </Button.InvisibleButtonGroup>
               </>
-            )}
-          </Box>
-        )}
+            );
+          }}
+        </Box>
       </Form.Upload.Root>
       <styled.textarea
         twBorderWidth="border-2"
-        twWidth="w-[500px]"
+        twWidth="w-full"
         twBorderRadius="rounded-md"
         twPadding="p-4"
         onChange={onTextChange}
         placeholder={formData.prompt}
       />
-    </styled.div>
+      <Button.InvisibleButtonGroup visibleState={rootState} twPosition="absolute" twTopRightBottomLeft="bottom-0 right-0">
+          <Button.CrossButton tooltipContent="Remove"/>
+      </Button.InvisibleButtonGroup>
+      </>)}}
+    </Box>
   );
 });
 
@@ -133,7 +140,9 @@ function addPromptInputNode(
   index: number
 ) {
   let newData = [...data];
-  newData.push(<PromptInput key={index} />);
+  newData.push(
+    <PromptInput key={index} twFlex="flex" twGap="gap-x-4"/>
+  );
   setData(newData);
 }
 
@@ -143,6 +152,7 @@ function Demo() {
 
   const addButton = (
     <Button.AddButton
+      twWidth="w-10"
       onClick={() => {
         addPromptInputNode(data, setData, index);
         setIndex(index + 1);
@@ -150,10 +160,10 @@ function Demo() {
     />
   );
   return (
-    <div>
+    <styled.div twPadding="p-10" twFlex="flex" twFlexDirection="flex-col">
       {data}
       {addButton}
-    </div>
+    </styled.div>
   );
 }
 
