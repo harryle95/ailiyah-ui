@@ -9,6 +9,7 @@ const Button = Themed.Button;
 const Form = Primitive.Form;
 const styled = Context.styled;
 const ThemeProvider = Context.ThemeProvider;
+const [Box, _] = Primitive.Box.createBox("Box", null);
 
 const theme = {
   ...Context.defaultTheme,
@@ -170,7 +171,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
               compLocation="right"
               themeName="NavBarInvisibleTextBoxButtons"
             >
-              <Button.InvisibleButtonGroup themeName="InvisibleButtonsLayout">
+              <Box themeName="InvisibleButtonsLayout">
                 <Button.EditButton
                   tooltipContent="Edit"
                   onClick={() => setEditingState(!editingState)}
@@ -189,7 +190,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
                     console.log("Deleting");
                   }}
                 />
-              </Button.InvisibleButtonGroup>
+              </Box>
             </Text.Component>
           </>
         ) : (

@@ -9,6 +9,7 @@ interface BaseBoxContextValue {
 }
 
 interface BaseBoxOwnProps {
+  disabled?: boolean;
   activeState?: boolean;
   hoverSetActive?: boolean;
   children: React.ReactNode | ((internalActive: boolean) => React.ReactNode);
@@ -25,7 +26,7 @@ function createBox<
 >(
   componentName: string,
   defaultContext?: ContextValueType,
-  defaultProps?: ITailwindTheme
+  defaultProps?: Omit<BoxProps, "children">
 ) {
   const [BoxProvider, useTextBoxContext] = createContext<ContextValueType>(
     componentName,
@@ -36,6 +37,7 @@ function createBox<
     const {
       activeState = true,
       hoverSetActive = true,
+      disabled = false,
       children,
       onMouseEnter,
       onMouseLeave,
@@ -54,9 +56,12 @@ function createBox<
         setInternalActive(false);
       }
     };
-    const dataState = activeState || internalActive ? "active" : "inactive";
+    const dataState =
+      (activeState || internalActive) && !disabled ? "active" : "inactive";
     return (
-      <BoxProvider value={{activeState: dataState} as unknown as ContextValueType}>
+      <BoxProvider
+        value={{ activeState: dataState } as unknown as ContextValueType}
+      >
         <styled.div
           {...defaultProps}
           onMouseEnter={hoverOn}

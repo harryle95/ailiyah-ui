@@ -91,8 +91,8 @@ const PromptInput = React.forwardRef<
                   twWidth="w-full"
                   twHeight="h-full"
                 />
-                <Button.InvisibleButtonGroup
-                  visibleState={state}
+                <Box
+                  activeState={state}
                   twPosition="absolute"
                   twTopRightBottomLeft="top-2 right-2"
                 >
@@ -112,7 +112,7 @@ const PromptInput = React.forwardRef<
                       <Button.DeleteIcon themeName="Icons" />
                     </Form.Upload.Cancel>
                   </Button.PopOverButtonGroup>
-                </Button.InvisibleButtonGroup>
+                </Box>
               </>
             );
           }}
@@ -126,9 +126,9 @@ const PromptInput = React.forwardRef<
         onChange={onTextChange}
         placeholder={formData.prompt}
       />
-      <Button.InvisibleButtonGroup visibleState={rootState} twPosition="absolute" twTopRightBottomLeft="bottom-0 right-0">
+      <Box activeState={rootState} twPosition="absolute" twTopRightBottomLeft="bottom-0 right-0">
           <Button.CrossButton tooltipContent="Remove"/>
-      </Button.InvisibleButtonGroup>
+      </Box>
       </>)}}
     </Box>
   );

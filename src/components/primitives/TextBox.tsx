@@ -3,6 +3,7 @@ import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
 import * as Primitive from "./types";
 import { createBox, BaseBoxProps, BaseBoxContextValue } from "./Box";
+import { LRLocationProps } from "./types";
 
 const [_Root, useTextBoxContext] = createBox<BaseBoxContextValue, BaseBoxProps>(
   "TextBox",
@@ -116,10 +117,6 @@ const Content = React.forwardRef<
   );
 });
 
-interface LocationProps {
-  compLocation: "left" | "right";
-}
-
 /**
  * Component is a div containign the auxiliary components of the text box - i.e. buttons group.
  *
@@ -131,7 +128,7 @@ interface LocationProps {
  */
 const Component = React.forwardRef<
   HTMLDivElement,
-  Primitive.DivProps & ITailwindTheme & LocationProps
+  Primitive.DivProps & ITailwindTheme & LRLocationProps
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";

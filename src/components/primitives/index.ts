@@ -5,7 +5,8 @@ import * as TextArea from "./TextArea";
 import * as Upload from "./Upload";
 import * as Accordion from "./Accordion";
 import * as PrimitiveProps from "./types";
+import * as Box from "./Box";
 
-export { Form, NavBar, TextBox, TextArea, Upload, Accordion };
+export { Form, NavBar, TextBox, TextArea, Upload, Accordion, Box };
 
 export type { PrimitiveProps };

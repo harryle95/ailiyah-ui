@@ -2,7 +2,8 @@ import * as React from "react";
 import * as Primitive from "./types";
 import { ITailwindTheme } from "../context";
 import { createElement, styled } from "../context/factory";
-import { useThemeContext } from "../context";
+import { CornerLocationProps, LocationMap } from "./types";
+
 /**
  * Renders as div styled with ITailwind parameters.
  * Container of all TextArea components.
@@ -30,16 +31,10 @@ const Content = React.forwardRef<
  */
 const TextArea = createElement("textarea", "TextArea");
 
-interface ComponentProps extends Primitive.DivProps, ITailwindTheme {
-  compLocation: "top-left" | "top-right" | "bottom-left" | "bottom-right";
-}
-
-const LocationMap = {
-  "top-left": "top-0 left-0",
-  "top-right": "top-0 right-0",
-  "bottom-left": "bottom-0 left-0",
-  "bottom-right": "bottom-0 right-0",
-};
+interface ComponentProps
+  extends Primitive.DivProps,
+    ITailwindTheme,
+    CornerLocationProps {}
 
 const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
   (props, ref) => {

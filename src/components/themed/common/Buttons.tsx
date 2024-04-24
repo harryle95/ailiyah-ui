@@ -10,31 +10,26 @@ import {
   DotsHorizontalIcon as _DotsHorizontalIcon,
   DotsVerticalIcon as _DotsVerticalIcon,
   Cross1Icon as _CrossIcon,
-  CheckIcon as _CheckIcon
+  CheckIcon as _CheckIcon,
 } from "@radix-ui/react-icons";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
 import { styled } from "../../context/factory";
-import { Tooltip } from "./Tooltip";
+import { Tooltip, TooltipProps } from "./Tooltip";
 import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
 import "../css/Alert.css";
 import "../css/Popover.css";
-import "../css/Dialog.css"
+import "../css/Dialog.css";
+import { PrimitiveProps } from "../../primitives";
 
-type ButtonProps = React.ComponentPropsWithoutRef<"button">;
-
-type TailwindButtonProps = ButtonProps & ITailwindTheme;
-
-interface TooltipProps {
-  tooltipContent?: string;
-}
+type TailwindButtonProps = PrimitiveProps.ButtonProps & ITailwindTheme;
 
 interface TooltipTailwindButtonProps
   extends TailwindButtonProps,
-    TooltipProps {}
+    Omit<TooltipProps, "children"> {}
 
 interface DeleteAlertProps extends TooltipTailwindButtonProps {
   dialogTitle: string;
@@ -162,10 +157,16 @@ const RightButton = createButton(
   "RightButton",
   <RightIcon themeName="Icons" />
 );
-const CrossIcon = styled(_CrossIcon)
-const CrossButton = createButton("CrossButton", <CrossIcon themeName="Icons"/>)
-const CheckIcon = styled(_CheckIcon)
-const CheckButton = createButton("CheckButton", <CheckIcon themeName="Icons"/>)
+const CrossIcon = styled(_CrossIcon);
+const CrossButton = createButton(
+  "CrossButton",
+  <CrossIcon themeName="Icons" />
+);
+const CheckIcon = styled(_CheckIcon);
+const CheckButton = createButton(
+  "CheckButton",
+  <CheckIcon themeName="Icons" />
+);
 
 interface PopOverButtonContentProps
   extends Omit<Popover.PopoverContentProps, "asChild">,
@@ -178,51 +179,27 @@ const PopOverButtonGroup = React.forwardRef<
   PopOverButtonContentProps
 >((props, ref) => {
   const { icon = <DotsHorizontalButton />, children, ...rest } = props;
-  const Content = styled(Popover.Content)
-  const Arrow = styled(Popover.Arrow)
+  const Content = styled(Popover.Content);
+  const Arrow = styled(Popover.Arrow);
   return (
     <Popover.Root>
       <Popover.Trigger asChild>{icon}</Popover.Trigger>
       <Popover.Portal>
-        <Content className="PopoverContent" themeName="TooltipPopoverContent" sideOffset={5} hideWhenDetached={true}>
+        <Content
+          className="PopoverContent"
+          themeName="TooltipPopoverContent"
+          sideOffset={5}
+          hideWhenDetached={true}
+        >
           <styled.div {...rest} ref={ref}>
             {children}
           </styled.div>
-          <Arrow className="PopoverArrow" themeName="TooltipPopoverArrow"/>
+          <Arrow className="PopoverArrow" themeName="TooltipPopoverArrow" />
         </Content>
       </Popover.Portal>
     </Popover.Root>
   );
 });
-
-type DivProps = React.ComponentPropsWithoutRef<"div">;
-
-interface InvisibleButtonGroupProps extends DivProps, ITailwindTheme {
-  visibleState?: boolean;
-  defaultState?: boolean;
-}
-
-const InvisibleButtonGroup = React.forwardRef<
-  HTMLDivElement,
-  InvisibleButtonGroupProps
->((props, ref) => {
-  const {
-    visibleState = null,
-    defaultState = true,
-    children,
-    style,
-    ...rest
-  } = props;
-  const displayState = visibleState !== null ? visibleState : defaultState;
-  const displayStyle = displayState ? style : { ...style, display: "none" };
-  return (
-    <styled.div ref={ref} {...rest} style={displayStyle}>
-      {children}
-    </styled.div>
-  );
-});
-
-InvisibleButtonGroup.displayName = "InvisibleButtonGroup";
 
 export {
   AddButton,
@@ -235,7 +212,6 @@ export {
   DotsHorizontalButton,
   DotsVerticalButton,
   PopOverButtonGroup,
-  InvisibleButtonGroup,
   AddIcon,
   DeleteIcon,
   EditIcon,
@@ -255,12 +231,10 @@ export {
   createButton,
 };
 
-export type{
+export type {
   TooltipProps,
   TooltipTailwindButtonProps,
-  InvisibleButtonGroupProps,
   PopOverButtonContentProps,
   TailwindButtonProps,
   DeleteAlertProps,
-  ButtonProps
-}
+};

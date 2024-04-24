@@ -54,9 +54,10 @@ function Demo() {
                   src={thumbnail}
                   twWidth="w-full"
                   twHeight="h-full"
+                  twAspectRatio="aspect-square"
                 />
-                <Button.InvisibleButtonGroup
-                  visibleState={state}
+                <Box
+                  activeState={state}
                   twPosition="absolute"
                   twTopRightBottomLeft="top-2 right-2"
                 >
@@ -76,7 +77,7 @@ function Demo() {
                       <Button.DeleteIcon themeName="Icons" />
                     </Form.Upload.Cancel>
                   </Button.PopOverButtonGroup>
-                </Button.InvisibleButtonGroup>
+                </Box>
               </>
             )}
           </Box>
