@@ -10,11 +10,12 @@ const styledFn = (component: any, defaultProps?: any) => {
   const SComponent = React.forwardRef<HTMLAnchorElement, any>((props, ref) => {
     const theme = useThemeContext();
     // @ts-ignore
-    const { className, children, ...rest } = getClassName(props, theme);
-    let _props = defaultProps ? { ...defaultProps, ...rest } : { ...rest };
+    const { children, ...rest } = props;
+    const propsWithDefault = {...defaultProps, ...rest}
+    const { className, ...other } = getClassName(propsWithDefault, theme);
     return React.createElement(
       component,
-      { ref, ..._props, className },
+      { ref, ...other, className },
       children
     );
   });
