@@ -20,7 +20,7 @@ export const Tooltip: React.FC<TooltipProps> = (props) => {
             {children}
         </_Tooltip.Trigger>
         <_Tooltip.Portal>
-          <Content className="TooltipContent" themeName="TooltipPopoverContent" sideOffset={5}>
+          <Content className="TooltipContent" themeName="TooltipPopoverContent" sideOffset={5} hideWhenDetached={true}>
             {tooltipContent}
             <Arrow className="TooltipArrow" themeName="TooltipPopoverArrow"/>
           </Content>
