@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TextArea } from "../components/primitives";
 import { Button } from "../components/themed";
-import * as Dialog from "../components/themed/Dialog";
+import * as Dialog from "../components/themed/common/Dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import "./styles.css";
 

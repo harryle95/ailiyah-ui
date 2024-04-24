@@ -1,4 +1,4 @@
-import { Demo } from "./examples/PromptInputDialog"
+import { Demo } from "./examples/NavBar"
 
 function App() {
   return <Demo/>

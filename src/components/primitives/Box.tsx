@@ -9,8 +9,8 @@ interface BaseBoxContextValue {
 }
 
 interface BaseBoxOwnProps {
-  activeState: boolean;
-  hoverSetActive: boolean;
+  activeState?: boolean;
+  hoverSetActive?: boolean;
   children: React.ReactNode | ((internalActive: boolean) => React.ReactNode);
 }
 

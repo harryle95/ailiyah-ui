@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ITailwindTheme } from "../context/types";
+import { ITailwindTheme } from "../../context/types";
 import {
   TrashIcon,
   Pencil1Icon,
@@ -14,15 +14,15 @@ import {
 } from "@radix-ui/react-icons";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
-import { styled } from "../context/factory";
+import { styled } from "../../context/factory";
 import { Tooltip } from "./Tooltip";
 import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import "./css/Alert.css";
-import "./css/Popover.css";
-import "./css/Dialog.css"
+import "../css/Alert.css";
+import "../css/Popover.css";
+import "../css/Dialog.css"
 
 type ButtonProps = React.ComponentPropsWithoutRef<"button">;
 

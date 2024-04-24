@@ -1,8 +1,8 @@
 import * as React from "react";
 import { styled } from "../context/factory";
 import { ITailwindTheme } from "../context/types";
-import { TooltipTailwindButtonProps, TooltipProps } from "../themed/Buttons";
-import { Tooltip } from "../themed/Tooltip";
+import { TooltipTailwindButtonProps, TooltipProps } from "../themed/common/Buttons";
+import { Tooltip } from "../themed/common/Tooltip";
 import * as Primitive from "./types"
 
 /**
