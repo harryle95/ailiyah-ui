@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "version": "0.0.1",
+  "description": "context component and utility for @ailiyah-ui",
+  "main": "'./src/index.ts'",
+  "author": "Hoang Son Le",
+  "license": "MIT",
+  "peerDependencies": {
+    "@types/react": "*",
+    "react": "^16.8 || ^17.0 || ^18.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "name": "@ailiyah-ui/context"
+}
