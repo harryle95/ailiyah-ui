@@ -2,19 +2,19 @@ import { createElement } from "../context/src";
 import { createBox, createLocationBox } from "./Box";
 
 /**
- * Renders as div styled with ITailwind parameters.
+ * Renders as div styled with TailwindProps parameters.
  * Container of all TextArea components.
  */
-const Root = createElement("div", "Root");
+const Root = createBox("Root");
 
 /**
- * Renders as div styled with ITailwind parameters
+ * Renders as div styled with TailwindProps parameters
  * Container of TextArea.TextArea and TextArea.Component
  */
 const Content = createBox("Content", { twPosition: "relative" });
 
 /**
- * Renders as textarea with ITailwind parameters
+ * Renders as textarea with TailwindProps parameters
  */
 const TextArea = createElement("textarea", "TextArea");
 
