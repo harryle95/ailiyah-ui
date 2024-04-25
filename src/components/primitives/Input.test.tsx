@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "./Form";
+import { Input } from "./Input";
 import { describe, test, expect } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
@@ -17,9 +17,7 @@ function TestElement(props) {
   const onEsc = (e) => {
     setText(defaultText), setEdit(!edit);
   };
-  const onClick = (e) => {
-    setEdit(!edit);
-  };
+
   return (
     <div>
       {edit ? (
