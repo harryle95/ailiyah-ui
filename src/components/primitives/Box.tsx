@@ -70,7 +70,7 @@ function createStateBox<
         setInternalState(false);
       }
     };
-    const dataState = (initialState || internalState) && disabled;
+    const dataState = (initialState || internalState) && !disabled;
     return (
       <StateBoxProvider
         value={{ activeState: dataState } as unknown as ContextValueType}
@@ -146,4 +146,4 @@ function createLocationBox<BoxProps extends BaseLocationBoxProps>(
  * Export
  *************************************************************************************************************************************
  */
-export { createStateBox, createBox, createLocationBox };
+export { createStateBox, createBox, createLocationBox, getState };
