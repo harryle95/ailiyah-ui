@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { styled } from "../../context/src";
-import "../css/Dialog.css"
+import { styled } from "@ailiyah-ui/factory";
+import "../css/Dialog.css";
 
 const Root = Dialog.Root;
 
@@ -24,13 +24,4 @@ const Description = styled(Dialog.Description);
 
 const Close = styled(Dialog.Close);
 
-export {
-  Root, 
-  Trigger, 
-  Portal,
-  Overlay,
-  Content,
-  Title,
-  Description,
-  Close
-}
+export { Root, Trigger, Portal, Overlay, Content, Title, Description, Close };

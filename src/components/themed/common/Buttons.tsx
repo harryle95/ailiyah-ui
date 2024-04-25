@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TailwindProps } from "../../context/src";
+import { TailwindProps } from "@ailiyah-ui/utils";
 import {
   TrashIcon,
   Pencil1Icon,
@@ -14,7 +14,7 @@ import {
 } from "@radix-ui/react-icons";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
-import { styled } from "../../context/src";
+import { styled } from "@ailiyah-ui/factory";
 import { Tooltip, TooltipProps } from "./Tooltip";
 import {
   DoubleArrowLeftIcon,
@@ -232,7 +232,6 @@ export {
 };
 
 export type {
-  TooltipProps,
   TooltipTailwindButtonProps,
   PopOverButtonContentProps,
   TailwindButtonProps,

@@ -1,45 +1,18 @@
 import * as React from "react";
 import { styled } from "@ailiyah-ui/factory";
-import { TailwindProps } from "@ailiyah-ui/utils";
-import {
-  TooltipTailwindButtonProps,
-  TooltipProps,
-} from "../themed/common/Buttons";
+import { TooltipTailwindButtonProps } from "../themed/common/Buttons";
 import { Tooltip } from "../themed/common/Tooltip";
-import * as Primitive from "./types";
 import { createContext } from "@ailiyah-ui/context";
-
-/**
- * ------------------------------------------------------------------------------------------------
- * Upload
- * ------------------------------------------------------------------------------------------------
- */
-
-interface UploadContextValue {
-  /** input component id -> for upload button */
-  id?: string;
-  /**
-   * Handler for when file is uploaded. Use-case: showing thumbnail when a file is uploaded
-   */
-  onFileUploaded?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Handler for when file is removed. Use-case: clicking x button to remove thumbnail
-   */
-  onFileRemoved: React.MouseEventHandler<HTMLButtonElement>;
-}
+import {
+  UploadContextValue,
+  UploadRootProps,
+  UploadTriggerProps,
+} from "./Upload.types";
 
 const [UploadProvider, useUploadContext] = createContext<UploadContextValue>(
   "Upload",
   undefined
 );
-
-interface UploadRootProps
-  extends Omit<Primitive.InputProps, "type" | "children">,
-    UploadContextValue {
-  children:
-    | React.ReactNode
-    | ((context: UploadContextValue) => React.ReactNode);
-}
 
 /**
  * Renders an <input type="file"> element that also provides context for its children.
@@ -79,9 +52,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
       [inputId, uploadFile, removeFile]
     );
     return (
-      <UploadProvider
-        value={contextValue as unknown as UploadContextValue}
-      >
+      <UploadProvider value={contextValue as unknown as UploadContextValue}>
         <styled.input
           type="file"
           id={inputId}
@@ -98,11 +69,6 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
   }
 );
 Root.displayName = "Root";
-
-interface UploadTriggerProps
-  extends Primitive.LabelProps,
-    Omit<TooltipProps, "children">,
-    TailwindProps {}
 
 /**
  * Renders an HTML `label` element with an internal `htmlFor` prop linked

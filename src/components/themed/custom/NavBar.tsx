@@ -1,9 +1,10 @@
 import * as React from "react";
 import * as Button from "../common/Buttons"
 import * as NavBar from "../../primitives/NavBar";
-import { TailwindProps } from "../../context/src";
+import { TailwindProps } from "@ailiyah-ui/utils"
+import { NavBarProps } from "../../primitives/NavBar.types";
 
-const Root: React.FC<NavBar.NavBarProps> = (props)=>{
+const Root: React.FC<NavBarProps> = (props)=>{
   const {children, themeName, ...rest} = props;
   let appliedTheme = themeName?themeName:"NavBarRoot";
   return (
@@ -35,7 +36,7 @@ const Trigger: React.FC<TailwindProps> = (props)=>{
 </NavBar.Trigger>)
 }
 
-const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+const Content = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref)=>{
   const {children, themeName, ...rest} = props; 
   let appliedThemeName = themeName?themeName:"NavBarContent";
   return (
@@ -45,7 +46,7 @@ const Content = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)
   )
 })
 
-const Body = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+const Body = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref)=>{
   const {children, themeName, ...rest} = props; 
   let appliedThemeName = themeName?themeName:"NavBarContentBody";
   return (
@@ -55,7 +56,7 @@ const Body = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
   )
 })
 
-const Header = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+const Header = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref)=>{
   const {children, themeName, ...rest} = props; 
   let appliedThemeName = themeName?themeName:"NavBarContentHeader";
   return (
@@ -65,7 +66,7 @@ const Header = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=
   )
 })
 
-const Footer = React.forwardRef<NavBar.DivRef, NavBar.NavBarProps>((props, ref)=>{
+const Footer = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref)=>{
   const {children, themeName, ...rest} = props; 
   let appliedThemeName = themeName?themeName:"NavBarContentFooter";
   return (
