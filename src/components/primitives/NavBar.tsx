@@ -1,64 +1,39 @@
 import * as React from "react";
-import { TailwindProps } from "@ailiyah-ui/utils";
 import { styled, createElement } from "@ailiyah-ui/factory";
-import * as Primitive from "./types";
 import { createContext } from "@ailiyah-ui/context";
+import {
+  NavBarContextValue,
+  NavBarProps,
+  NavBarTriggerProps,
+} from "./NavBar.types";
 
-type DivRef = React.ElementRef<"div"> | null;
+const [NavBarProvider, useNavBarContext] =
+  createContext<NavBarContextValue>("NavBar");
 
-interface NavBarProps extends Primitive.DivProps, TailwindProps {}
-
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBar
- * ------------------------------------------------------------------------------------------------
- */
-
-interface NavBarState {
-  activeState: boolean;
-  setActiveState: Function;
-}
-
-const [NavBarProvider, useNavBarContext] = createContext<NavBarState>("NavBar");
-function getStateName(state: boolean): string {
+function getState(state: boolean): string {
   return state ? "active" : "inactive";
 }
 
-const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
+const Root = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
   return (
     <NavBarProvider
       value={{ activeState: visible, setActiveState: setVisible }}
     >
-      <styled.div ref={ref} {...rest} data-state={getStateName(visible)}>
+      <styled.div ref={ref} {...rest} data-state={getState(visible)}>
         {children}
       </styled.div>
     </NavBarProvider>
   );
 });
 
-NavBar.displayName = "NavBar";
-
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBarTrigger
- * ------------------------------------------------------------------------------------------------
- */
-
-interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
-  children?:
-    | React.ReactNode
-    | ((
-        state: boolean,
-        trigger: React.MouseEventHandler<HTMLButtonElement>
-      ) => React.ReactNode);
-}
+Root.displayName = "Root";
 
 /**
  * Trigger to expand/collapse navigation bar
  */
-const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
+const Trigger = React.forwardRef<HTMLDivElement, NavBarTriggerProps>(
   (props, ref) => {
     const { children, onClick = (e) => {}, ...rest } = props;
     const { activeState, setActiveState } = useNavBarContext();
@@ -67,7 +42,7 @@ const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
       onClick(e);
     };
     return (
-      <styled.div {...rest} ref={ref} data-state={getStateName(activeState)}>
+      <styled.div {...rest} ref={ref} data-state={getState(activeState)}>
         {typeof children === "function"
           ? children(activeState, onClickHandler)
           : children}
@@ -75,19 +50,14 @@ const NavBarTrigger = React.forwardRef<DivRef, NavBarTriggerProps>(
     );
   }
 );
-NavBarTrigger.displayName = "NavBarTrigger";
+Trigger.displayName = "Trigger";
 
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBarContent
- * ------------------------------------------------------------------------------------------------
- */
-const NavBarContent = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
+const Content = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const { activeState } = useNavBarContext();
 
   return activeState ? (
-    <styled.div ref={ref} {...rest} data-state={getStateName(activeState)}>
+    <styled.div ref={ref} {...rest} data-state={getState(activeState)}>
       {children}
     </styled.div>
   ) : (
@@ -95,61 +65,15 @@ const NavBarContent = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
       ref={ref}
       {...rest}
       style={{ width: "0px" }}
-      data-state={getStateName(activeState)}
+      data-state={getState(activeState)}
     >
       {children}
     </styled.div>
   );
 });
-NavBarContent.displayName = "NavBarContent";
+Content.displayName = "Content";
+const Header = createElement("div", "Header");
+const Footer = createElement("div", "Footer");
+const Body = createElement("div", "Body");
 
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBarHeader
- * ------------------------------------------------------------------------------------------------
- */
-const NavBarHeader = createElement("div", "NavBarContent");
-
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBarFooter
- * ------------------------------------------------------------------------------------------------
- */
-const NavBarFooter = createElement("div", "NavBarContent");
-
-/**
- * ------------------------------------------------------------------------------------------------
- * NavBarBody
- * ------------------------------------------------------------------------------------------------
- */
-const NavBarBody = createElement("div", "NavBarContent");
-
-/**
- * ------------------------------------------------------------------------------------------------
- * Export
- * ------------------------------------------------------------------------------------------------
- */
-const Root = NavBar;
-const Trigger = NavBarTrigger;
-const Content = NavBarContent;
-const Header = NavBarHeader;
-const Footer = NavBarFooter;
-const Body = NavBarBody;
-
-export {
-  NavBar,
-  NavBarTrigger,
-  NavBarContent,
-  NavBarHeader,
-  NavBarFooter,
-  NavBarBody,
-  //
-  Root,
-  Trigger,
-  Content,
-  Header,
-  Body,
-  Footer,
-  //
-};
-export type { NavBarProps, DivRef };
+export { Root, Trigger, Content, Header, Body, Footer };
