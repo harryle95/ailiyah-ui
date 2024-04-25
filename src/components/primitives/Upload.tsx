@@ -19,7 +19,7 @@ const [UploadProvider, useUploadContext] = createContext<UploadContextValue>(
  * For Upload children inside of Root, users can call `useUploadContext` hook to get
  * the `id` of the input element, and the two handlers `onFileUploaded` and `onFileRemoved`
  *
- * @param explicit id - if you want the trigger label to be placed outside of Root
+ * @param id - if you want the trigger label to be placed outside of Root
  * @param onFileUploaded - hook called when input value is changed
  * @param onFileRemoved - hook called to reset file input value
  * @param children - can be a React.ReactNode or a callback that renders a ReactNode based
@@ -37,7 +37,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
     ref = internalRef;
     const uploadFile = onFileUploaded;
     const removeFile = (e) => {
-      onFileRemoved(e);
+      onFileRemoved && onFileRemoved(e);
       if (internalRef) {
         // @ts-ignore
         internalRef.current.value = "";
@@ -59,6 +59,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
           style={{ display: "none" }}
           ref={internalRef}
           {...rest}
+          title="file-upload"
           onChange={onFileUploaded}
         />
         {typeof children === "function"
@@ -144,7 +145,7 @@ const Cancel = React.forwardRef<HTMLButtonElement, TooltipTailwindButtonProps>(
       if (onClick) {
         onClick(e);
       }
-      onFileRemoved(e);
+      onFileRemoved && onFileRemoved(e);
     };
 
     return tooltipContent ? (

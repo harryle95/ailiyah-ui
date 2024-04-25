@@ -13,7 +13,7 @@ interface UploadContextValue {
   /**
    * Handler for when file is removed. Use-case: clicking x button to remove thumbnail
    */
-  onFileRemoved: React.MouseEventHandler<HTMLButtonElement>;
+  onFileRemoved?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 interface UploadRootProps
@@ -28,7 +28,7 @@ interface UploadTriggerProps
   extends Primitive.LabelProps,
     Omit<TooltipProps, "children">,
     TailwindProps {
-  tooltipContent: string;
+  tooltipContent?: string;
 }
 
 export type { UploadContextValue, UploadRootProps, UploadTriggerProps };
