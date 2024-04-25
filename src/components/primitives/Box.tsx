@@ -5,8 +5,8 @@ import {
   BaseStateBoxContextValue,
   BaseStateBoxProps,
 } from "./Box.types";
-import { createContext, createElement } from "../context/src";
-import { styled } from "../context/src";
+import { createContext } from "../context/src";
+import { styled, createElement } from "../factory/src";
 import { LocationMap } from "./types";
 
 function getState(value: boolean): "active" | "inactive" {

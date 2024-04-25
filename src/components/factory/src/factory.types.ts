@@ -1,4 +1,4 @@
-import { TailwindProps } from "./tailwind.types";
+import { TailwindProps } from "../../utils/src";
 import { ElementType, FunctionComponent } from "react";
 
 type TailwindComponentProps<T extends ElementType> =

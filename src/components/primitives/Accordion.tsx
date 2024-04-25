@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
-import { TailwindProps, styled } from "../context/src";
+import { TailwindProps } from "../utils/src";
+import { styled } from "../factory/src";
 import "./Accordion.css";
 
 /**

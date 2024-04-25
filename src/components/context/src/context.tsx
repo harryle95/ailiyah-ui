@@ -1,6 +1,6 @@
 import React from "react";
-import { PresetTheme } from "./default.types";
-import { defaultTheme } from "./default";
+import { PresetTheme } from "../../utils/src";
+import { defaultTheme } from "../../utils/src";
 
 function createContext<ContextValueType>(
   rootComponentName: string,

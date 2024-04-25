@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useThemeContext } from "./context";
-import { getClassName } from "./tailwind";
+import { useThemeContext } from "../../context/src";
+import { getClassName } from "../../utils/src";
 import {
   StyledFactoryFn,
   TailwindComponentDefaultProps,

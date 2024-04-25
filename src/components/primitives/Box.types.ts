@@ -1,4 +1,4 @@
-import { TailwindProps } from "../context/src";
+import { TailwindProps } from "../utils/src";
 import React from "react";
 import { CornerLocationProps } from "./types";
 import * as PrimitiveProps from "./types";

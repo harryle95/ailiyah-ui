@@ -6,8 +6,6 @@ import {
   getClassName,
 } from "./tailwind";
 import { TailwindProps } from "./tailwind.types";
-import { defaultTheme } from "./default";
-import { DivProps } from "../../primitives/types";
 
 describe("Test isTailwindKey", () => {
   describe("Given a TailwindProps key", () => {
@@ -160,7 +158,8 @@ describe("Test getClassName", () => {
   let clashingClassName = ["w-[1px]", "h-[100px]"];
   let nonClashingClassName = ["", "DummyClassName", "AnotherDummyClassName"];
 
-  let themeTestFn = (props: TailwindProps & DivProps, themes: any) => {
+  let themeTestFn = (props: TailwindProps, themes: any) => {
+    // @ts-ignore
     let { className, ...rest } = props;
     let { twProps, ...other } = extractTailwindTheme(rest);
     if (themes && twProps.themeName && themes[twProps.themeName])
@@ -174,7 +173,7 @@ describe("Test getClassName", () => {
     test(`should return: ${expClassName}`, ()=>testCallBack(props, themes, expClassName));
   };
 
-  let classNameTestFn = (props: TailwindProps & DivProps) => {
+  let classNameTestFn = (props: TailwindProps) => {
     // @ts-ignore
     describe.each(clashingThemes)(`with clashing theme %o`, (theme) =>
       themeTestFn(props, theme)
@@ -185,17 +184,19 @@ describe("Test getClassName", () => {
     ), props;
   };
 
-  let themeNameTestFn = (props: TailwindProps & DivProps) => {
+  let themeNameTestFn = (props: TailwindProps) => {
     describe.each(clashingClassName)("with clashingClassName: %s", (clsName) =>
+      // @ts-ignore
       classNameTestFn({ ...props, className: clsName })
     );
     describe.each(nonClashingClassName)(
       "with nonClashingClassName: %s",
+      // @ts-ignore
       (clsName) => classNameTestFn({ ...props, className: clsName })
     );
   };
 
-  let propTestFn = (props: TailwindProps & DivProps) => {
+  let propTestFn = (props: TailwindProps) => {
     describe("with no themeName", () => themeNameTestFn(props));
     describe("with themeName: Icons", () =>
       themeNameTestFn({ ...props, themeName: "Icons" }));
@@ -204,6 +205,7 @@ describe("Test getClassName", () => {
   };
   // @ts-ignore
   describe.each(propsNoTw)("with props that have no tailwind props %o", (props) =>
+    // @ts-ignore
     propTestFn(props)
   );
 
