@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { createStateBox, getState } from "./Box";
+import { createStateBox, getState, createLocationBox } from "./Box";
 import React from "react";
 
 const user = userEvent.setup();
@@ -115,3 +115,17 @@ describe("Test createStateBox", () => {
   describe("with react component using hook", () =>
     testCallBack(getComponentWithHook));
 });
+
+const LBox = createLocationBox("LocationBox");
+
+describe("Test Location Box", ()=>{
+    const getComponent = ()=>{
+        render(<LBox compLocation="top-left" title="test-element"></LBox>)
+        return screen.getByTitle("test-element");
+    }
+
+    test("should have className be 'absolute top-0 left-0'", ()=>{
+        let component = getComponent();
+        expect(component.className).toBe('absolute top-0 left-0')
+    })
+})

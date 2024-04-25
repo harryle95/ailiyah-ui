@@ -110,30 +110,33 @@ const createBox = (componentName: string, defaultProps?: BaseBoxProps) =>
  *************************************************************************************************************************************
  */
 
+/**
+ * Similar to Box except it accepts the prop `compLocation` to represent its location
+ * on the parent's container. `compLocation` takes on four corner values - i.e.
+ * `top/bottom-left/right`.
+ *
+ * @param componentName display name of the component
+ * @param defaultProps default props. Automatically set twPosition to absolute
+ * @returns `Root` - box component
+ */
 function createLocationBox<BoxProps extends BaseLocationBoxProps>(
   componentName: string,
   defaultProps?: Omit<BoxProps, "children">
 ) {
-  const Div = styled("div", defaultProps);
+  const Div = styled(
+    "div",
+    defaultProps
+      ? { twPosition: "absolute", ...defaultProps }
+      : { twPosition: "absolute" }
+  );
   const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
-    const {
-      children,
-      compLocation,
-      twPosition = "absolute",
-      twTopRightBottomLeft,
-      ...rest
-    } = props;
+    const { children, compLocation, twTopRightBottomLeft, ...rest } = props;
     let location = twTopRightBottomLeft
       ? twTopRightBottomLeft
       : LocationMap[compLocation];
 
     return (
-      <Div
-        {...rest}
-        ref={ref}
-        twTopRightBottomLeft={location}
-        twPosition={twPosition}
-      >
+      <Div {...rest} ref={ref} twTopRightBottomLeft={location}>
         {children}
       </Div>
     );
