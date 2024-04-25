@@ -5,8 +5,8 @@ import {
   BaseStateBoxContextValue,
   BaseStateBoxProps,
 } from "./Box.types";
-import { createContext } from "../context/src";
-import { styled, createElement } from "../factory/src";
+import { createContext } from "@ailiyah-ui/context";
+import { styled, createElement } from "@ailiyah-ui/factory";
 import { LocationMap } from "./types";
 
 function getState(value: boolean): "active" | "inactive" {

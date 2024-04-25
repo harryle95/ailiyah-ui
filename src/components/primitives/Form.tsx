@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TailwindProps } from "../context/src";
-import { styled } from "../context/src";
+import { TailwindProps } from "@ailiyah-ui/utils";
+import { styled } from "@ailiyah-ui/factory";
 import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
 import * as Upload from "./Upload";
 import * as Primitive from "./types";

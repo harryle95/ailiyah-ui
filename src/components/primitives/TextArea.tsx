@@ -1,4 +1,4 @@
-import { createElement } from "../context/src";
+import { createElement } from "@ailiyah-ui/factory";
 import { createBox, createLocationBox } from "./Box";
 
 /**

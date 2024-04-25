@@ -1,8 +1,8 @@
 import * as React from "react";
-import { TailwindProps } from "../context/src";
-import { styled, createElement } from "../context/src";
+import { TailwindProps } from "@ailiyah-ui/utils";
+import { styled, createElement } from "@ailiyah-ui/factory";
 import * as Primitive from "./types";
-import { createContext } from "../context/src";
+import { createContext } from "@ailiyah-ui/context";
 
 type DivRef = React.ElementRef<"div"> | null;
 
@@ -28,7 +28,9 @@ const NavBar = React.forwardRef<DivRef, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
   const [visible, setVisible] = React.useState(true);
   return (
-    <NavBarProvider value={{activeState: visible, setActiveState: setVisible}}>
+    <NavBarProvider
+      value={{ activeState: visible, setActiveState: setVisible }}
+    >
       <styled.div ref={ref} {...rest} data-state={getStateName(visible)}>
         {children}
       </styled.div>

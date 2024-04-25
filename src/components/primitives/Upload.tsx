@@ -1,6 +1,6 @@
 import * as React from "react";
-import { styled } from "../context/src";
-import { TailwindProps } from "../context/src";
+import { styled } from "@ailiyah-ui/factory";
+import { TailwindProps } from "@ailiyah-ui/utils";
 import {
   TooltipTailwindButtonProps,
   TooltipProps,

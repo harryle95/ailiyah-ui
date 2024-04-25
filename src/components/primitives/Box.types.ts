@@ -1,4 +1,4 @@
-import { TailwindProps } from "../utils/src";
+import { TailwindProps } from "@ailiyah-ui/utils";
 import React from "react";
 import { CornerLocationProps } from "./types";
 import * as PrimitiveProps from "./types";
