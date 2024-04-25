@@ -1,6 +1,7 @@
 import * as React from "react";
-import { useThemeContext } from "../../context/src";
-import { getClassName } from "../../utils/src";
+import { useThemeContext } from "@ailiyah-ui/context";
+import {getClassName} from "@ailiyah-ui/utils";
+
 import {
   StyledFactoryFn,
   TailwindComponentDefaultProps,

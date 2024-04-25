@@ -1,5 +1,5 @@
-import { TailwindProps } from "../../utils/src";
 import { ElementType, FunctionComponent } from "react";
+import { TailwindProps } from "@ailiyah-ui/utils";
 
 type TailwindComponentProps<T extends ElementType> =
   React.ComponentPropsWithoutRef<T> & TailwindProps;

@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
-import { styled, createElement } from "./factory";
+import { styled } from "./factory";
 import { render, screen } from "@testing-library/react";
-import { ThemeProvider } from "../../context/src";
+import { ThemeProvider } from "@ailiyah-ui/context";
 import React from "react";
 
 describe("Test styled", () => {

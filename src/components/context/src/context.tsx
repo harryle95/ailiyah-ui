@@ -1,6 +1,6 @@
 import React from "react";
-import { PresetTheme } from "../../utils/src";
-import { defaultTheme } from "../../utils/src";
+import { PresetTheme } from "@ailiyah-ui/utils";
+import { defaultTheme } from "@ailiyah-ui/utils";
 
 function createContext<ContextValueType>(
   rootComponentName: string,

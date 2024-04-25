@@ -1,0 +1,14 @@
+{
+  "name": "@ailiyah-ui/factory",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Factory methods for ailiyah-ui package ",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "dependencies": {
+    "@ailiyah-ui/context": "*",
+    "@ailiyah-ui/utils": "*"
+  }
+}
