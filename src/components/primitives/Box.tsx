@@ -17,6 +17,24 @@ function getState(value: boolean): "active" | "inactive" {
  * State Box
  *************************************************************************************************************************************
  */
+
+/**
+ * Function that creates a div container that has state information embedded in data-state attribute
+ *
+ * @param componentName name of component
+ * @param defaultContext not required. Default value to be returned from useStateBoxContext.
+ * @param defaultProps not required. Default props for created div element
+ * @returns `[Root, useStateBoxContext]`. Root element and context hook.
+ * @returns `Root` element: div element with tailwind styling props. If `defaultProps` are provided, set default
+ * props values.
+ * @returns `useStateBoxContext` hook: context hook for getting state information of the component. Returns
+ * boolean variable `activeState`. `activeState = disabled && (initiallState || internalState)` where `initialState`
+ * is set by parent and `internalState` is determined by hovering action.
+ * @prop `disabled` - boolean variable - whether state information is disabled
+ * @prop `initialState` - boolean variable - external state information to be inherited from parent element
+ * @prop `hoverSetActive` - boolean variable - whether hovering set state to true
+ * @prop `children` - either `React.ReactNode` or callback `(state: boolean):React.ReactNode=>{...}`
+ */
 function createStateBox<
   ContextValueType extends BaseStateBoxContextValue,
   StateBoxProps extends BaseStateBoxProps
@@ -52,7 +70,7 @@ function createStateBox<
         setInternalState(false);
       }
     };
-    const dataState = initialState || internalState;
+    const dataState = (initialState || internalState) && disabled;
     return (
       <StateBoxProvider
         value={{ activeState: dataState } as unknown as ContextValueType}
@@ -75,6 +93,14 @@ function createStateBox<
 /*************************************************************************************************************************************
  * Base Box
  *************************************************************************************************************************************
+ */
+
+/**
+ * Function to create generic `div` with tailwind props
+ *
+ * @param componentName display name
+ * @param defaultProps initial props
+ * @returns Root div element that accepts tailwind props and with prop values intialised with defaultProps
  */
 const createBox = (componentName: string, defaultProps?: BaseBoxProps) =>
   createElement("div", componentName, defaultProps);
