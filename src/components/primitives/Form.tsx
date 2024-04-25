@@ -1,106 +1,12 @@
 import * as React from "react";
-import { TailwindProps } from "@ailiyah-ui/utils";
-import { styled } from "@ailiyah-ui/factory";
-import { Form as _Form, FormProps as _FormProps } from "react-router-dom";
-import * as Upload from "./Upload";
-import * as Primitive from "./types";
+import { Form } from "react-router-dom";
+import { FormContextValue, FormProps } from "./Form.types";
+import { createContext } from "@ailiyah-ui/context";
 
-/**
- * ------------------------------------------------------------------------------------------------
- * Input
- * ------------------------------------------------------------------------------------------------
- */
-
-interface InteractiveInputProps extends Primitive.InputProps, TailwindProps {
-  /**
-   * Handler called when esc key is pressed. To prevent default behaviour,
-   * set to (e)=>e.preventDefault().
-   *
-   * @param event - Keyboard event type for input element
-   * @returns
-   */
-  onEscDown?: React.KeyboardEventHandler<HTMLInputElement>;
-
-  /**
-   * Handler called when enter key is pressed. To prevent default behaviour,
-   * set to (e)=>e.preventDefault()
-   *
-   * @param event - Keyboard event type for input element
-   * @returns
-   */
-  onEnterDown?: React.KeyboardEventHandler<HTMLInputElement>;
-}
-
-/**
- * Generic input - does not use Form hooks internally
- *
- * @param onEscDown - handler when ESC key is pressed
- * @param onEnterDown - handler when ENTER key is pressed
- */
-const Input = React.forwardRef<HTMLInputElement, InteractiveInputProps>(
-  (props, ref) => {
-    const {
-      onKeyDown = () => {},
-      onEscDown = () => {},
-      onEnterDown = () => {},
-      ...rest
-    } = props;
-
-    const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const key = e.key;
-      switch (key) {
-        case "Escape":
-          e.preventDefault();
-          onEscDown(e);
-          return;
-        case "Enter":
-          e.preventDefault();
-          onEnterDown(e);
-          return;
-        default:
-          onKeyDown(e);
-          return;
-      }
-    };
-
-    return <styled.input onKeyDown={keyDownHandler} {...rest} ref={ref} />;
-  }
+const [FormProvider, useFormContext] = createContext<FormContextValue>(
+  "Form",
+  undefined
 );
-
-Input.displayName = "Input";
-
-/**
- * ------------------------------------------------------------------------------------------------
- * Form
- * ------------------------------------------------------------------------------------------------
- */
-
-interface IFormContext {
-  submitForm?:
-    | React.FormEvent<HTMLFormElement>
-    | React.MouseEventHandler<HTMLButtonElement>
-    | React.KeyboardEventHandler<HTMLInputElement>;
-}
-
-interface FormProps extends Omit<_FormProps, "children" | "onSubmit"> {
-  children: React.ReactNode | ((formContext: IFormContext) => React.ReactNode);
-  onSubmit?:
-    | React.FormEvent<HTMLFormElement>
-    | React.MouseEventHandler<HTMLButtonElement>
-    | React.KeyboardEventHandler<HTMLInputElement>
-    | React.FocusEventHandler<HTMLInputElement>;
-}
-
-const FormContext = React.createContext<IFormContext | undefined>(undefined);
-
-const useFormContext: () => IFormContext = () => {
-  const context = React.useContext(FormContext);
-  if (!context) {
-    console.error("useFormContext must be used within a Form");
-    return {};
-  }
-  return context;
-};
 
 /**
  * Wrapper of Remix/React-Router-Dom's `Form` component, which provides an accompanying
@@ -154,8 +60,8 @@ const Root = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
     [onSubmit]
   );
   return (
-    <FormContext.Provider value={contextValue as unknown as IFormContext}>
-      <_Form
+    <FormProvider value={contextValue as unknown as FormContextValue}>
+      <Form
         ref={ref}
         {...rest}
         onSubmit={
@@ -163,13 +69,13 @@ const Root = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
         }
       >
         {typeof children === "function"
-          ? children(contextValue as unknown as IFormContext)
+          ? children(contextValue as unknown as FormContextValue)
           : children}
-      </_Form>
-    </FormContext.Provider>
+      </Form>
+    </FormProvider>
   );
 });
 
 Root.displayName = "FormRoot";
 
-export { Root, Input, Upload, useFormContext };
+export { Root, useFormContext };

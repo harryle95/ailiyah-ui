@@ -7,6 +7,7 @@ import {
 } from "../themed/common/Buttons";
 import { Tooltip } from "../themed/common/Tooltip";
 import * as Primitive from "./types";
+import { createContext } from "@ailiyah-ui/context";
 
 /**
  * ------------------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ import * as Primitive from "./types";
  * ------------------------------------------------------------------------------------------------
  */
 
-interface IUploadContext {
+interface UploadContextValue {
   /** input component id -> for upload button */
   id?: string;
   /**
@@ -27,23 +28,17 @@ interface IUploadContext {
   onFileRemoved: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const UploadContext = React.createContext<IUploadContext | undefined>(
+const [UploadProvider, useUploadContext] = createContext<UploadContextValue>(
+  "Upload",
   undefined
 );
 
-const useUploadContext: () => IUploadContext = () => {
-  const content = React.useContext(UploadContext);
-  if (!content) {
-    console.log("Must call useUploadContext inside an Upload component");
-    return { onFileRemoved: () => {} };
-  }
-  return content;
-};
-
 interface UploadRootProps
   extends Omit<Primitive.InputProps, "type" | "children">,
-    IUploadContext {
-  children: React.ReactNode | ((context: IUploadContext) => React.ReactNode);
+    UploadContextValue {
+  children:
+    | React.ReactNode
+    | ((context: UploadContextValue) => React.ReactNode);
 }
 
 /**
@@ -84,7 +79,9 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
       [inputId, uploadFile, removeFile]
     );
     return (
-      <UploadContext.Provider value={contextValue as unknown as IUploadContext}>
+      <UploadProvider
+        value={contextValue as unknown as UploadContextValue}
+      >
         <styled.input
           type="file"
           id={inputId}
@@ -94,9 +91,9 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
           onChange={onFileUploaded}
         />
         {typeof children === "function"
-          ? children(contextValue as unknown as IUploadContext)
+          ? children(contextValue as unknown as UploadContextValue)
           : children}
-      </UploadContext.Provider>
+      </UploadProvider>
     );
   }
 );
@@ -148,7 +145,12 @@ const Trigger = React.forwardRef<HTMLLabelElement, UploadTriggerProps>(
 
     return tooltipContent ? (
       <Tooltip tooltipContent={tooltipContent}>
-        <styled.label htmlFor={_htmlFor} {...rest} ref={ref} twCursor={twCursor}>
+        <styled.label
+          htmlFor={_htmlFor}
+          {...rest}
+          ref={ref}
+          twCursor={twCursor}
+        >
           {children}
         </styled.label>
       </Tooltip>
