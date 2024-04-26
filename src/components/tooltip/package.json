@@ -1,0 +1,15 @@
+{
+  "name": "@ailiyah-ui/tooltip",
+  "version": "0.0.1",
+  "description": "styled tooltip",
+  "main": "./src/index.ts",
+  "type": "module",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT",
+  "dependencies": {
+    "@ailiyah-ui/factory": "*",
+    "react": "^18.2.0",
+    "@radix-ui/react-tooltip": "^1.0.7"
+  }
+}

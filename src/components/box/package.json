@@ -5,6 +5,8 @@
   "main": "./src/index.ts",
   "author": "Hoang Son Le",
   "license": "MIT ",
+  "type": "module",
+  "module": "./src/index.ts",
   "dependencies": {
     "@ailiyah-ui/utils": "*",
     "@ailiyah-ui/context": "*",

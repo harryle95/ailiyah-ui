@@ -15,7 +15,7 @@ import {
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import * as Popover from "@radix-ui/react-popover";
 import { styled } from "@ailiyah-ui/factory";
-import { Tooltip, TooltipProps } from "./Tooltip";
+import { Tooltip, TooltipProps } from "../tooltip/src/Tooltip";
 import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
@@ -23,7 +23,7 @@ import {
 import "./Alert.css";
 import "./Popover.css";
 import "./Dialog.css";
-import { PrimitiveProps } from ".";
+import { PrimitiveProps } from "@ailiyah-ui/utils";
 
 type TailwindButtonProps = PrimitiveProps.ButtonProps & TailwindProps;
 
