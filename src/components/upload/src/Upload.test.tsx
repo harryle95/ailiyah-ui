@@ -9,7 +9,7 @@ const file = new File(["hello"], "hello.png", { type: "image/png" });
 
 function Thumbnail() {
   const [thumbnail, setThumbnail] = React.useState("");
-  const onFileUploaded = (e) => {
+  const onFileUploaded = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.files) {
       setThumbnail("uploaded.png");
     }

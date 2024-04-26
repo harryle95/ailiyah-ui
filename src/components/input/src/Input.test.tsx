@@ -6,15 +6,14 @@ import { render, screen } from "@testing-library/react";
 
 const user = userEvent.setup();
 
-function TestElement(props) {
-  const { defaultText, ...rest } = props;
+function TestElement({defaultText}: {defaultText: string}) {
   const [edit, setEdit] = React.useState(() => true);
   const [text, setText] = React.useState(() => defaultText);
-  const onEnter = (e) => {
-    setText(e.target.value);
+  const onEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setText(e.currentTarget.value);
     setEdit(!edit);
   };
-  const onEsc = (e) => {
+  const onEsc = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setText(defaultText), setEdit(!edit);
   };
 

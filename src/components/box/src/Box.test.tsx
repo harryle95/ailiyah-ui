@@ -46,7 +46,7 @@ function BoxContent() {
 let disabledVar = [true, false];
 let initialStateVar = [true, false];
 let hoverSetActiveVar = [true, false];
-let testCallBack = (getComponent) =>
+let testCallBack = (getComponent: Function) =>
   describe.each(disabledVar)("with disabled: %s", (disabled) => {
     describe.each(initialStateVar)("with initialState: %s", (initialState) => {
       describe.each(hoverSetActiveVar)(
@@ -94,7 +94,7 @@ let testCallBack = (getComponent) =>
   });
 
 describe("Test createStateBox", () => {
-  let getComponentFunctional = (disabled, initialState, hoverSetActive) => {
+  let getComponentFunctional = (disabled: boolean, initialState: boolean, hoverSetActive: boolean) => {
     render(
       <SBox
         disabled={disabled}
@@ -115,7 +115,7 @@ describe("Test createStateBox", () => {
     ];
   };
 
-  let getComponentWithHook = (disabled, initialState, hoverSetActive) => {
+  let getComponentWithHook = (disabled: boolean, initialState: boolean, hoverSetActive: boolean) => {
     render(
       <SBox
         disabled={disabled}

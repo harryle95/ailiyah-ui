@@ -6,6 +6,7 @@ import {
   getClassName,
 } from "./tailwind";
 import { TailwindProps } from "./tailwind.types";
+import { PresetTheme } from "./default.types";
 
 describe("Test isTailwindKey", () => {
   describe("Given a TailwindProps key", () => {
@@ -28,7 +29,7 @@ describe("Test isTailwindKey", () => {
 });
 
 describe("Test extractTailwindTheme", () => {
-  const testCallBack = (props, twTheme, restProp) => {
+  const testCallBack = (props: any, twTheme: any, restProp: any) => {
     const { twProps, ...rest } = extractTailwindTheme(
       props as unknown as TailwindProps
     );
@@ -79,7 +80,7 @@ describe("Test extractTailwindTheme", () => {
 });
 
 describe("Test toClassstring", () => {
-  let testCallBack = (props, className) => {
+  let testCallBack = (props: TailwindProps, className: string) => {
     const result = toClassString(props);
     expect(result).toBe(className);
   };
@@ -105,7 +106,7 @@ describe("Test toClassstring", () => {
 });
 
 describe("Test getClassName", () => {
-  let testCallBack = (props, theme, className) => {
+  let testCallBack = (props: TailwindProps, theme: PresetTheme, className: string) => {
     const clsName = getClassName(props as unknown as TailwindProps, theme);
     expect(clsName.className).toEqual(className);
   };
@@ -118,7 +119,7 @@ describe("Test getClassName", () => {
     [{ twWidth: "w-10", twHeight: "h-10" }],
   ];
 
-  let propsWithBoth = [];
+  let propsWithBoth: Array<PresetTheme> = [];
 
   propsNoTw.forEach(([noTwItem]) => {
     propsTWOnly.forEach(([twOnlyItem]) => {

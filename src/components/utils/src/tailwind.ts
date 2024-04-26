@@ -22,8 +22,10 @@ const extractTailwindTheme = <T extends TailwindProps>(props: T) => {
 
   Object.keys(props).forEach((key) => {
     if (isTailwindKey(key)) {
+      // @ts-ignore
       twProps[key] = props[key];
     } else {
+      // @ts-ignore
       rest[key] = props[key];
     }
   });

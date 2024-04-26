@@ -4,9 +4,8 @@ import { useThemeContext, ThemeProvider } from "./context";
 import { expect, test, describe } from "vitest";
 
 
-const ThemeTestComponent = (props) => {
+const ThemeTestComponent = ({themeName}:{themeName: string}) => {
   const theme = useThemeContext();
-  const { themeName, ...rest } = props;
   return <>{theme[themeName] ? <h1>{themeName}</h1> : <></>}</>;
 };
 

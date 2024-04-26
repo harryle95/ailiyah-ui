@@ -20,7 +20,7 @@ export function TestComponent() {
           twDisplay="hidden data-[state=active]:flex"
           title="button-group"
         >
-          <Button.EditButton title="edit-button"/>
+          <Button.EditButton title="edit-button" />
           <Button.DeleteButton title="delete-button" />
         </Thumbnail.Component>
       </Thumbnail.Content>
@@ -29,6 +29,7 @@ export function TestComponent() {
 }
 
 const meta: Meta<typeof TestComponent> = {
+  title: "Thumbnail",
   component: TestComponent,
   tags: ["autodocs"],
   decorators: [

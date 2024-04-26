@@ -56,7 +56,7 @@ function createStateBox<
     createContext<ContextValueType>(componentName, defaultContext);
   const Div = styled("div", defaultProps);
 
-  const Root = React.forwardRef<HTMLDivElement, StateBoxProps>((props, ref) => {
+  const Root = React.memo(React.forwardRef<HTMLDivElement, StateBoxProps>((props, ref) => {
     const {
       initialState = true,
       hoverSetActive = true,
@@ -95,7 +95,7 @@ function createStateBox<
         </Div>
       </StateBoxProvider>
     );
-  });
+  }));
   return [Root, useStateBoxContext] as const;
 }
 
@@ -117,7 +117,7 @@ function createStateBoxChildren<
     element,
     defaultProps as TailwindComponentDefaultProps<ElementType>
   );
-  const Component = React.forwardRef<RefType, PropsType>((props, ref) => {
+  const Component = React.memo(React.forwardRef<RefType, PropsType>((props, ref) => {
     const { activeState } = stateHookFn();
     const stateFn = stateLabelFn
       ? stateLabelFn
@@ -125,7 +125,7 @@ function createStateBoxChildren<
     let rest = { ...props, "data-state": stateFn(activeState) };
     if (propHookFn) rest = propHookFn(rest);
     return <Element ref={ref} {...rest} />;
-  });
+  }));
   Component.displayName = componentName;
   return Component;
 }

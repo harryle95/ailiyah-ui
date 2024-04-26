@@ -37,9 +37,11 @@ const Trigger = React.forwardRef<HTMLDivElement, NavBarTriggerProps>(
   (props, ref) => {
     const { children, onClick = (e) => {}, ...rest } = props;
     const { activeState, setActiveState } = useNavBarContext();
-    const onClickHandler = (e) => {
+    const onClickHandler = (
+      e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>
+    ) => {
       setActiveState(!activeState);
-      onClick(e);
+      onClick(e as React.MouseEvent<HTMLDivElement>);
     };
     return (
       <styled.div {...rest} ref={ref} data-state={getState(activeState)}>
