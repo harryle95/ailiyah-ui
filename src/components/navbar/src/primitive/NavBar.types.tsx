@@ -1,5 +1,4 @@
-import { PrimitiveProps } from "./types";
-import { TailwindProps } from "@ailiyah-ui/utils";
+import { TailwindProps, PrimitiveProps } from "@ailiyah-ui/utils";
 
 interface NavBarContextValue {
   activeState: boolean;

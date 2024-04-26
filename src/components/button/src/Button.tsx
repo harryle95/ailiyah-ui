@@ -1,5 +1,7 @@
 import * as React from "react";
-import { TailwindProps } from "@ailiyah-ui/utils";
+import { TailwindProps, PrimitiveProps } from "@ailiyah-ui/utils";
+import { styled } from "@ailiyah-ui/factory";
+import { Tooltip, TooltipProps } from "@ailiyah-ui/tooltip";
 import {
   TrashIcon,
   Pencil1Icon,
@@ -11,19 +13,14 @@ import {
   DotsVerticalIcon as _DotsVerticalIcon,
   Cross1Icon as _CrossIcon,
   CheckIcon as _CheckIcon,
-} from "@radix-ui/react-icons";
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
-import * as Popover from "@radix-ui/react-popover";
-import { styled } from "@ailiyah-ui/factory";
-import { Tooltip, TooltipProps } from "../tooltip/src/Tooltip";
-import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import * as Popover from "@radix-ui/react-popover";
 import "./Alert.css";
 import "./Popover.css";
 import "./Dialog.css";
-import { PrimitiveProps } from "@ailiyah-ui/utils";
 
 type TailwindButtonProps = PrimitiveProps.ButtonProps & TailwindProps;
 
