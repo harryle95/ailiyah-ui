@@ -1,0 +1,16 @@
+{
+  "name": "@ailiyah-ui/dialog",
+  "version": "0.0.1",
+  "description": "styled dialog component",
+  "main": "./src/index.ts",
+  "type": "module",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "dependencies": {
+    "@ailiyah-ui/factory": "*",
+    "@radix-ui/colors": "^3.0.0",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "react": "^18.2.0"
+  }
+}
