@@ -20,6 +20,10 @@ const [_Root, useTextBoxContext] = createStateBox<
   twAlignItems: "items-center",
 });
 
+function getState(active: boolean) {
+  return active ? "active" : "inactive";
+}
+
 /**
  * Text box represent a text area that can optionally has side components -i.e
  * buttons.
@@ -115,7 +119,7 @@ const Content = React.forwardRef<
       twWidth={twWidth}
       {...rest}
       ref={ref}
-      data-state={activeState}
+      data-state={getState(activeState)}
     >
       {children}
     </styled.div>
@@ -139,7 +143,12 @@ const Component = React.forwardRef<
   const order = compLocation === "left" ? "order-1" : "order-3";
   const { activeState } = useTextBoxContext();
   return (
-    <styled.div twOrder={order} {...rest} data-state={activeState} ref={ref}>
+    <styled.div
+      twOrder={order}
+      {...rest}
+      data-state={getState(activeState)}
+      ref={ref}
+    >
       {children}
     </styled.div>
   );

@@ -1,4 +1,4 @@
-import { Demo } from "./examples/PreviewThumbnail"
+import { Demo } from "./examples/NavBar"
 
 function App() {
   return <Demo/>
