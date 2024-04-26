@@ -1,0 +1,15 @@
+{
+  "name": "@ailiyah-ui/input",
+  "version": "0.0.1",
+  "description": "input component ",
+  "main": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "type": "module",
+  "module": "./src/index.ts",
+  "dependencies": {
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/factory": "*",
+    "react": "^18.2.0"
+  }
+}
