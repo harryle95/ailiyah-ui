@@ -1,12 +1,8 @@
 import * as _Tooltip from "@radix-ui/react-tooltip";
 import * as React from "react";
-import "../css/Tooltip.css";
+import "./Tooltip.css";
 import { styled } from "@ailiyah-ui/factory";
-
-interface TooltipProps {
-  tooltipContent?: string;
-  children: React.ReactNode;
-}
+import { TooltipProps } from "./Tooltip.types";
 
 const Tooltip: React.FC<TooltipProps> = (props) => {
   const { children, tooltipContent } = props;

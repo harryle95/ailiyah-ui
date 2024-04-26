@@ -1,7 +1,7 @@
-import * as Primitive from "./types";
+import {PrimitiveProps} from "./types";
 import { TailwindProps } from "@ailiyah-ui/utils";
 
-interface InputProps extends Primitive.InputProps, TailwindProps {
+interface InputProps extends PrimitiveProps.InputProps, TailwindProps {
   /**
    * Handler called when esc key is pressed. To prevent default behaviour,
    * set to (e)=>e.preventDefault().

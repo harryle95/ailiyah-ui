@@ -20,10 +20,10 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
-import "../css/Alert.css";
-import "../css/Popover.css";
-import "../css/Dialog.css";
-import { PrimitiveProps } from "../../primitives";
+import "./Alert.css";
+import "./Popover.css";
+import "./Dialog.css";
+import { PrimitiveProps } from ".";
 
 type TailwindButtonProps = PrimitiveProps.ButtonProps & TailwindProps;
 

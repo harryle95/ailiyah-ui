@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "@ailiyah-ui/factory";
-import { TooltipTailwindButtonProps } from "../themed/common/Buttons";
-import { Tooltip } from "../themed/common/Tooltip";
+import { TooltipTailwindButtonProps } from "./Buttons";
+import { Tooltip } from "./Tooltip";
 import { createContext } from "@ailiyah-ui/context";
 import {
   UploadContextValue,

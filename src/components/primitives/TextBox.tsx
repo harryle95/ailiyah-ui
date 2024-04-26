@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "@ailiyah-ui/factory";
 import { TailwindProps } from "@ailiyah-ui/utils";
-import * as Primitive from "./types";
+import { PrimitiveProps } from "./types";
 import { BaseStateBoxProps, BaseStateBoxContextValue } from "./Box.types";
 import { createStateBox } from "./Box";
 
@@ -91,7 +91,7 @@ const Root = _Root;
  */
 const Content = React.forwardRef<
   HTMLDivElement,
-  Primitive.DivProps & TailwindProps
+  PrimitiveProps.DivProps & TailwindProps
 >((props, ref) => {
   const {
     twWhitespace = "whitespace-nowrap",
@@ -129,7 +129,7 @@ const Content = React.forwardRef<
  */
 const Component = React.forwardRef<
   HTMLDivElement,
-  Primitive.DivProps & TailwindProps & LRLocationProps
+  PrimitiveProps.DivProps & TailwindProps & LRLocationProps
 >((props, ref) => {
   const { compLocation, children, ...rest } = props;
   const order = compLocation === "left" ? "order-1" : "order-3";

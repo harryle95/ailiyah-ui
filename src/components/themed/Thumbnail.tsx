@@ -1,9 +1,9 @@
 import * as React from "react";
-import { createStateBox } from "../../primitives/Box";
-import { PrimitiveProps } from "../../primitives/";
+import { createStateBox } from "../primitives/Box";
+import { PrimitiveProps } from "../primitives";
 import { TailwindProps } from "@ailiyah-ui/utils";
 import { styled } from "@ailiyah-ui/factory";
-import { CornerLocationProps, LocationMap } from "../../primitives/types";
+import { CornerLocationProps, LocationMap } from "../primitives/types";
 import { createElement } from "@ailiyah-ui/factory";
 
 const [Root, useRootContext] = createStateBox("Root", undefined);

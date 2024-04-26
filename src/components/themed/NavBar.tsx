@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as Button from "../common/Buttons"
-import * as NavBar from "../../primitives/NavBar";
+import * as Button from "../primitives/Buttons"
+import { NavBar } from "../primitives";
 import { TailwindProps } from "@ailiyah-ui/utils"
-import { NavBarProps } from "../../primitives/NavBar.types";
+import { NavBarProps } from "../primitives/NavBar.types";
 
 const Root: React.FC<NavBarProps> = (props)=>{
   const {children, themeName, ...rest} = props;

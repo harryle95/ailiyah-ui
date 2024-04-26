@@ -1,4 +1,4 @@
-import * as Primitive from "./types";
+import { PrimitiveProps } from "./types";
 import { TailwindProps } from "@ailiyah-ui/utils";
 
 interface NavBarContextValue {
@@ -6,7 +6,7 @@ interface NavBarContextValue {
   setActiveState: Function;
 }
 
-interface NavBarProps extends Primitive.DivProps, TailwindProps {}
+interface NavBarProps extends PrimitiveProps.DivProps, TailwindProps {}
 
 interface NavBarTriggerProps extends Omit<NavBarProps, "children"> {
   children?:

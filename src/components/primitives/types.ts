@@ -1,12 +1,14 @@
-import * as React from "react";
+import React from "react";
 
-type DivProps = React.ComponentPropsWithoutRef<"div">;
-type InputProps = React.ComponentPropsWithoutRef<"input">;
-type TextAreaProps = React.ComponentPropsWithoutRef<"textarea">;
-type ButtonProps = React.ComponentPropsWithoutRef<"button">;
-type LabelProps = React.ComponentPropsWithoutRef<"label">;
-type FormProps = React.ComponentPropsWithoutRef<"form">;
-type ImageProps = React.ComponentPropsWithoutRef<"img">;
+namespace PrimitiveProps {
+  export type DivProps = React.ComponentPropsWithoutRef<"div">;
+  export type InputProps = React.ComponentPropsWithoutRef<"input">;
+  export type TextAreaProps = React.ComponentPropsWithoutRef<"textarea">;
+  export type ButtonProps = React.ComponentPropsWithoutRef<"button">;
+  export type LabelProps = React.ComponentPropsWithoutRef<"label">;
+  export type FormProps = React.ComponentPropsWithoutRef<"form">;
+  export type ImageProps = React.ComponentPropsWithoutRef<"img">;
+}
 
 interface LRLocationProps {
   compLocation: "left" | "right";
@@ -25,14 +27,4 @@ const LocationMap = {
 
 export { LocationMap };
 
-export type {
-  DivProps,
-  InputProps,
-  TextAreaProps,
-  ButtonProps,
-  LabelProps,
-  FormProps,
-  ImageProps,
-  LRLocationProps,
-  CornerLocationProps,
-};
+export type { PrimitiveProps, LRLocationProps, CornerLocationProps };
