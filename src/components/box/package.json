@@ -1,16 +1,14 @@
 {
-  "name": "@ailiyah-ui/accordion",
+  "name": "@ailiyah-ui/box",
   "version": "0.0.1",
-  "description": "Accordion component ",
+  "description": "box component ",
   "main": "./src/index.ts",
   "author": "Hoang Son Le",
-  "type": "module",
-  "module": "./src/index.ts",
+  "license": "MIT ",
   "dependencies": {
     "@ailiyah-ui/utils": "*",
     "@ailiyah-ui/context": "*",
     "@ailiyah-ui/factory": "*",
-    "@radix-ui/react-accordion": "^1.1.2",
     "react": "^18.2.0"
   }
 }
