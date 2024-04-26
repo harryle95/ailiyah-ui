@@ -1,11 +1,15 @@
 import * as React from "react";
 import { styled } from "@ailiyah-ui/factory";
-import { TailwindProps } from "@ailiyah-ui/utils";
-import { PrimitiveProps } from "./types";
-import { BaseStateBoxProps, BaseStateBoxContextValue } from "./Box.types";
-import { createStateBox } from "./Box";
-
-import { LRLocationProps } from "./types";
+import {
+  TailwindProps,
+  PrimitiveProps,
+  LRLocationProps,
+} from "@ailiyah-ui/utils";
+import {
+  createStateBox,
+  BaseStateBoxProps,
+  BaseStateBoxContextValue,
+} from "@ailiyah-ui/box";
 
 const [_Root, useTextBoxContext] = createStateBox<
   BaseStateBoxContextValue,

@@ -1,0 +1,16 @@
+{
+  "name": "@ailiyah-ui/text",
+  "version": "0.0.1",
+  "description": "styled text",
+  "main": "./src/index.ts",
+  "type": "module",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT",
+  "dependencies": {
+    "@ailiyah-ui/factory": "*",
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/box": "*",
+    "react": "^18.2.0"
+  }
+}

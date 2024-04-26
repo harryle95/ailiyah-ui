@@ -1,5 +1,5 @@
 import { createElement } from "@ailiyah-ui/factory";
-import { createBox, createLocationBox } from "./Box";
+import { createBox, createLocationBox } from "@ailiyah-ui/box";
 
 /**
  * Renders as div styled with TailwindProps parameters.
