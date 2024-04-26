@@ -1,12 +1,12 @@
 import * as React from "react";
 import { styled } from "@ailiyah-ui/factory";
-import { TooltipTailwindButtonProps } from "./Buttons";
-import { Tooltip } from "./Tooltip";
+import { Tooltip } from "@ailiyah-ui/tooltip";
 import { createContext } from "@ailiyah-ui/context";
 import {
   UploadContextValue,
   UploadRootProps,
   UploadTriggerProps,
+  CancelTriggerProps,
 } from "./Upload.types";
 
 const [UploadProvider, useUploadContext] = createContext<UploadContextValue>(
@@ -137,7 +137,7 @@ Trigger.displayName = "Trigger";
  * @param onClick - button click handler - if provided, will be invoked before `onFileRemoved`
  * function from `useUploadContext` is invoked.
  */
-const Cancel = React.forwardRef<HTMLButtonElement, TooltipTailwindButtonProps>(
+const Cancel = React.forwardRef<HTMLButtonElement, CancelTriggerProps>(
   (props, ref) => {
     const { children, tooltipContent = "", onClick, ...rest } = props;
     const { onFileRemoved } = useUploadContext();

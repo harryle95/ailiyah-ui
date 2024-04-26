@@ -1,7 +1,6 @@
 import React from "react";
-import { TooltipProps } from "@radix-ui/react-tooltip";
-import { TailwindProps } from "@ailiyah-ui/utils";
-import { PrimitiveProps } from "./types";
+import { TooltipProps } from "@ailiyah-ui/tooltip";
+import { TailwindProps, PrimitiveProps } from "@ailiyah-ui/utils";
 
 interface UploadContextValue {
   /** input component id -> for upload button */
@@ -27,8 +26,16 @@ interface UploadRootProps
 interface UploadTriggerProps
   extends PrimitiveProps.LabelProps,
     Omit<TooltipProps, "children">,
-    TailwindProps {
-  tooltipContent?: string;
-}
+    TailwindProps {}
 
-export type { UploadContextValue, UploadRootProps, UploadTriggerProps };
+interface CancelTriggerProps
+  extends PrimitiveProps.ButtonProps,
+    Omit<TooltipProps, "children">,
+    TailwindProps {}
+
+export type {
+  UploadContextValue,
+  UploadRootProps,
+  UploadTriggerProps,
+  CancelTriggerProps,
+};

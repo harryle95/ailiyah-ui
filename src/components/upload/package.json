@@ -1,0 +1,17 @@
+{
+  "name": "@ailiyah-ui/upload",
+  "version": "0.0.1",
+  "description": "styled upload component",
+  "main": "./src/index.ts",
+  "type": "module",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "dependencies": {
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/context": "*",
+    "@ailiyah-ui/factory": "*",
+    "@ailiyah-ui/tooltip": "*",
+    "react": "^18.2.0"
+  }
+}
