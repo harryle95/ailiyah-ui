@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { TailwindProps } from "@ailiyah-ui/utils";
 import { styled } from "@ailiyah-ui/factory";

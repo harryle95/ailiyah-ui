@@ -1,0 +1,14 @@
+{
+  "name": "@ailiyah-ui/accordion",
+  "version": "0.0.1",
+  "description": "Accordion component ",
+  "main": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "type": "module",
+  "module": "./src/index.ts",
+  "dependencies": {
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/context": "*",
+    "@radix-ui/react-accordion": "^1.1.2"
+  }
+}
