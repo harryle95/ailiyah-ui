@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "../components/themed";
+import * as Button from "@ailiyah-ui/button";
 
 function Demo() {
   return (

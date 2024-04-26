@@ -105,7 +105,7 @@ interface TextBoxUpdateFormProps
 
 const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   const { projectName, setProjectName, id, setEditingState } = props;
-  const [name, setName] = React.useState(projectName);
+  const [name, setName] = React.useState(() => projectName);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -143,8 +143,8 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
   const { id, name, ...rest } = props;
   const projectURL = `/project/${id}`;
   // States
-  const [projectName, setName] = React.useState(name);
-  const [editingState, setEditingState] = React.useState(false);
+  const [projectName, setName] = React.useState(() => name);
+  const [editingState, setEditingState] = React.useState(() => false);
 
   // Chek if current link is active and set button to appear/disappear
 

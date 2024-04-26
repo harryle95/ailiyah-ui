@@ -121,9 +121,7 @@ function createStateBoxChildren<
     const { activeState } = stateHookFn();
     const stateFn = stateLabelFn
       ? stateLabelFn
-      : (state: boolean) => {
-          return state ? "active" : "inactive";
-        };
+      : getState
     let rest = { ...props, "data-state": stateFn(activeState) };
     if (propHookFn) rest = propHookFn(rest);
     return <Element ref={ref} {...rest} />;

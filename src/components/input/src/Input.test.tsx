@@ -8,8 +8,8 @@ const user = userEvent.setup();
 
 function TestElement(props) {
   const { defaultText, ...rest } = props;
-  const [edit, setEdit] = React.useState(true);
-  const [text, setText] = React.useState(defaultText);
+  const [edit, setEdit] = React.useState(() => true);
+  const [text, setText] = React.useState(() => defaultText);
   const onEnter = (e) => {
     setText(e.target.value);
     setEdit(!edit);

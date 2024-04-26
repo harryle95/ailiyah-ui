@@ -16,7 +16,7 @@ function getState(state: boolean): string {
 
 const Root = React.forwardRef<HTMLDivElement, NavBarProps>((props, ref) => {
   const { children, ...rest } = props;
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = React.useState(() => true);
   return (
     <NavBarProvider
       value={{ activeState: visible, setActiveState: setVisible }}
