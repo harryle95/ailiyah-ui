@@ -1,18 +1,18 @@
 import * as React from "react";
-import { Primitive, Themed, Context } from "../index";
+import { Themed as NavBar } from "@ailiyah-ui/navbar";
+import { TextBox } from "@ailiyah-ui/text";
+import * as Button from "@ailiyah-ui/button";
+import { Link, Form } from "react-router-dom";
+import { styled } from "@ailiyah-ui/factory";
+import { ThemeProvider } from "@ailiyah-ui/context";
+import { createStateBox } from "@ailiyah-ui/box";
+import { defaultTheme } from "@ailiyah-ui/utils";
+import { Input } from "@ailiyah-ui/input";
 
-import { Link } from "react-router-dom";
-
-const NavBar = Themed.NavBar;
-const Text = Primitive.TextBox;
-const Button = Themed.Button;
-const Form = Primitive.Form;
-const styled = Context.styled;
-const ThemeProvider = Context.ThemeProvider;
-const [Box, _] = Primitive.Box.createStateBox("Box");
+const [Box, _] = createStateBox("Box");
 
 const theme = {
-  ...Context.defaultTheme,
+  ...defaultTheme,
   NavBarFormInput: {
     twWidth: "w-full",
     twHeight: "h-full",
@@ -117,9 +117,9 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
   };
 
   return (
-    <Form.Root onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <input name="id" value={id} className="hidden" readOnly />
-      <Form.Input
+      <Input
         themeName="NavBarFormInput"
         name="name"
         type="text"
@@ -135,7 +135,7 @@ const TextBoxUpdateForm: React.FC<TextBoxUpdateFormProps> = (props) => {
         }}
         onBlur={onSubmit}
       />
-    </Form.Root>
+    </Form>
   );
 };
 
@@ -149,25 +149,25 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
   // Chek if current link is active and set button to appear/disappear
 
   return (
-    <Text.Root
+    <TextBox.Root
       themeName="NavBarTextBoxRoot"
-      activeState={editingState}
+      initialState={editingState}
       hoverSetActive={true}
       {...rest}
     >
       <styled.div twPosition="relative" twWidth="w-full" twHeight="h-full">
         {!editingState ? (
           <>
-            <Text.Content>
+            <TextBox.Content>
               <Link to={projectURL}>{projectName}</Link>
-            </Text.Content>
+            </TextBox.Content>
 
-            <Text.Component
+            <TextBox.Component
               compLocation="right"
               themeName="NavBarTextBoxMask"
-            ></Text.Component>
+            ></TextBox.Component>
 
-            <Text.Component
+            <TextBox.Component
               compLocation="right"
               themeName="NavBarInvisibleTextBoxButtons"
             >
@@ -191,7 +191,7 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
                   }}
                 />
               </Box>
-            </Text.Component>
+            </TextBox.Component>
           </>
         ) : (
           <TextBoxUpdateForm
@@ -202,6 +202,6 @@ const TextBoxItem: React.FC<ProjectDTO> = (props) => {
           />
         )}
       </styled.div>
-    </Text.Root>
+    </TextBox.Root>
   );
 };
