@@ -1,7 +1,9 @@
-import { TailwindProps } from "@ailiyah-ui/utils";
+import {
+  TailwindProps,
+  CornerLocationProps,
+  PrimitiveProps,
+} from "@ailiyah-ui/utils";
 import React from "react";
-import { CornerLocationProps } from "@ailiyah-ui/utils/src/types";
-import { PrimitiveProps } from "@ailiyah-ui/utils/src/types";
 
 interface BaseBoxProps extends TailwindProps, PrimitiveProps.DivProps {}
 

@@ -7,7 +7,7 @@ import {
 } from "./Box.types";
 import { createContext } from "@ailiyah-ui/context";
 import { styled, createElement } from "@ailiyah-ui/factory";
-import { LocationMap } from "@ailiyah-ui/utils/src/types";
+import { LocationMap } from "@ailiyah-ui/utils";
 
 function getState(value: boolean): "active" | "inactive" {
   return value ? "active" : "inactive";
