@@ -6,8 +6,17 @@ import {
   BaseStateBoxProps,
 } from "./Box.types";
 import { createContext } from "@ailiyah-ui/context";
-import { styled, createElement } from "@ailiyah-ui/factory";
-import { LocationMap } from "@ailiyah-ui/utils";
+import {
+  styled,
+  createElement,
+  TailwindComponentDefaultProps,
+  TailwindComponentProps,
+} from "@ailiyah-ui/factory";
+import {
+  CornerLocationProps,
+  LocationMap,
+  TailwindProps,
+} from "@ailiyah-ui/utils";
 
 function getState(value: boolean): "active" | "inactive" {
   return value ? "active" : "inactive";
@@ -37,7 +46,7 @@ function getState(value: boolean): "active" | "inactive" {
  */
 function createStateBox<
   ContextValueType extends BaseStateBoxContextValue,
-  StateBoxProps extends BaseStateBoxProps
+  StateBoxProps extends BaseStateBoxProps,
 >(
   componentName: string,
   defaultContext?: ContextValueType,
@@ -90,6 +99,49 @@ function createStateBox<
   return [Root, useStateBoxContext] as const;
 }
 
+function createStateBoxChildren<
+  ElementType extends React.ElementType,
+  ContextValueType extends BaseStateBoxContextValue = BaseStateBoxContextValue,
+  PropsType extends
+    TailwindComponentProps<ElementType> = TailwindComponentProps<ElementType>,
+>(
+  element: ElementType,
+  componentName: string,
+  stateHookFn: () => ContextValueType,
+  defaultProps?: Omit<PropsType, "children">,
+  propHookFn?: (props: any) => any,
+  stateLabelFn?: (state: boolean) => string
+) {
+  type RefType = React.ElementRef<ElementType>;
+  const Element = styled(
+    element,
+    defaultProps as TailwindComponentDefaultProps<ElementType>
+  );
+  const Component = React.forwardRef<RefType, PropsType>((props, ref) => {
+    const { activeState } = stateHookFn();
+    const stateFn = stateLabelFn
+      ? stateLabelFn
+      : (state: boolean) => {
+          return state ? "active" : "inactive";
+        };
+    let rest = { ...props, "data-state": stateFn(activeState) };
+    if (propHookFn) rest = propHookFn(rest);
+    return <Element ref={ref} {...rest} />;
+  });
+  Component.displayName = componentName;
+  return Component;
+}
+
+function resolveLocation<T extends CornerLocationProps & TailwindProps>(
+  props: T
+) {
+  let { compLocation = "top-right", twTopRightBottomLeft, ...rest } = props;
+  twTopRightBottomLeft = twTopRightBottomLeft
+    ? twTopRightBottomLeft
+    : LocationMap[compLocation];
+  return { ...rest, twTopRightBottomLeft: twTopRightBottomLeft };
+}
+
 /*************************************************************************************************************************************
  * Base Box
  *************************************************************************************************************************************
@@ -130,13 +182,9 @@ function createLocationBox<BoxProps extends BaseLocationBoxProps>(
       : { twPosition: "absolute" }
   );
   const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
-    const { children, compLocation, twTopRightBottomLeft, ...rest } = props;
-    let location = twTopRightBottomLeft
-      ? twTopRightBottomLeft
-      : LocationMap[compLocation];
-
+    let { children, ...rest } = resolveLocation(props);
     return (
-      <Div {...rest} ref={ref} twTopRightBottomLeft={location}>
+      <Div {...rest} ref={ref}>
         {children}
       </Div>
     );
@@ -149,4 +197,11 @@ function createLocationBox<BoxProps extends BaseLocationBoxProps>(
  * Export
  *************************************************************************************************************************************
  */
-export { createStateBox, createBox, createLocationBox, getState };
+export {
+  createStateBox,
+  createBox,
+  createLocationBox,
+  getState,
+  createStateBoxChildren,
+  resolveLocation,
+};

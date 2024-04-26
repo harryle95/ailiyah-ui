@@ -15,7 +15,7 @@ interface LRLocationProps {
 }
 
 interface CornerLocationProps {
-  compLocation: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  compLocation?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 }
 
 const LocationMap = {

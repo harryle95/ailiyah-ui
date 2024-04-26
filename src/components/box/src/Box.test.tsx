@@ -1,8 +1,17 @@
 import { describe, test, expect } from "vitest";
 import { screen, render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { createStateBox, getState, createLocationBox } from "./Box";
+import {
+  createStateBox,
+  getState,
+  createLocationBox,
+  createStateBoxChildren,
+  resolveLocation,
+} from "./Box";
 import React from "react";
+import { BaseStateBoxContextValue } from "./Box.types";
+import { TailwindComponentProps } from "@ailiyah-ui/factory";
+import { CornerLocationProps } from "@ailiyah-ui/utils";
 
 const user = userEvent.setup();
 
@@ -12,6 +21,18 @@ const [SBox, useStateBoxContext] = createStateBox("Box", undefined, {
   twBackgroundColor: "bg-black",
   twTextColor: "text-white",
 });
+
+const SBoxChildren = createStateBoxChildren(
+  "div",
+  "Children",
+  useStateBoxContext
+);
+
+const SBoxChildrenLocation = createStateBoxChildren<
+  "div",
+  BaseStateBoxContextValue,
+  CornerLocationProps & TailwindComponentProps<"div">
+>("div", "location", useStateBoxContext, {}, resolveLocation);
 
 function BoxContent() {
   const { activeState } = useStateBoxContext();
@@ -102,7 +123,7 @@ describe("Test createStateBox", () => {
         hoverSetActive={hoverSetActive}
         title="test-element"
       >
-        <BoxContent/>
+        <BoxContent />
       </SBox>
     );
     return [
@@ -118,14 +139,81 @@ describe("Test createStateBox", () => {
 
 const LBox = createLocationBox("LocationBox");
 
-describe("Test Location Box", ()=>{
-    const getComponent = ()=>{
-        render(<LBox compLocation="top-left" title="test-element"></LBox>)
-        return screen.getByTitle("test-element");
-    }
+describe("Test Location Box", () => {
+  test("at default should be 'absolute top-0 right-0'", () => {
+    render(<LBox title="test-element"></LBox>);
+    let component = screen.getByTitle("test-element");
+    expect(component.className).toBe("absolute top-0 right-0");
+  });
 
-    test("should have className be 'absolute top-0 left-0'", ()=>{
-        let component = getComponent();
-        expect(component.className).toBe('absolute top-0 left-0')
-    })
-})
+  test("should have className be 'absolute top-0 left-0'", () => {
+    render(<LBox compLocation="top-left" title="test-element"></LBox>);
+    let component = screen.getByTitle("test-element");
+    expect(component.className).toBe("absolute top-0 left-0");
+  });
+
+  test("with overwritten location to be top-2 left-2 should be absolute top-2 left-2", () => {
+    render(
+      <LBox
+        compLocation="top-left"
+        title="test-element"
+        twTopRightBottomLeft="top-2 left-2"
+      ></LBox>
+    );
+    let component = screen.getByTitle("test-element");
+    expect(component.className).toBe("absolute top-2 left-2");
+  });
+});
+
+describe("Test State Children", () => {
+  describe("with parent box intial state being inactive", () => {
+    const Component = () => {
+      return (
+        <SBox initialState={false} title="parent-box">
+          <SBoxChildren title="children-box">Content</SBoxChildren>
+        </SBox>
+      );
+    };
+
+    const LocationComponent = () => {
+      return (
+        <SBox initialState={false} title="parent-box">
+          <SBoxChildrenLocation title="children-box" compLocation="top-left">
+            Content
+          </SBoxChildrenLocation>
+        </SBox>
+      );
+    };
+    test("children-box should be inactive on rendering", () => {
+      render(<Component />);
+      expect(screen.getByTitle("children-box").getAttribute("data-state")).toBe(
+        "inactive"
+      );
+    });
+    test("children-box should be active on hover", async () => {
+      render(<Component />);
+      let parent = screen.getByTitle("parent-box");
+      let children = screen.getByTitle("children-box");
+      await user.hover(parent);
+      expect(children.getAttribute("data-state")).toBe("active");
+    });
+    test("children location box should be inactive on rendered", () => {
+      render(<LocationComponent />);
+      expect(screen.getByTitle("children-box").getAttribute("data-state")).toBe(
+        "inactive"
+      );
+    });
+    test("children location box should be active on hover", async () => {
+      render(<LocationComponent />);
+      let parent = screen.getByTitle("parent-box");
+      let children = screen.getByTitle("children-box");
+      await user.hover(parent);
+      expect(children.getAttribute("data-state")).toBe("active");
+    });
+    test("children-box should be on top-left", async () => {
+      render(<LocationComponent />);
+      let children = screen.getByTitle("children-box");
+      expect(children.className).toBe("top-0 left-0");
+    });
+  });
+});

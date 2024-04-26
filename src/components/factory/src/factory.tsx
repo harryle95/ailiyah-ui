@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useThemeContext } from "@ailiyah-ui/context";
-import {getClassName} from "@ailiyah-ui/utils";
+import { getClassName } from "@ailiyah-ui/utils";
 
 import {
   StyledFactoryFn,
@@ -12,7 +12,7 @@ const styledFn = (component: any, defaultProps?: any) => {
     const theme = useThemeContext();
     // @ts-ignore
     const { children, ...rest } = props;
-    const propsWithDefault = {...defaultProps, ...rest}
+    const propsWithDefault = { ...defaultProps, ...rest };
     const { className, ...other } = getClassName(propsWithDefault, theme);
     return React.createElement(
       component,
@@ -42,14 +42,16 @@ const styled = styledProxy as unknown as StyledFactoryFn;
 
 type IntrinsicElementType = keyof React.JSX.IntrinsicElements;
 
-const createElement = <T extends IntrinsicElementType>(
+const _createElement = <T extends IntrinsicElementType>(
   component: T,
-  displayName: string,
+  displayName?: string,
   defaultProps?: TailwindComponentDefaultProps<T>
 ) => {
   const Element = styled(component, defaultProps);
-  Element.displayName = displayName;
+  if (displayName) Element.displayName = displayName;
   return Element;
 };
+
+const createElement = _createElement as StyledFactoryFn;
 
 export { styled, createElement };

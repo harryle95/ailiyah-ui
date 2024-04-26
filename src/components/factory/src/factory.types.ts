@@ -22,6 +22,11 @@ type JSXFactory = {
     component: T,
     defaultProps?: TailwindComponentDefaultProps<T>
   ): TailwindComponent<T>;
+  <T extends ElementType>(
+    component: T,
+    displayName?: string,
+    defaultProps?: TailwindComponentDefaultProps<T>
+  ): TailwindComponent<T>;
 };
 
 type StyledFactoryFn = JSXElement & JSXFactory;
