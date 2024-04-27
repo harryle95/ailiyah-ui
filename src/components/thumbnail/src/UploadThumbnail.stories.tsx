@@ -6,13 +6,38 @@ import { styled } from "@ailiyah-ui/factory";
 import { PresetTheme } from "@ailiyah-ui/utils";
 import { ThemeProvider } from "@ailiyah-ui/context";
 import { UploadThumbnail } from "./UploadThumbnail";
+import { within, userEvent } from "@storybook/test";
 
-export function TestComponent({ value }: { value: PresetTheme }) {
+const uploadFile = async (
+  path: string,
+  name: string,
+  type: string
+): Promise<File> => {
+  const data = await fetch(path);
+  const blob = await data.blob();
+  return new File([blob], name, { type: type });
+};
+
+const mockImage = async (): Promise<File> => {
+  return await uploadFile("/testImage.jpeg", "testImage.jpeg", "image/jpeg");
+};
+
+export function TestComponent({
+  value,
+  disabled,
+}: {
+  value: PresetTheme;
+  disabled: boolean;
+}) {
   const [thumbnail, setThumbnail] = React.useState<Blob | MediaSource>();
 
   return (
     <ThemeProvider value={value}>
-      <UploadThumbnail thumbnail={thumbnail} setThumbnail={setThumbnail} />
+      <UploadThumbnail
+        thumbnail={thumbnail}
+        setThumbnail={setThumbnail}
+        disabled={disabled}
+      />
     </ThemeProvider>
   );
 }
@@ -22,6 +47,7 @@ const meta: Meta<typeof TestComponent> = {
   component: TestComponent,
   tags: ["autodocs"],
   parameters: {
+    disabled: { default: false, type: "boolean" },
     value: {
       default: defaultTheme,
     },
@@ -39,9 +65,9 @@ export default meta;
 
 type Story = StoryObj<typeof TestComponent>;
 
-
 export const Default: Story = {
   args: {
+    disabled: false,
     value: {
       ...defaultTheme,
       UploadThumbnailContent: {
@@ -51,7 +77,7 @@ export const Default: Story = {
         twFlex: "flex",
         twAlignItems: "items-center",
         twJustifyContent: "justify-center",
-        twBorderWidth: "data-[state=active]:border-2"
+        twBorderWidth: "data-[state=active]:border-2",
       },
       UploadCanvas: {
         twMaxWidth: "max-w-full",
@@ -66,4 +92,66 @@ export const Default: Story = {
       },
     },
   },
+};
+
+export const DefaultHover: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.hover(canvas.getByText("Upload"));
+  },
+};
+
+export const DefaultUploaded: Story = {
+  args: Default.args,
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement)
+    const file = await mockImage()
+    await userEvent.upload(canvas.getByTitle("file-upload")!, file)
+    await userEvent.unhover(canvas.getByTitle("file-upload"))
+  }
+};
+
+export const DefaultUploadedHover: Story = {
+  args: Default.args,
+  play: async({canvasElement}) => {
+    const canvas = within(canvasElement)
+    const file = await mockImage()
+    await userEvent.upload(canvas.getByTitle("file-upload")!, file)
+  }
+};
+
+export const DefaultUploadedHoverDelete: Story = {
+  args: Default.args,
+  play: async({canvasElement}) => {
+    const canvas = within(canvasElement)
+    const file = await mockImage()
+    await userEvent.upload(canvas.getByTitle("file-upload")!, file)
+    await userEvent.click(document.querySelector(".UploadThumbnailDeleteButton")!)
+  }
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    disabled: true,
+  },
+  
+};
+
+export const DisabledHover: Story = {
+  args: Disabled.args,
+  play: async({canvasElement}) => {
+    const canvas = within(canvasElement)
+    await userEvent.hover(canvas.getByText("Upload"))
+  }
+};
+
+export const DisabledClick: Story = {
+  args: Disabled.args,
+  play: async({canvasElement}) => {
+    const canvas = within(canvasElement)
+    const file = await mockImage()
+    await userEvent.upload(canvas.getByTitle("file-upload")!, file)
+  }
 };

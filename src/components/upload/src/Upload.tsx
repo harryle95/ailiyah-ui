@@ -36,7 +36,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
     const internalRef = React.useRef(null);
     ref = internalRef;
     const uploadFile = onFileUploaded;
-    const removeFile = (e) => {
+    const removeFile = (e: React.MouseEvent<HTMLButtonElement>) => {
       onFileRemoved && onFileRemoved(e);
       if (internalRef) {
         // @ts-ignore

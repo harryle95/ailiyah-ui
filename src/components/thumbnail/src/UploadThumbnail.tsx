@@ -8,6 +8,7 @@ import * as Button from "@ailiyah-ui/button";
 interface UploadThumbnailOwnProps {
   thumbnail?: Blob | MediaSource;
   setThumbnail: Function;
+  disabled?:boolean,
 }
 
 const UploadThumbnail = React.memo(
@@ -15,7 +16,7 @@ const UploadThumbnail = React.memo(
     HTMLDivElement,
     UploadThumbnailOwnProps & Omit<TailwindComponentProps<"div">, "children">
   >((props, ref) => {
-    const { thumbnail, setThumbnail, ...rest } = props;
+    const { thumbnail, setThumbnail, disabled=false, ...rest } = props;
     const displayThumbnail = thumbnail ? URL.createObjectURL(thumbnail) : "";
     const onFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.currentTarget.files) setThumbnail(e.currentTarget.files[0]);
@@ -26,6 +27,7 @@ const UploadThumbnail = React.memo(
         <Thumbnail.Root themeName="UploadThumbnailRoot" initialState={false}>
           <Thumbnail.Content themeName="UploadThumbnailContent">
             <Upload.Root
+              disabled={disabled}
               onFileUploaded={onFileUpload}
               onFileRemoved={onFileRemoved}
             >
@@ -37,7 +39,7 @@ const UploadThumbnail = React.memo(
                     src={displayThumbnail}
                     themeName="UploadCanvas"
                   />
-                  <Thumbnail.Component
+                  {disabled? <></>: <Thumbnail.Component
                     themeName="UploadThumbnailButtonGroup"
                     compLocation="bottom-right"
                   >
@@ -47,7 +49,7 @@ const UploadThumbnail = React.memo(
                     <Upload.Cancel themeName="UploadThumbnailDeleteButton" tooltipContent="Remove">
                       <Button.DeleteIcon />
                     </Upload.Cancel>
-                  </Thumbnail.Component>
+                  </Thumbnail.Component>}
                 </>
               )}
             </Upload.Root>
