@@ -14,7 +14,7 @@ global.URL.createObjectURL = vi.fn(() => "testImage.png");
 describe("Given a disabled upload thumbnail", () => {
   describe("when first rendered", () => {
     beforeEach(async () => {
-      render(<TestComponent disabled={true} value={Default.args!.value!} />);
+      render(<TestComponent editing={false} value={Default.args!.value!} />);
     });
     test("Content Area should be in the document", () => {
       let contentArea = document.querySelector(".UploadThumbnailContent");
@@ -69,7 +69,7 @@ describe("Given a disabled upload thumbnail", () => {
 describe("Given an upload thumbnail", () => {
   describe("when first rendered", () => {
     beforeEach(async () => {
-      render(<TestComponent disabled={false} value={Default.args!.value!} />);
+      render(<TestComponent editing={true} value={Default.args!.value!} />);
     });
     test("Content Area should be in the document", () => {
       let contentArea = document.querySelector(".UploadThumbnailContent");

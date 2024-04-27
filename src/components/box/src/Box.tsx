@@ -179,14 +179,14 @@ function createLocationBox<BoxProps extends BaseLocationBoxProps>(
       ? { twPosition: "absolute", ...defaultProps }
       : { twPosition: "absolute" }
   );
-  const Root = React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
+  const Root = React.memo(React.forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     let { children, ...rest } = resolveLocation(props);
     return (
       <Div {...rest} ref={ref}>
         {children}
       </Div>
     );
-  });
+  }));
   Root.displayName = componentName;
   return Root;
 }

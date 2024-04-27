@@ -8,7 +8,7 @@ import {
 } from "./factory.types";
 
 const styledFn = (component: any, defaultProps?: any) => {
-  const SComponent = React.forwardRef<HTMLAnchorElement, any>((props, ref) => {
+  const SComponent = React.memo(React.forwardRef<HTMLAnchorElement, any>((props, ref) => {
     const theme = useThemeContext();
     // @ts-ignore
     const { children, ...rest } = props;
@@ -19,7 +19,7 @@ const styledFn = (component: any, defaultProps?: any) => {
       { ref, ...other, className },
       children
     );
-  });
+  }));
   return SComponent;
 };
 

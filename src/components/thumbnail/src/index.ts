@@ -1,3 +1,3 @@
 export * from "./Thumbnail"
 
-export * from "./UploadThumbnail"
+export * from "../../prompt/src/UploadThumbnail"

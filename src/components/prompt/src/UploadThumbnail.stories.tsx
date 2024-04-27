@@ -24,10 +24,10 @@ const mockImage = async (): Promise<File> => {
 
 export function TestComponent({
   value,
-  disabled,
+  editing,
 }: {
   value: PresetTheme;
-  disabled: boolean;
+  editing: boolean;
 }) {
   const [thumbnail, setThumbnail] = React.useState<Blob | MediaSource>();
 
@@ -36,7 +36,7 @@ export function TestComponent({
       <UploadThumbnail
         thumbnail={thumbnail}
         setThumbnail={setThumbnail}
-        disabled={disabled}
+        editing={editing}
       />
     </ThemeProvider>
   );
@@ -47,7 +47,7 @@ const meta: Meta<typeof TestComponent> = {
   component: TestComponent,
   tags: ["autodocs"],
   parameters: {
-    disabled: { default: false, type: "boolean" },
+    editing: { default: true, type: "boolean" },
     value: {
       default: defaultTheme,
     },
@@ -67,7 +67,7 @@ type Story = StoryObj<typeof TestComponent>;
 
 export const Default: Story = {
   args: {
-    disabled: false,
+    editing: true,
     value: {
       ...defaultTheme,
       UploadThumbnailContent: {
@@ -134,7 +134,7 @@ export const DefaultUploadedHoverDelete: Story = {
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    disabled: true,
+    editing: false,
   },
   
 };

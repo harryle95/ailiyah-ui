@@ -8,9 +8,6 @@
   "type": "module",
   "module": "./src/index.ts",
   "dependencies": {
-    "@ailiyah-ui/factory": "*",
-    "@ailiyah-ui/upload": "*",
-    "@ailiyah-ui/button": "*",
     "@ailiyah-ui/utils": "*",
     "@ailiyah-ui/box": "*",
     "react": "^18.2.0"
