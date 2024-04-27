@@ -18,7 +18,11 @@ const UploadThumbnail = React.memo(
     };
     const onFileRemoved = () => setThumbnail(null);
     return (
-      <styled.div {...rest} ref={ref}>
+      <styled.div
+        {...rest}
+        themeName="PromptElementUploadThumbnailRoot"
+        ref={ref}
+      >
         <Thumbnail.Root themeName="UploadThumbnailRoot" initialState={false}>
           <Thumbnail.Content themeName="UploadThumbnailContent">
             <Upload.Root

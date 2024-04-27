@@ -1,9 +1,7 @@
-import React from "react";
-
 interface TextAreaOwnProps {
   editing?: boolean;
-  prompt: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  prompt?: string;
+  setPrompt: Function;
 }
 
 export type { TextAreaOwnProps };

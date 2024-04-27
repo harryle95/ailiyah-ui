@@ -11,9 +11,7 @@ const user = userEvent.setup();
 function TestComponent() {
   const [editing, setEditing] = React.useState(() => false);
   const [prompt, setPrompt] = React.useState(() => initialPrompt);
-  const onChange = vi.fn((e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setPrompt(e.target.value)
-  );
+
   const EditButton = (
     <button onClick={(e) => setEditing(!editing)} title="edit-button">
       Edit
@@ -24,8 +22,8 @@ function TestComponent() {
       <TextArea
         title="text-content"
         editing={editing}
+        setPrompt={setPrompt}
         prompt={prompt}
-        onChange={onChange}
       />
       {EditButton}
     </>
