@@ -2,7 +2,20 @@ import { Meta, StoryObj } from "@storybook/react";
 import { defaultTheme } from "@ailiyah-ui/utils";
 import React from "react";
 import { styled } from "@ailiyah-ui/factory";
-import { TestComponent } from "./UploadThumbnail.test";
+
+import { PresetTheme } from "@ailiyah-ui/utils";
+import { ThemeProvider } from "@ailiyah-ui/context";
+import { UploadThumbnail } from "./UploadThumbnail";
+
+export function TestComponent({ value }: { value: PresetTheme }) {
+  const [thumbnail, setThumbnail] = React.useState<Blob | MediaSource>();
+
+  return (
+    <ThemeProvider value={value}>
+      <UploadThumbnail thumbnail={thumbnail} setThumbnail={setThumbnail} />
+    </ThemeProvider>
+  );
+}
 
 const meta: Meta<typeof TestComponent> = {
   title: "UploadThumbnail",
@@ -26,14 +39,15 @@ export default meta;
 
 type Story = StoryObj<typeof TestComponent>;
 
+
 export const Default: Story = {
   args: {
     value: {
       ...defaultTheme,
       UploadThumbnailContent: {
         twPadding: "pb-6",
-        twWidth: "w-[500px]",
-        twHeight: "h-[500px]",
+        twWidth: "w-[200px]",
+        twHeight: "h-[200px]",
         twFlex: "flex",
         twAlignItems: "items-center",
         twJustifyContent: "justify-center",
