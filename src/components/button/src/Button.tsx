@@ -90,24 +90,25 @@ const DeleteAlertButton = React.forwardRef<HTMLButtonElement, DeleteAlertProps>(
 DeleteAlertButton.displayName = "DeleteAlertButton";
 
 const createButton = (buttonName: string, icon: React.JSX.Element) => {
-  const ButtonComponent = React.forwardRef<
-    HTMLButtonElement,
-    TooltipTailwindButtonProps
-  >((props, ref) => {
-    const { tooltipContent, ...rest } = props;
-    const rendered = tooltipContent ? (
-      <Tooltip tooltipContent={tooltipContent}>
-        <styled.button ref={ref} {...rest}>
-          {icon}
-        </styled.button>
-      </Tooltip>
-    ) : (
-      <styled.button ref={ref} {...rest}>
-        {icon}
-      </styled.button>
-    );
-    return rendered;
-  });
+  const ButtonComponent = React.memo(
+    React.forwardRef<HTMLButtonElement, TooltipTailwindButtonProps>(
+      (props, ref) => {
+        const { tooltipContent, ...rest } = props;
+        const rendered = tooltipContent ? (
+          <Tooltip tooltipContent={tooltipContent}>
+            <styled.button ref={ref} {...rest}>
+              {icon}
+            </styled.button>
+          </Tooltip>
+        ) : (
+          <styled.button ref={ref} {...rest}>
+            {icon}
+          </styled.button>
+        );
+        return rendered;
+      }
+    )
+  );
   ButtonComponent.displayName = buttonName;
   return ButtonComponent;
 };
