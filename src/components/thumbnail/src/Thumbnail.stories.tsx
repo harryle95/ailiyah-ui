@@ -10,7 +10,7 @@ export function TestComponent() {
     <Thumbnail.Root initialState={false} title="thumbnail">
       <Thumbnail.Content twPadding="pb-6">
         <Thumbnail.Image
-          src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeriya-1805164.jpg&fm=jpg"
+          src="/testImage.jpeg"
           twAspectRatio="aspect-square"
           twWidth="w-full"
           twHeight="h-full"
