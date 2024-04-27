@@ -1,0 +1,18 @@
+{
+  "name": "@ailiyah-ui/thumbnail",
+  "version": "0.0.1",
+  "description": "thumbnail component ",
+  "main": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "type": "module",
+  "module": "./src/index.ts",
+  "dependencies": {
+    "@ailiyah-ui/factory": "*",
+    "@ailiyah-ui/upload": "*",
+    "@ailiyah-ui/button": "*",
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/box": "*",
+    "react": "^18.2.0"
+  }
+}
