@@ -1,43 +1,92 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { PresetTheme, defaultTheme } from "@ailiyah-ui/utils";
-import { ThemeProvider } from "@ailiyah-ui/context";
-import { UserEvent, within, expect } from "@storybook/test";
+import { defaultTheme } from "@ailiyah-ui/utils";
+import { userEvent, within } from "@storybook/test";
 import React from "react";
-import { PromptElement } from "./PromptElement";
-import { PromptDataType } from "./PromptElement.types";
 import { styled } from "@ailiyah-ui/factory";
+import {
+  mockImage,
+  replacementMockImage,
+  TestComponent,
+  theme,
+  InitialFormData,
+  mockPrompt,
+} from "./PromptElement.helper";
 
-const InitialFormData: PromptDataType = {
-  0: {},
-  1: {},
-  2: {},
+const uploadPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  const file = await mockImage();
+  await userEvent.upload(canvas.getByTitle("file-upload")!, file);
+  await userEvent.unhover(canvas.getByTitle("file-upload")!);
 };
 
-function TestComponent({
-  initialEditing,
-  initialFormData,
-  value,
-}: {
-  initialEditing: boolean;
-  initialFormData: PromptDataType;
-  value?: PresetTheme;
-}) {
-  const [formData, setFormData] = React.useState(initialFormData);
-  const [editing, setEditing] = React.useState(() => initialEditing);
-  const promptId = "1";
-  console.log(formData);
-  return (
-    <ThemeProvider value={value}>
-      <PromptElement
-        editing={editing}
-        formData={formData[promptId]}
-        setEditing={setEditing}
-        setFormData={setFormData}
-        promptId={promptId}
-      />
-    </ThemeProvider>
+const typePlay = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  await userEvent.type(
+    document.querySelector(".PromptElementTextArea")!,
+    mockPrompt
   );
-}
+};
+
+const hoverNoUploadPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  await userEvent.hover(canvas.getByText("Upload"));
+};
+
+const hoverUploadPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  await userEvent.hover(document.querySelector(".UploadThumbnailRoot")!);
+};
+
+const removeThumbnailPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  await userEvent.click(
+    document.querySelector(".UploadThumbnailDeleteButton")!
+  );
+};
+
+const reUploadPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  const file = await replacementMockImage();
+  await userEvent.upload(canvas.getByTitle("file-upload")!, file);
+  await userEvent.unhover(canvas.getByTitle("file-upload")!);
+};
+
+const clickEditPlay = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+  await userEvent.click(document.querySelector(".PromptElementEditButton")!);
+};
+
+const editFromDisabled = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  await hoverNoUploadPlay({ canvasElement });
+  await clickEditPlay({ canvasElement });
+};
 
 const meta: Meta<typeof TestComponent> = {
   title: "PromptElement",
@@ -66,45 +115,172 @@ export const Default: Story = {
   args: {
     initialEditing: true,
     initialFormData: InitialFormData,
-    value: {
-      ...defaultTheme,
-      PromptElementRoot: {
-        twWidth: "w-full",
-        twHeight: "h-full",
-      },
-      PromptElementContent: {
-        twFlex: "flex",
-        twGap: "gap-x-4",
-      },
-      PromptElementTextArea: {
-        twFlexGrow: "flex-grow",
-        twBorderWidth: "border-2",
-        twBorderRadius: "rounded-md",
-        twPadding: "p-4",
-      },
-      PromptElementUploadThumbnailRoot: {
-        twFlexShrink: "flex-shrink-0",
-      },
-      UploadThumbnailContent: {
-        twPadding: "pb-6",
-        twWidth: "w-[200px]",
-        twHeight: "h-[200px]",
-        twFlex: "flex",
-        twAlignItems: "items-center",
-        twJustifyContent: "justify-center",
-        twBorderWidth: "data-[state=active]:border-2",
-      },
-      UploadCanvas: {
-        twMaxWidth: "max-w-full",
-        twMaxHeight: "max-h-full",
-        twObjectFit: "object-contain",
-        twFontWeight: "font-bold",
-        twFontSize: "text-2xl",
-      },
-      UploadThumbnailButtonGroup: {
-        twDisplay: "hidden data-[state=active]:flex",
-        twGap: "gap-x-4",
-      },
-    },
+    value: theme,
+  },
+};
+
+export const DefaultHover: Story = {
+  args: Default.args,
+  play: hoverNoUploadPlay,
+};
+
+export const UploadNoType: Story = {
+  args: Default.args,
+  play: uploadPlay,
+};
+
+export const UploadNoTypeThenReupload: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await uploadPlay({ canvasElement });
+    await reUploadPlay({ canvasElement });
+  },
+};
+
+export const UploadThenType: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await uploadPlay({ canvasElement });
+    await typePlay({ canvasElement });
+  },
+};
+
+export const TypeNoUpload: Story = {
+  args: Default.args,
+  play: typePlay,
+};
+
+export const TypeThenUpload: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await typePlay({ canvasElement });
+    await uploadPlay({ canvasElement });
+  },
+};
+
+export const UploadedTypedThenHover: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await uploadPlay({ canvasElement });
+    await typePlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+  },
+};
+
+export const UploadedTypedHoveredThenReupload: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await uploadPlay({ canvasElement });
+    await typePlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+    await reUploadPlay({ canvasElement });
+  },
+};
+
+export const UploadedTypedHoveredThenRemove: Story = {
+  args: Default.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await uploadPlay({ canvasElement });
+    await typePlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+    await removeThumbnailPlay({ canvasElement });
+  },
+};
+
+export const Disabled: Story = {
+  args: { ...Default.args, initialEditing: false },
+};
+
+export const DisabledHover: Story = {
+  args: Disabled.args,
+  play: hoverNoUploadPlay,
+};
+
+export const DisabledHoverThenClickEdit: Story = {
+  args: Disabled.args,
+  play: editFromDisabled,
+};
+
+export const DisabledEditThenHover: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await hoverNoUploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadNoType: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await uploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadNoTypeThenReupload: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await uploadPlay({ canvasElement });
+    await reUploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadThenType: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await uploadPlay({ canvasElement });
+    await typePlay({ canvasElement });
+  },
+};
+
+export const DisabledEditTypeNoUpload: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await typePlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenTypeThenUpload: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await typePlay({ canvasElement });
+    await uploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadedTypedThenHover: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await typePlay({ canvasElement });
+    await uploadPlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadedTypedHoveredThenReupload: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await typePlay({ canvasElement });
+    await uploadPlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+    await reUploadPlay({ canvasElement });
+  },
+};
+
+export const DisabledEditThenUploadTypeHoverReUploadThenRemove: Story = {
+  args: Disabled.args,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    await editFromDisabled({ canvasElement });
+    await typePlay({ canvasElement });
+    await uploadPlay({ canvasElement });
+    await hoverUploadPlay({ canvasElement });
+    await reUploadPlay({ canvasElement });
+    await removeThumbnailPlay({ canvasElement });
   },
 };
