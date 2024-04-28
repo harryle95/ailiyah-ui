@@ -25,12 +25,12 @@ const TextArea = React.memo(
       />
     );
     const textdisplay = (
-      <styled.div
+      <styled.p
         ref={ref}
         {...(rest as TailwindProps & PrimitiveProps.DivProps)}
       >
         {prompt}
-      </styled.div>
+      </styled.p>
     );
     return <>{editing ? renderedTextArea : textdisplay}</>;
   })

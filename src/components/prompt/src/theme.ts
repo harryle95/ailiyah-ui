@@ -18,13 +18,14 @@ export const theme: PresetTheme = {
     twOverflow: "overflow-y-auto",
     twOther: "scrollbar-thin",
     twPadding: "p-4",
+    twHeight: "h-fit",
   },
   PromptButtonGroup: {
     twFlexShrink: "flex-shrink-0",
   },
   PromptElementRoot: {
-    twWidth: "w-full",
-    twHeight: "h-full",
+    twWidth: "w-fit",
+    twHeight: "h-fit",
     twPadding: "pb-6",
   },
   PromptElementContent: {
@@ -36,6 +37,7 @@ export const theme: PresetTheme = {
     twBorderWidth: "border-2",
     twBorderRadius: "rounded-md",
     twPadding: "p-4",
+    twWidth: "w-full",
   },
   PromptElementThumbnailRoot: {
     twFlexShrink: "flex-shrink-0",

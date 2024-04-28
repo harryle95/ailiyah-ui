@@ -35,7 +35,7 @@ describe("Given text area initially not in editing mode", () => {
     render(<TestComponent />);
   });
   test("text area should be a div element", async () => {
-    expect(screen.getByText(initialPrompt).tagName).toBe("DIV");
+    expect(screen.getByText(initialPrompt).tagName).toBe("P");
   });
   test("when not in editing user should not be able to enter text value", async () => {
     await user.type(screen.getByText(initialPrompt), addedPrompt);
@@ -60,7 +60,7 @@ describe("Given text area initially not in editing mode", () => {
         screen.getByTitle("edit-button").click();
       });
       test("text area should be a div element", async () => {
-        expect(screen.getByTitle("text-content").tagName).toBe("DIV");
+        expect(screen.getByTitle("text-content").tagName).toBe("P");
       });
       test("text area content should be the final value", async () => {
         expect(screen.getByTitle("text-content").textContent).toBe(
