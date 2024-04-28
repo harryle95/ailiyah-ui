@@ -13,7 +13,7 @@ import { CornerLocationProps } from "@ailiyah-ui/utils";
 import { UploadThumbnail } from "./UploadThumbnail";
 import { TextArea } from "./TextArea";
 
-const [Root, useRootContext] = createStateBox("Root");
+const [Root, useRootContext] = createStateBox("Root", undefined, {twPosition: "relative"});
 const Content = createBox("Content", { twPosition: "relative" });
 const Component = createStateBoxChildren<
   "div",
