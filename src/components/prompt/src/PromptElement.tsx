@@ -4,7 +4,7 @@ import {
   PromptElementDataType,
 } from "./PromptElement.types";
 import React from "react";
-import { EditButton } from "@ailiyah-ui/button";
+import { DeleteButton, EditButton } from "@ailiyah-ui/button";
 import {
   BaseStateBoxContextValue,
   createBox,
@@ -15,7 +15,7 @@ import {
 import { CornerLocationProps } from "@ailiyah-ui/utils";
 import { UploadThumbnail } from "./UploadThumbnail";
 import { TextArea } from "./TextArea";
-import { FormDataType } from "./Prompt.types";
+import { FormDataType, StateType } from "./Prompt.types";
 
 const [Root, useRootContext] = createStateBox("Root", undefined, {
   twPosition: "relative",
@@ -38,9 +38,17 @@ const PromptElement = React.memo(
     HTMLDivElement,
     PromptElementOwnProps & TailwindComponentProps<"div">
   >((props, ref) => {
-    const { editing, setEditing, formData, setFormData, promptId, ...rest } =
-      props;
+    const {
+      editing,
+      setEditing,
+      formData,
+      setFormData,
+      promptId,
+      removeElement = () => {},
+      ...rest
+    } = props;
     const { thumbnail = undefined, prompt = "" } = formData;
+
     const setThumbnail = (newThumbnail: File) => {
       setFormData((currentFormData: FormDataType) => {
         return {
@@ -65,22 +73,32 @@ const PromptElement = React.memo(
             editing={editing}
             thumbnail={thumbnail}
             setThumbnail={setThumbnail}
+            themeName="PromptElementThumbnail"
           />
-          <TextArea editing={editing} prompt={prompt} setPrompt={setPrompt} />
+          <TextArea
+            editing={editing}
+            prompt={prompt}
+            setPrompt={setPrompt}
+            themeName="PromptElementTextArea"
+          />
         </Content>
-        {!editing ? (
-          <Component
-            compLocation="bottom-right"
-            themeName="PromptElementButtonGroup"
-          >
-            <EditButton
-              onClick={() => setEditing(true)}
-              themeName="PromptElementEditButton"
-            />
-          </Component>
-        ) : (
-          <></>
-        )}
+        <Component
+          compLocation="bottom-right"
+          themeName="PromptElementButtonGroup"
+        >
+          <EditButton
+            onClick={() => setEditing()}
+            themeName="PromptElementEditButton"
+            tooltipContent="Edit"
+          />
+          <DeleteButton
+            onClick={(e) => {
+              removeElement(e);
+            }}
+            themeName="PromptElementDeleteButton"
+            tooltipContent="Delete"
+          />
+        </Component>
       </Root>
     );
   })

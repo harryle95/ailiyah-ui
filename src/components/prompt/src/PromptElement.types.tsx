@@ -9,6 +9,7 @@ interface PromptElementOwnProps {
   setEditing: Function;
   formData: PromptElementDataType;
   setFormData: Function;
+  removeElement?: Function;
 }
 
 export type { PromptElementOwnProps, PromptElementDataType };

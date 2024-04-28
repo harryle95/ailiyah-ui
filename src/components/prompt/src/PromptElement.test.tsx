@@ -3,11 +3,11 @@ import { expect, test, describe, beforeEach, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import {
   TestComponent,
-  theme,
   InitialFormData,
   mockPrompt,
 } from "./PromptElement.helper";
 import React = require("react");
+import { theme } from "./theme";
 
 global.URL.createObjectURL = vi.fn(() => "testImage.png");
 
@@ -52,12 +52,10 @@ const Actions = {
     await userEvent.hover(screen.getByText("Upload"));
   },
   hoverOnThumbnail: async () => {
-    await userEvent.hover(document.querySelector(".UploadThumbnailRoot")!);
+    await userEvent.hover(document.querySelector(".PromptElementThumbnail")!);
   },
   clickDelete: async () => {
-    await userEvent.click(
-      document.querySelector(".UploadThumbnailDeleteButton")!
-    );
+    await userEvent.click(document.querySelector(".ThumbnailDeleteButton")!);
   },
   clickEdit: async () => {
     await userEvent.click(document.querySelector(".PromptElementEditButton")!);
@@ -85,51 +83,39 @@ const Tests = {
       ).not.toBeVisible();
     },
   },
-  uploadThumbnailButton: {
+  ThumbnailButton: {
     isInTheDocument: () => {
       expect(
-        document.querySelector(".UploadThumbnailButtonGroup")
+        document.querySelector(".ThumbnailButtonGroup")
       ).toBeInTheDocument();
       expect(
-        document.querySelector(".UploadThumbnailDeleteButton")
+        document.querySelector(".ThumbnailDeleteButton")
       ).toBeInTheDocument();
     },
     isNotInTheDocument: () => {
-      expect(document.querySelector(".UploadThumbnailButtonGroup")).toBeNull();
-      expect(document.querySelector(".UploadThumbnailDeleteButton")).toBeNull();
+      expect(document.querySelector(".ThumbnailButtonGroup")).toBeNull();
+      expect(document.querySelector(".ThumbnailDeleteButton")).toBeNull();
     },
     isVisible: () => {
-      expect(
-        document.querySelector(".UploadThumbnailButtonGroup")
-      ).toBeVisible();
-      expect(
-        document.querySelector(".UploadThumbnailDeleteButton")
-      ).toBeVisible();
+      expect(document.querySelector(".ThumbnailButtonGroup")).toBeVisible();
+      expect(document.querySelector(".ThumbnailDeleteButton")).toBeVisible();
     },
     isInvisible: () => {
+      expect(document.querySelector(".ThumbnailButtonGroup")).not.toBeVisible();
       expect(
-        document.querySelector(".UploadThumbnailButtonGroup")
-      ).not.toBeVisible();
-      expect(
-        document.querySelector(".UploadThumbnailDeleteButton")
+        document.querySelector(".ThumbnailDeleteButton")
       ).not.toBeVisible();
     },
   },
-  uploadThumbnailCanvas: {
+  ThumbnailCanvas: {
     isInTheDocument: () => {
-      expect(
-        document.querySelector(".UploadThumbnailCanvas")
-      ).toBeInTheDocument();
+      expect(document.querySelector(".ThumbnailCanvas")).toBeInTheDocument();
     },
     isAnUploadForm: () => {
-      expect(document.querySelector(".UploadThumbnailCanvas")?.tagName).toBe(
-        "LABEL"
-      );
+      expect(document.querySelector(".ThumbnailCanvas")?.tagName).toBe("LABEL");
     },
     isAnImage: () => {
-      expect(document.querySelector(".UploadThumbnailCanvas")?.tagName).toBe(
-        "IMG"
-      );
+      expect(document.querySelector(".ThumbnailCanvas")?.tagName).toBe("IMG");
     },
   },
   promptElementTextArea: {
@@ -143,7 +129,7 @@ const Tests = {
     },
     isEnabled: () => {
       expect(
-        document.querySelector(".PromptElementTextArea")  
+        document.querySelector(".PromptElementTextArea")
       ).not.toHaveAttribute("disabled");
     },
     isDisabled: () => {
@@ -178,15 +164,15 @@ const testActivePromptElement = () => {
     );
     test(
       "upload thumbnail canvas is in the document",
-      Tests.uploadThumbnailCanvas.isInTheDocument
+      Tests.ThumbnailCanvas.isInTheDocument
     );
     test(
       "upload thumbnail canvas is an upload form",
-      Tests.uploadThumbnailCanvas.isAnUploadForm
+      Tests.ThumbnailCanvas.isAnUploadForm
     );
     test(
       "upload thumbnail buttons are not in the document",
-      Tests.uploadThumbnailButton.isNotInTheDocument
+      Tests.ThumbnailButton.isNotInTheDocument
     );
     test(
       "prompt element edit button is not in the document",
@@ -196,7 +182,7 @@ const testActivePromptElement = () => {
       beforeEach(Actions.upload);
       test(
         "upload thumbnail canvas is an image",
-        Tests.uploadThumbnailCanvas.isAnImage
+        Tests.ThumbnailCanvas.isAnImage
       );
       test(
         "text area content is still empty",
@@ -204,53 +190,47 @@ const testActivePromptElement = () => {
       );
       test(
         "upload and delete buttons are in the document",
-        Tests.uploadThumbnailButton.isInTheDocument
+        Tests.ThumbnailButton.isInTheDocument
       );
       test(
         "upload and delete buttons are invisible",
-        Tests.uploadThumbnailButton.isInvisible
+        Tests.ThumbnailButton.isInvisible
       );
       describe("when hovering on the canvas", () => {
         beforeEach(Actions.hoverOnThumbnail);
         test(
           "upload and delete buttons are visible",
-          Tests.uploadThumbnailButton.isVisible
+          Tests.ThumbnailButton.isVisible
         );
         describe("when clicking on the delete button", () => {
           beforeEach(Actions.clickDelete);
           test(
             "upload thumbnail is an upload button",
-            Tests.uploadThumbnailCanvas.isAnUploadForm
+            Tests.ThumbnailCanvas.isAnUploadForm
           );
           test(
             "upload and delete buttons are not in the document",
-            Tests.uploadThumbnailButton.isNotInTheDocument
+            Tests.ThumbnailButton.isNotInTheDocument
           );
         });
         describe("when reuploading", () => {
           beforeEach(Actions.reupload);
-          test(
-            "upload thumbnail is an image",
-            Tests.uploadThumbnailCanvas.isAnImage
-          );
+          test("upload thumbnail is an image", Tests.ThumbnailCanvas.isAnImage);
           test(
             "upload and delete buttons are in the document",
-            Tests.uploadThumbnailButton.isInTheDocument
+            Tests.ThumbnailButton.isInTheDocument
           );
           test(
             "upload and delete buttons are invisible",
-            Tests.uploadThumbnailButton.isInvisible
+            Tests.ThumbnailButton.isInvisible
           );
         });
         describe("when typing", () => {
           beforeEach(Actions.type);
-          test(
-            "upload thumbnail is an image",
-            Tests.uploadThumbnailCanvas.isAnImage
-          );
+          test("upload thumbnail is an image", Tests.ThumbnailCanvas.isAnImage);
           test(
             "upload and delete buttons are in the document",
-            Tests.uploadThumbnailButton.isInTheDocument
+            Tests.ThumbnailButton.isInTheDocument
           );
           test(
             "textarea content is set to correct value",
@@ -267,11 +247,11 @@ const testActivePromptElement = () => {
       );
       test(
         "upload thumbnail canvas is an upload form",
-        Tests.uploadThumbnailCanvas.isAnUploadForm
+        Tests.ThumbnailCanvas.isAnUploadForm
       );
       test(
         "upload thumbnail buttons are not in the document",
-        Tests.uploadThumbnailButton.isNotInTheDocument
+        Tests.ThumbnailButton.isNotInTheDocument
       );
       test(
         "prompt element edit button is not in the document",
@@ -281,7 +261,7 @@ const testActivePromptElement = () => {
         beforeEach(Actions.upload);
         test(
           "upload thumbnail canvas is an image",
-          Tests.uploadThumbnailCanvas.isAnImage
+          Tests.ThumbnailCanvas.isAnImage
         );
         test(
           "text area content matches",
@@ -289,11 +269,11 @@ const testActivePromptElement = () => {
         );
         test(
           "upload and delete buttons are in the document",
-          Tests.uploadThumbnailButton.isInTheDocument
+          Tests.ThumbnailButton.isInTheDocument
         );
         test(
           "upload and delete buttons are invisible",
-          Tests.uploadThumbnailButton.isInvisible
+          Tests.ThumbnailButton.isInvisible
         );
       });
     });

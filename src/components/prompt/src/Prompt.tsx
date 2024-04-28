@@ -9,6 +9,7 @@ import {
 import { PromptElementDataType } from "./PromptElement.types";
 import { styled } from "@ailiyah-ui/factory";
 import { PromptElement } from "./PromptElement";
+import { AddButton, SubmitButton } from "@ailiyah-ui/button";
 
 function setObjectById<T>(
   promptId: string,
@@ -59,14 +60,15 @@ const Prompt = React.memo(
 
     const setEditingByPromptId = (promptId: string) => {
       return () => {
-        setEditingStates((prevState) => {
-          return { ...prevState, [promptId]: true };
+        setEditingStates((prevState: StateType) => {
+          console.log("Click on editing");
+          return { ...prevState, [promptId]: !prevState[promptId] };
         });
       };
     };
 
     const addElement = () => {
-      let newId = crypto.randomUUID()
+      let newId = crypto.randomUUID();
       setObjectById<boolean>(newId, editing ? editing : true, setEditingStates);
       setObjectById<PromptElementDataType>(
         newId,
@@ -75,9 +77,11 @@ const Prompt = React.memo(
       );
     };
 
-    const removeElement = (promptId: string) => {
-      removeObjectById(promptId, setEditingStates);
-      removeObjectById(promptId, setFormData);
+    const removeElementByPromptId = (promptId: string) => {
+      return () => {
+        removeObjectById(promptId, setEditingStates);
+        removeObjectById(promptId, setFormData);
+      };
     };
 
     return (
@@ -86,6 +90,7 @@ const Prompt = React.memo(
           {formData && Object.keys(formData).length > 0 ? (
             Object.entries(formData).map(([key, value], _) => {
               const setEditing = setEditingByPromptId(key);
+              const removeElement = removeElementByPromptId(key);
               return (
                 <PromptElement
                   key={key}
@@ -94,6 +99,7 @@ const Prompt = React.memo(
                   promptId={key}
                   setFormData={setFormData}
                   formData={value}
+                  removeElement={removeElement}
                 />
               );
             })
@@ -102,15 +108,11 @@ const Prompt = React.memo(
           )}
         </styled.div>
         <styled.div themeName="PromptButtonGroup">
-          <styled.button
-            themeName="PromptButtonGroupAddButton"
+          <AddButton
+            themeName="PromptButtonGroupNewButton"
             onClick={addElement}
-          >
-            Add Form
-          </styled.button>
-          <styled.button themeName="PromptButtonGroupSubmitButton">
-            SubmitForm
-          </styled.button>
+          />
+          <SubmitButton themeName="PromptButtonSubmitButton" />
         </styled.div>
       </styled.div>
     );

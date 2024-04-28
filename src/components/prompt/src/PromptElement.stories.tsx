@@ -7,10 +7,10 @@ import {
   mockImage,
   replacementMockImage,
   TestComponent,
-  theme,
   InitialFormData,
   mockPrompt,
 } from "./PromptElement.helper";
+import { theme } from "./theme";
 
 const uploadPlay = async ({
   canvasElement,
@@ -45,7 +45,7 @@ const hoverUploadPlay = async ({
   canvasElement: HTMLElement;
 }) => {
   const canvas = within(canvasElement);
-  await userEvent.hover(document.querySelector(".UploadThumbnailRoot")!);
+  await userEvent.hover(document.querySelector(".ThumbnailRoot")!);
 };
 
 const removeThumbnailPlay = async ({
@@ -54,9 +54,7 @@ const removeThumbnailPlay = async ({
   canvasElement: HTMLElement;
 }) => {
   const canvas = within(canvasElement);
-  await userEvent.click(
-    document.querySelector(".UploadThumbnailDeleteButton")!
-  );
+  await userEvent.click(document.querySelector(".ThumbnailDeleteButton")!);
 };
 
 const reUploadPlay = async ({
@@ -101,7 +99,7 @@ const meta: Meta<typeof TestComponent> = {
   },
   decorators: [
     (Story) => (
-      <styled.div twWidth="w-full" twHeight="h-full">
+      <styled.div twWidth="w-full max-w-[600px]" twHeight="h-full">
         <Story />
       </styled.div>
     ),

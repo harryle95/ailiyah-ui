@@ -17,7 +17,7 @@ describe("Given a disabled upload thumbnail", () => {
       render(<TestComponent editing={false} value={Default.args!.value!} />);
     });
     test("Content Area should be in the document", () => {
-      let contentArea = document.querySelector(".UploadThumbnailContent");
+      let contentArea = document.querySelector(".ThumbnailContent");
       expect(contentArea).toBeInTheDocument();
     });
     test("Upload button should be visible", () => {
@@ -29,13 +29,13 @@ describe("Given a disabled upload thumbnail", () => {
       expect(() => screen.getByRole("img")).toThrowError();
     });
     test("Button group should not have been rendered", () => {
-      let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+      let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
       expect(buttonGroup).toBeNull();
     });
     test("Hovering on content area should not make button group visible", async () => {
-      let contentArea = document.querySelector(".UploadThumbnailContent")!;
+      let contentArea = document.querySelector(".ThumbnailContent")!;
       await user.hover(contentArea);
-      let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+      let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
       expect(buttonGroup).toBeNull();
     });
     describe("when a user try to upload", () => {
@@ -53,13 +53,13 @@ describe("Given a disabled upload thumbnail", () => {
         expect(() => screen.getByRole("img")).toThrowError();
       });
       test("Button group should not have been rendered", () => {
-        let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+        let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
         expect(buttonGroup).toBeNull();
       });
       test("Hovering on content area should not make button group visible", async () => {
-        let contentArea = document.querySelector(".UploadThumbnailContent")!;
+        let contentArea = document.querySelector(".ThumbnailContent")!;
         await user.hover(contentArea);
-        let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+        let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
         expect(buttonGroup).toBeNull();
       });
     });
@@ -72,7 +72,7 @@ describe("Given an upload thumbnail", () => {
       render(<TestComponent editing={true} value={Default.args!.value!} />);
     });
     test("Content Area should be in the document", () => {
-      let contentArea = document.querySelector(".UploadThumbnailContent");
+      let contentArea = document.querySelector(".ThumbnailContent");
       expect(contentArea).toBeInTheDocument();
     });
     test("Upload button should be visible", () => {
@@ -84,13 +84,13 @@ describe("Given an upload thumbnail", () => {
       expect(() => screen.getByRole("img")).toThrowError();
     });
     test("Button group should not have been rendered", () => {
-      let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+      let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
       expect(buttonGroup).toBeNull();
     });
     test("Hovering on content area should not make button group visible", async () => {
-      let contentArea = document.querySelector(".UploadThumbnailContent")!;
+      let contentArea = document.querySelector(".ThumbnailContent")!;
       await user.hover(contentArea);
-      let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+      let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
       expect(buttonGroup).toBeNull();
     });
     describe("when an image has been uploaded", async () => {
@@ -106,25 +106,25 @@ describe("Given an upload thumbnail", () => {
         expect(screen.getByRole("img")).toBeInTheDocument();
       });
       test("Button group should be invisible", async () => {
-        let buttonGroup = document.querySelector(".UploadThumbnailButtonGroup");
+        let buttonGroup = document.querySelector(".ThumbnailButtonGroup");
         expect(buttonGroup).toBeInTheDocument();
         expect(buttonGroup).not.toBeVisible();
       });
       describe("When hovering on the image", () => {
         beforeEach(async () => {
-          let contentArea = document.querySelector(".UploadThumbnailContent")!;
+          let contentArea = document.querySelector(".ThumbnailContent")!;
           await user.hover(contentArea);
         });
         test("Button group should be visible once hovered", async () => {
           let buttonGroup = document.querySelector(
-            ".UploadThumbnailButtonGroup"
+            ".ThumbnailButtonGroup"
           );
           expect(buttonGroup).toBeInTheDocument();
           expect(buttonGroup).toBeVisible();
         });
         test("Delete button should be visible once hovered", async () => {
           let deleteButton = document.querySelector(
-            ".UploadThumbnailDeleteButton"
+            ".ThumbnailDeleteButton"
           );
           expect(deleteButton).toBeInTheDocument();
           expect(deleteButton).toBeVisible();
@@ -132,7 +132,7 @@ describe("Given an upload thumbnail", () => {
         describe("When clicking on the delete button", () => {
           beforeEach(async () => {
             let deleteButton = document.querySelector(
-              ".UploadThumbnailDeleteButton"
+              ".ThumbnailDeleteButton"
             )!;
             await user.click(deleteButton);
           });
@@ -146,17 +146,17 @@ describe("Given an upload thumbnail", () => {
           });
           test("Button group should not have been rendered", () => {
             let buttonGroup = document.querySelector(
-              ".UploadThumbnailButtonGroup"
+              ".ThumbnailButtonGroup"
             );
             expect(buttonGroup).toBeNull();
           });
           test("Hovering on content area should not make button group visible", async () => {
             let contentArea = document.querySelector(
-              ".UploadThumbnailContent"
+              ".ThumbnailContent"
             )!;
             await user.hover(contentArea);
             let buttonGroup = document.querySelector(
-              ".UploadThumbnailButtonGroup"
+              ".ThumbnailButtonGroup"
             );
             expect(buttonGroup).toBeNull();
           });

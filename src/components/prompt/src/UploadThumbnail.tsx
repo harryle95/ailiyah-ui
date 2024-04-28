@@ -1,7 +1,6 @@
 import { TailwindComponentProps } from "@ailiyah-ui/factory";
 import * as Thumbnail from "../../thumbnail/src/Thumbnail";
 import React from "react";
-import { styled } from "@ailiyah-ui/factory";
 import * as Upload from "@ailiyah-ui/upload";
 import * as Button from "@ailiyah-ui/button";
 import { UploadThumbnailOwnProps } from "./UploadThumbnail.types";
@@ -18,53 +17,49 @@ const UploadThumbnail = React.memo(
     };
     const onFileRemoved = () => setThumbnail(null);
     return (
-      <styled.div
-        {...rest}
-        themeName="PromptElementUploadThumbnailRoot"
-        ref={ref}
-      >
-        <Thumbnail.Root themeName="UploadThumbnailRoot" initialState={false}>
-          <Thumbnail.Content themeName="UploadThumbnailContent">
-            <Upload.Root
-              disabled={!editing}
-              onFileUploaded={onFileUpload}
-              onFileRemoved={onFileRemoved}
-            >
-              {!displayThumbnail ? (
-                <Upload.Trigger themeName="UploadThumbnailCanvas">Upload</Upload.Trigger>
-              ) : (
-                <>
-                  <Thumbnail.Image
-                    src={displayThumbnail}
-                    themeName="UploadThumbnailCanvas"
-                  />
-                  {!editing ? (
-                    <></>
-                  ) : (
-                    <Thumbnail.Component
-                      themeName="UploadThumbnailButtonGroup"
-                      compLocation="bottom-right"
+      <Thumbnail.Root ref={ref} {...rest} initialState={false}>
+        <Thumbnail.Content themeName="ThumbnailContent">
+          <Upload.Root
+            disabled={!editing}
+            onFileUploaded={onFileUpload}
+            onFileRemoved={onFileRemoved}
+          >
+            {!displayThumbnail ? (
+              <Upload.Trigger themeName="ThumbnailCanvas">
+                Upload
+              </Upload.Trigger>
+            ) : (
+              <>
+                <Thumbnail.Image
+                  src={displayThumbnail}
+                  themeName="ThumbnailCanvas"
+                />
+                {!editing ? (
+                  <></>
+                ) : (
+                  <Thumbnail.Component
+                    themeName="ThumbnailButtonGroup"
+                    compLocation="bottom-right"
+                  >
+                    <Upload.Trigger
+                      themeName="ThumbnailUploadButton"
+                      tooltipContent="Upload"
                     >
-                      <Upload.Trigger
-                        themeName="UploadThumbnailUploadButton"
-                        tooltipContent="Upload"
-                      >
-                        <Button.UploadIcon />
-                      </Upload.Trigger>
-                      <Upload.Cancel
-                        themeName="UploadThumbnailDeleteButton"
-                        tooltipContent="Remove"
-                      >
-                        <Button.DeleteIcon />
-                      </Upload.Cancel>
-                    </Thumbnail.Component>
-                  )}
-                </>
-              )}
-            </Upload.Root>
-          </Thumbnail.Content>
-        </Thumbnail.Root>
-      </styled.div>
+                      <Button.UploadIcon />
+                    </Upload.Trigger>
+                    <Upload.Cancel
+                      themeName="ThumbnailDeleteButton"
+                      tooltipContent="Remove"
+                    >
+                      <Button.DeleteIcon />
+                    </Upload.Cancel>
+                  </Thumbnail.Component>
+                )}
+              </>
+            )}
+          </Upload.Root>
+        </Thumbnail.Content>
+      </Thumbnail.Root>
     );
   })
 );

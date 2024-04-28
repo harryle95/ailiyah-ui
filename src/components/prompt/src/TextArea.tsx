@@ -12,7 +12,6 @@ const TextArea = React.memo(
       TextAreaOwnProps
   >((props, ref) => {
     let { prompt, setPrompt, editing = true, ...rest } = props;
-    rest.themeName = "PromptElementTextArea";
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
       setPrompt(e.currentTarget.value);
 
