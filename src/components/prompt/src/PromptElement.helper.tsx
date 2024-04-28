@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@ailiyah-ui/context";
 import { PromptElement } from "./PromptElement";
 import { PresetTheme, defaultTheme } from "@ailiyah-ui/utils";
-import { PromptDataType } from "./PromptElement.types";
 import React from "react";
+import { FormDataType } from "./Prompt.types";
 
 const uploadFile = async (
   path: string,
@@ -32,7 +32,7 @@ function TestComponent({
   value,
 }: {
   initialEditing: boolean;
-  initialFormData: PromptDataType;
+  initialFormData: FormDataType;
   value?: PresetTheme;
 }) {
   const [formData, setFormData] = React.useState(initialFormData);
@@ -96,7 +96,7 @@ const theme: PresetTheme = {
   },
 };
 
-const InitialFormData: PromptDataType = {
+const InitialFormData: FormDataType = {
   0: {},
   1: {},
   2: {},

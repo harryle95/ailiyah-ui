@@ -11,8 +11,4 @@ interface PromptElementOwnProps {
   setFormData: Function;
 }
 
-interface PromptDataType{
-  [key: string]: PromptElementDataType
-}
-
-export type { PromptElementOwnProps, PromptDataType, PromptElementDataType};
+export type { PromptElementOwnProps, PromptElementDataType };

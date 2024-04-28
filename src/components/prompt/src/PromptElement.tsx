@@ -1,5 +1,8 @@
 import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
-import { PromptElementOwnProps, PromptDataType } from "./PromptElement.types";
+import {
+  PromptElementOwnProps,
+  PromptElementDataType,
+} from "./PromptElement.types";
 import React from "react";
 import { EditButton } from "@ailiyah-ui/button";
 import {
@@ -12,8 +15,11 @@ import {
 import { CornerLocationProps } from "@ailiyah-ui/utils";
 import { UploadThumbnail } from "./UploadThumbnail";
 import { TextArea } from "./TextArea";
+import { FormDataType } from "./Prompt.types";
 
-const [Root, useRootContext] = createStateBox("Root", undefined, {twPosition: "relative"});
+const [Root, useRootContext] = createStateBox("Root", undefined, {
+  twPosition: "relative",
+});
 const Content = createBox("Content", { twPosition: "relative" });
 const Component = createStateBoxChildren<
   "div",
@@ -34,9 +40,9 @@ const PromptElement = React.memo(
   >((props, ref) => {
     const { editing, setEditing, formData, setFormData, promptId, ...rest } =
       props;
-    const { thumbnail=undefined, prompt="" } = formData;
+    const { thumbnail = undefined, prompt = "" } = formData;
     const setThumbnail = (newThumbnail: File) => {
-      setFormData((currentFormData: PromptDataType) => {
+      setFormData((currentFormData: FormDataType) => {
         return {
           ...currentFormData,
           [promptId]: { ...currentFormData[promptId], thumbnail: newThumbnail },
@@ -44,7 +50,7 @@ const PromptElement = React.memo(
       });
     };
     const setPrompt = (newPrompt: string) => {
-      setFormData((currentFormData: PromptDataType) => {
+      setFormData((currentFormData: FormDataType) => {
         return {
           ...currentFormData,
           [promptId]: { ...currentFormData[promptId], prompt: newPrompt },
