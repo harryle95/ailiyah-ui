@@ -31,12 +31,12 @@ const UploadThumbnail = React.memo(
               onFileRemoved={onFileRemoved}
             >
               {!displayThumbnail ? (
-                <Upload.Trigger themeName="UploadCanvas">Upload</Upload.Trigger>
+                <Upload.Trigger themeName="UploadThumbnailCanvas">Upload</Upload.Trigger>
               ) : (
                 <>
                   <Thumbnail.Image
                     src={displayThumbnail}
-                    themeName="UploadCanvas"
+                    themeName="UploadThumbnailCanvas"
                   />
                   {!editing ? (
                     <></>

@@ -79,7 +79,7 @@ export const Default: Story = {
         twJustifyContent: "justify-center",
         twBorderWidth: "data-[state=active]:border-2",
       },
-      UploadCanvas: {
+      UploadThumbnailCanvas: {
         twMaxWidth: "max-w-full",
         twMaxHeight: "max-h-full",
         twObjectFit: "object-contain",

@@ -38,7 +38,6 @@ function TestComponent({
   const [formData, setFormData] = React.useState(initialFormData);
   const [editing, setEditing] = React.useState(() => initialEditing);
   const promptId = "1";
-  console.log(formData);
   return (
     <ThemeProvider value={value}>
       <PromptElement
@@ -84,7 +83,7 @@ const theme: PresetTheme = {
     twJustifyContent: "justify-center",
     twBorderWidth: "data-[state=active]:border-2",
   },
-  UploadCanvas: {
+  UploadThumbnailCanvas: {
     twMaxWidth: "max-w-full",
     twMaxHeight: "max-h-full",
     twObjectFit: "object-contain",
