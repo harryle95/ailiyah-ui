@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/box",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "box component ",
   "main": "./src/index.ts",
   "author": "Hoang Son Le",

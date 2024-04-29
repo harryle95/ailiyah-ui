@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/tooltip",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "styled tooltip",
   "main": "./src/index.ts",
   "type": "module",

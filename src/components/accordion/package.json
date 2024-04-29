@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/accordion",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Accordion component ",
   "main": "./src/index.ts",
   "author": "Hoang Son Le",

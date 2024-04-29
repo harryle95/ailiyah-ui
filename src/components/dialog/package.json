@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/dialog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "styled dialog component",
   "main": "./src/index.ts",
   "type": "module",
