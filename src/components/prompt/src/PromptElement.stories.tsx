@@ -109,6 +109,41 @@ export default meta;
 
 type Story = StoryObj<typeof TestComponent>;
 
+// @ts-ignore
+let resolvedImage = await mockImage();
+export const InitialImageDisabled: Story = {
+  args: {
+    initialEditing: false,
+    initialFormData: {
+      ...InitialFormData,
+      1: { thumbnail: resolvedImage, prompt: "Hello World" },
+    },
+    value: theme,
+  },
+};
+
+export const InitialImageNoPromptDisabled: Story = {
+  args: {
+    initialEditing: false,
+    initialFormData: {
+      ...InitialFormData,
+      1: { thumbnail: resolvedImage, prompt: "" },
+    },
+    value: theme,
+  },
+};
+
+export const InitialPromptNoImageDisabled: Story = {
+  args: {
+    initialEditing: false,
+    initialFormData: {
+      ...InitialFormData,
+      1: { thumbnail: undefined, prompt: "Hello World" },
+    },
+    value: theme,
+  },
+};
+
 export const Default: Story = {
   args: {
     initialEditing: true,

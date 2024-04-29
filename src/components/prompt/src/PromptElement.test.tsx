@@ -1,16 +1,64 @@
 import { screen, render } from "@testing-library/react";
 import { expect, test, describe, beforeEach, vi } from "vitest";
-import userEvent from "@testing-library/user-event";
-import {
-  TestComponent,
-  InitialFormData,
-  mockPrompt,
-} from "./PromptElement.helper";
+import { TestComponent, InitialFormData } from "./PromptElement.helper";
 import React = require("react");
 import { theme } from "./theme";
-import { SetupAction, ComponentTest, StateTest } from "./helper";
+import { SetupAction, StateTest } from "./helper";
 
 global.URL.createObjectURL = vi.fn(() => "testImage.png");
+
+const EmptyStateDisabled = () => {
+  describe("Empty state disabled - no thumbnail, no prompt", () => {
+    test("textarea should be rendered correctly", () => {
+      StateTest.TextArea.renderDisabled();
+    });
+    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test(
+      "prompt element buttons should be rendered",
+      StateTest.PromptButtons.rendered
+    );
+    test(
+      "thumbnail buttons should not be rendered",
+      StateTest.Thumnail.unUploaded
+    );
+    test("text area content should be empty", StateTest.TextArea.empty);
+    test(
+      "upload canvas should be an upload button",
+      StateTest.Thumnail.isNotAnImage
+    );
+    test(
+      "prompt element buttons should be invisible",
+      StateTest.PromptButtons.unhovered
+    );
+  });
+};
+
+const EmptyStateDisabledHovered = () => {
+  describe("Hovered + Empty state disabled - no thumbnail, no prompt", () => {
+    test(
+      "textarea should be rendered correctly",
+      StateTest.TextArea.renderDisabled
+    );
+    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test(
+      "prompt element buttons should be rendered",
+      StateTest.PromptButtons.rendered
+    );
+    test(
+      "thumbnail buttons should not be rendered",
+      StateTest.Thumnail.unUploaded
+    );
+    test("text area content should be empty", StateTest.TextArea.empty);
+    test(
+      "upload canvas should be an upload button",
+      StateTest.Thumnail.isNotAnImage
+    );
+    test(
+      "prompt element buttons should be invisible",
+      StateTest.PromptButtons.unhovered
+    );
+  });
+};
 
 const EmptyState = () => {
   describe("Empty state - no thumbnail, no prompt", () => {
@@ -255,18 +303,23 @@ const TestFromEnabled = () => {
       EmptyStateHovered();
     });
   });
-  describe("when type", ()=>{
-    beforeEach(SetupAction.type)
-    NoThumbnailPrompt()
-    describe("when hovered", ()=>{
-      beforeEach(SetupAction.hoverOnUpload)
-      NoThumbnailPromptHovered()
-    })
-    describe("when upload", ()=>{
-      beforeEach(SetupAction.upload)
-      ThumbnailPrompt()
-    })
-  })
+  describe("when type", () => {
+    beforeEach(SetupAction.type);
+    NoThumbnailPrompt();
+    describe("when hovered", () => {
+      beforeEach(SetupAction.hoverOnUpload);
+      NoThumbnailPromptHovered();
+    });
+    describe("when upload", () => {
+      beforeEach(SetupAction.upload);
+      ThumbnailPrompt();
+    });
+  });
+  describe("when click on edit", () => {
+    beforeEach(SetupAction.clickEdit);
+    EmptyStateDisabled();
+  });
 };
+
 
 TestFromEnabled();

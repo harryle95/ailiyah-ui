@@ -7,9 +7,10 @@ import {
   FormObjectType,
 } from "./Prompt.types";
 import { PromptElementDataType } from "./PromptElement.types";
-import { styled } from "@ailiyah-ui/factory";
+import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
 import { PromptElement } from "./PromptElement";
-import { AddButton, SubmitButton } from "@ailiyah-ui/button";
+import { createContext } from "@ailiyah-ui/context";
+import { createStateBox } from "@ailiyah-ui/box";
 
 function setObjectById<T>(
   promptId: string,
@@ -32,24 +33,35 @@ function removeObjectById<T>(
   });
 }
 
-const Prompt = React.memo(
+interface PromptContextValue {
+  addElement: Function;
+}
+
+const [PromptContextProvider, usePromptContext] =
+  createContext<PromptContextValue>("Prompt");
+
+const Root = React.memo(
   React.forwardRef<
     HTMLDivElement,
     PrimitiveProps.DivProps & TailwindProps & PromptRootOwnProps
   >((props, ref) => {
-    const { initialFormData, editing, ...rest } = props;
-
+    const { initialFormData, editing, children, ...rest } = props;
     const initState = initialFormData
       ? React.useCallback(() => {
           return Object.keys(initialFormData).reduce(
             (acc: StateType, curr: string) => {
-              acc[curr] = editing ? editing : true;
+              acc[curr] =
+                editing !== undefined && editing !== null ? editing : true;
               return acc;
             },
             {}
           );
         }, [Object.keys(initialFormData)])
-      : {};
+      : () => {
+          return {};
+        };
+
+    console.log(initState());
 
     const [editingStates, setEditingStates] =
       React.useState<StateType>(initState);
@@ -84,33 +96,54 @@ const Prompt = React.memo(
       };
     };
 
+    const providerValue = React.useMemo(() => {
+      return {
+        addElement: addElement,
+      };
+    }, [addElement]);
+
     return (
-      <styled.div {...rest} ref={ref} themeName="PromptRoot">
-        <styled.div themeName="PromptContent">
-          {formData && Object.keys(formData).length > 0 ? (
-            Object.entries(formData).map(([key, value], _) => {
-              const setEditing = setEditingByPromptId(key);
-              const removeElement = removeElementByPromptId(key);
-              return (
-                <PromptElement
-                  key={key}
-                  editing={editingStates[key]}
-                  setEditing={setEditing}
-                  promptId={key}
-                  setFormData={setFormData}
-                  formData={value}
-                  removeElement={removeElement}
-                />
-              );
-            })
-          ) : (
-            <></>
-          )}
+      <PromptContextProvider value={providerValue}>
+        <styled.div {...rest} ref={ref} themeName="PromptRoot">
+          <styled.div themeName="PromptContent">
+            {formData && Object.keys(formData).length > 0 ? (
+              Object.entries(formData).map(([key, value], _) => {
+                const setEditing = setEditingByPromptId(key);
+                const removeElement = removeElementByPromptId(key);
+                return (
+                  <PromptElement
+                    key={key}
+                    editing={editingStates[key]}
+                    setEditing={setEditing}
+                    promptId={key}
+                    setFormData={setFormData}
+                    formData={value}
+                    removeElement={removeElement}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </styled.div>
+          {children}
         </styled.div>
-        <styled.div themeName="PromptButtonGroup">
+      </PromptContextProvider>
+    );
+  })
+);
+
+const PromptButtonGroup = React.memo(
+  React.forwardRef<HTMLDivElement, TailwindComponentProps<"div">>(
+    (props, ref) => {
+      const { addElement } = usePromptContext();
+      return (
+        <styled.div themeName="PromptButtonGroup" ref={ref} {...props}>
           <styled.button
             themeName="PromptButtonGroupNewButton"
-            onClick={addElement}
+            onClick={
+              addElement as unknown as React.MouseEventHandler<HTMLButtonElement>
+            }
           >
             Add Prompt
           </styled.button>
@@ -118,7 +151,20 @@ const Prompt = React.memo(
             Submit
           </styled.button>
         </styled.div>
-      </styled.div>
+      );
+    }
+  )
+);
+
+const Prompt = React.memo(
+  React.forwardRef<
+    HTMLDivElement,
+    PrimitiveProps.DivProps & TailwindProps & PromptRootOwnProps
+  >((props, ref) => {
+    return (
+      <Root ref={ref} {...props}>
+        <PromptButtonGroup />
+      </Root>
     );
   })
 );

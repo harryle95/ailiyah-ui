@@ -35,7 +35,6 @@ const SetupAction = {
   clickEdit: async () => {
     await userEvent.click(document.querySelector(".PromptElementEditButton")!);
     await userEvent.unhover(document.querySelector(".PromptElementEditButton")!);
-
   },
 };
 
