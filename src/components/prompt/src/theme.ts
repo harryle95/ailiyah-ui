@@ -9,6 +9,8 @@ export const theme: PresetTheme = {
     twFlex: "flex",
     twFlexDirection: "flex-col",
     twJustifyContent: "justify-between",
+    twPadding: "p-4",
+    twGap: "gap-y-5",
   },
   PromptContent: {
     twFlex: "flex",
@@ -17,29 +19,51 @@ export const theme: PresetTheme = {
     twFlexGrow: "flex-grow",
     twOverflow: "overflow-y-auto",
     twOther: "scrollbar-thin",
-    twPadding: "p-4",
-    twHeight: "h-fit",
+    twPadding: "pr-3",
   },
   PromptButtonGroup: {
     twFlexShrink: "flex-shrink-0",
+    twGap: "gap-x-3",
+    twFlex: "flex",
+    twAlignItems: "items-center",
+    twJustifyContent: "justify-end",
+    twPadding: "pr-3",
+    twTextColor:
+      "text-neutral-700 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300",
+  },
+  PromptButtonGroupNewButton: {
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
+    twPadding: "py-2 px-3",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-lg",
+    twWidth: "w-[120px]",
+  },
+  PromptButtonGroupSubmitButton: {
+    twBackgroundColor:
+      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
+    twPadding: "py-2 px-3",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-lg",
+    twWidth: "w-[120px]",
   },
   PromptElementRoot: {
-    twWidth: "w-fit",
+    twWidth: "w-full",
     twHeight: "h-fit",
     twPadding: "pb-6",
   },
   PromptElementContent: {
     twFlex: "flex",
     twGap: "gap-x-4",
+    twWidth: "w-full",
   },
   PromptElementTextArea: {
     twFlexGrow: "flex-grow",
     twBorderWidth: "border-2",
     twBorderRadius: "rounded-md",
     twPadding: "p-4",
-    twWidth: "w-full",
   },
-  PromptElementThumbnailRoot: {
+  PromptElementThumbnail: {
     twFlexShrink: "flex-shrink-0",
   },
   PromptElementButtonGroup: {

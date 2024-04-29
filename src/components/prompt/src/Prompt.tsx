@@ -108,11 +108,15 @@ const Prompt = React.memo(
           )}
         </styled.div>
         <styled.div themeName="PromptButtonGroup">
-          <AddButton
+          <styled.button
             themeName="PromptButtonGroupNewButton"
             onClick={addElement}
-          />
-          <SubmitButton themeName="PromptButtonSubmitButton" />
+          >
+            Add Prompt
+          </styled.button>
+          <styled.button themeName="PromptButtonGroupSubmitButton">
+            Submit
+          </styled.button>
         </styled.div>
       </styled.div>
     );
