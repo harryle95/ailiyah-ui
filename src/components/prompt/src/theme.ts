@@ -11,6 +11,7 @@ export const theme: PresetTheme = {
     twJustifyContent: "justify-between",
     twPadding: "p-4",
     twGap: "gap-y-5",
+    twFlexGrow: "flex-grow",
   },
   PromptContent: {
     twFlex: "flex",
@@ -89,4 +90,36 @@ export const theme: PresetTheme = {
     twDisplay: "hidden data-[state=active]:flex",
     twGap: "gap-x-4",
   },
+  DialogContainer: {
+    twPadding: "p-4",
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twFlex: "flex",
+    twFlexDirection: "flex-col",
+    twGap: "gap-y-4",
+  },
+  DialogContent: {
+    twWidth: "w-fit min-w-[550px]",
+    twHeight: "h-4/5",
+    twPadding: "p-2",
+    twBorderRadius: "rounded-md",
+    twBackgroundColor: "bg-neutral-50"
+  },
+  PromptForm: {
+    twFlexGrow: "flex-grow",
+    twOverflow: "overflow-y-auto",
+  },
+  DialogTitle: {
+    twFontSize: "text-2xl",
+    twFontWeight: "font-bold",
+  },
+  TextAreaTextArea: {
+    twWidth: "w-full",
+    twHeight: "h-full",
+    twBorderWidth: "border-2",
+    twBorderRadius: "rounded-md",
+    twPadding: "py-4 pl-4 pr-9",
+    twResize: "resize-none",
+    twOther: "scrollbar-thin"
+  }
 };

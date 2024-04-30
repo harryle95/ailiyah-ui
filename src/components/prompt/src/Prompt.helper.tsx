@@ -1,6 +1,5 @@
 import { Root, PromptButtonGroup } from "./Prompt";
-import { ThemeProvider } from "@ailiyah-ui/context";
-import { theme } from "./theme";
+import { styled } from "@ailiyah-ui/factory";
 import { FormDataType, StateType } from "./Prompt.types";
 import React from "react";
 
@@ -39,7 +38,7 @@ export function PromptForm({
   });
 
   return (
-    <form onSubmit={onSubmit}>
+    <styled.form onSubmit={onSubmit} themeName="PromptForm">
       <Root
         editingStates={editingStates}
         setEditingStates={setEditingStates}
@@ -48,6 +47,6 @@ export function PromptForm({
       >
         <PromptButtonGroup />
       </Root>
-    </form>
+    </styled.form>
   );
 }
