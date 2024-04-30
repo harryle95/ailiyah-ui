@@ -1,27 +1,31 @@
 import { screen } from "@testing-library/react";
-import { expect } from "vitest";
+import { expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { mockPrompt } from "./PromptElement.helper";
+
+export const submitSpy = vi.fn((e) => {
+  e.preventDefault()
+});
 
 const SetupAction = {
   upload: async () => {
     const file = new File(["hello"], "testImage.png", { type: "image/png" });
-    await userEvent.upload(screen.getByTitle("file-upload")!, file);
-    await userEvent.unhover(screen.getByTitle("file-upload")!);
+    await userEvent.upload(document.querySelector(".file-upload")!, file);
+    await userEvent.unhover(document.querySelector(".file-upload")!);
   },
   reupload: async () => {
     const file = new File(["hello world"], "testImage.png", {
       type: "image/png",
     });
-    await userEvent.upload(screen.getByTitle("file-upload")!, file);
-    await userEvent.unhover(screen.getByTitle("file-upload")!);
+    await userEvent.upload(document.querySelector(".file-upload")!, file);
+    await userEvent.unhover(document.querySelector(".file-upload")!);
   },
   type: async () => {
     await userEvent.type(
       document.querySelector(".PromptElementTextArea")!,
       mockPrompt
     );
-    await userEvent.unhover(document.querySelector(".PromptElementTextArea")!)
+    await userEvent.unhover(document.querySelector(".PromptElementTextArea")!);
   },
   hoverOnUpload: async () => {
     await userEvent.hover(screen.getByText("Upload"));
@@ -32,9 +36,26 @@ const SetupAction = {
   clickDelete: async () => {
     await userEvent.click(document.querySelector(".ThumbnailDeleteButton")!);
   },
+  clickDeletePromptElement: async () => {
+    await userEvent.click(
+      document.querySelector(".PromptElementDeleteButton")!
+    );
+  },
   clickEdit: async () => {
     await userEvent.click(document.querySelector(".PromptElementEditButton")!);
-    await userEvent.unhover(document.querySelector(".PromptElementEditButton")!);
+    await userEvent.unhover(
+      document.querySelector(".PromptElementEditButton")!
+    );
+  },
+  clickNewPrompt: async () => {
+    await userEvent.click(
+      document.querySelector(".PromptButtonGroupNewButton")!
+    );
+  },
+  clickSubmit: async () => {
+    await userEvent.click(
+      document.querySelector(".PromptButtonGroupSubmitButton")!
+    );
   },
 };
 
@@ -89,9 +110,48 @@ const ComponentTest = {
   },
   thumbnailUploadButton: createComponentTestSuite(".ThumbnailUploadButton"),
   thumbnailDeleteButton: createComponentTestSuite(".ThumbnailDeleteButton"),
+  promptFormAddButton: createComponentTestSuite(".PromptButtonGroupNewButton"),
+  promptFormSubmitButton: createComponentTestSuite(
+    ".PromptButtonGroupSubmitButton"
+  ),
 };
 
 const StateTest = {
+  PromptForm: {
+    rendered: () => {
+      ComponentTest.promptFormAddButton.isInTheDocument()
+      ComponentTest.promptFormAddButton.isVisible()
+      ComponentTest.promptFormSubmitButton.isInTheDocument()
+      ComponentTest.promptFormSubmitButton.isVisible()
+    },
+    wasSubmitted: () => expect(submitSpy).toHaveBeenCalledOnce(),
+    wasNotSubmitted: () => expect(submitSpy).not.toHaveBeenCalledTimes(0),
+    havePromptCount: (count: number) => {
+      return () =>
+        expect(document.querySelectorAll(".PromptElementTextArea").length).toBe(
+          count
+        );
+    },
+    hasPromptElementTextAreaContent: (counter: number, textContent: string) => {
+      return () =>
+        expect(
+          document.querySelectorAll(".PromptElementTextArea")[counter]
+            .textContent
+        ).toBe(textContent);
+    },
+    hasPromptElementThumbnailBeAnImage: (counter: number) => {
+      return () =>
+        expect(
+          document.querySelectorAll(".ThumbnailCanvas")[counter].tagName
+        ).toBe("IMG");
+    },
+    hasPromptElementThumbnailBeAnUploadForm: (counter: number) => {
+      return () =>
+        expect(
+          document.querySelectorAll(".ThumbnailCanvas")[counter].tagName
+        ).toBe("LABEL");
+    },
+  },
   PromptButtons: {
     rendered: () => {
       ComponentTest.promptElementEditButton.isInTheDocument();
@@ -120,7 +180,7 @@ const StateTest = {
     typed: ComponentTest.promptElementTextArea.hasTypedContent,
     empty: ComponentTest.promptElementTextArea.hasNullContent,
   },
-  Thumnail: {
+  Thumbnail: {
     isAnImage: ComponentTest.thumbnailCanvas.isAnImage,
     isNotAnImage: ComponentTest.thumbnailCanvas.isNotAnImage,
     rendered: () => {

@@ -45,30 +45,14 @@ const Root = React.memo(
     HTMLDivElement,
     PrimitiveProps.DivProps & TailwindProps & PromptRootOwnProps
   >((props, ref) => {
-    const { initialFormData, editing, children, ...rest } = props;
-    const initState = initialFormData
-      ? React.useCallback(() => {
-          return Object.keys(initialFormData).reduce(
-            (acc: StateType, curr: string) => {
-              acc[curr] =
-                editing !== undefined && editing !== null ? editing : true;
-              return acc;
-            },
-            {}
-          );
-        }, [Object.keys(initialFormData)])
-      : () => {
-          return {};
-        };
-
-    console.log(initState());
-
-    const [editingStates, setEditingStates] =
-      React.useState<StateType>(initState);
-
-    const [formData, setFormData] = React.useState<FormDataType>(() => {
-      return initialFormData ? initialFormData : {};
-    });
+    const {
+      formData,
+      setFormData,
+      editingStates,
+      setEditingStates,
+      children,
+      ...rest
+    } = props;
 
     const setEditingByPromptId = (promptId: string) => {
       return () => {
@@ -81,7 +65,7 @@ const Root = React.memo(
 
     const addElement = () => {
       let newId = crypto.randomUUID();
-      setObjectById<boolean>(newId, editing ? editing : true, setEditingStates);
+      setObjectById<boolean>(newId, true, setEditingStates);
       setObjectById<PromptElementDataType>(
         newId,
         { thumbnail: undefined, prompt: "" },
@@ -156,17 +140,4 @@ const PromptButtonGroup = React.memo(
   )
 );
 
-const Prompt = React.memo(
-  React.forwardRef<
-    HTMLDivElement,
-    PrimitiveProps.DivProps & TailwindProps & PromptRootOwnProps
-  >((props, ref) => {
-    return (
-      <Root ref={ref} {...props}>
-        <PromptButtonGroup />
-      </Root>
-    );
-  })
-);
-
-export { Prompt };
+export { Root, PromptButtonGroup };

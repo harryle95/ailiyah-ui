@@ -1,29 +1,12 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Prompt } from "./Prompt";
-import { ThemeProvider } from "@ailiyah-ui/context";
-import { theme } from "./theme";
 import { styled } from "@ailiyah-ui/factory";
 import { mockImage, replacementMockImage } from "./PromptElement.helper";
-import { FormDataType, StateType } from "./Prompt.types";
+import { PromptForm } from "./Prompt.helper";
 
-function TestComponent({
-  initialFormData,
-  editing,
-}: {
-  initialFormData: FormDataType;
-  editing: boolean;
-}) {
-  return (
-    <ThemeProvider value={theme}>
-      <Prompt initialFormData={initialFormData} editing={editing} />
-    </ThemeProvider>
-  );
-}
-
-const meta: Meta<typeof TestComponent> = {
+const meta: Meta<typeof PromptForm> = {
   title: "Prompt",
-  component: TestComponent,
+  component: PromptForm,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -36,7 +19,7 @@ const meta: Meta<typeof TestComponent> = {
 
 export default meta;
 
-type Story = StoryObj<typeof TestComponent>;
+type Story = StoryObj<typeof PromptForm>;
 
 export const Default: Story = {};
 

@@ -60,6 +60,7 @@ const Root = React.forwardRef<HTMLInputElement, UploadRootProps>(
           ref={internalRef}
           {...rest}
           title="file-upload"
+          className="file-upload"
           onChange={onFileUploaded}
         />
         {typeof children === "function"

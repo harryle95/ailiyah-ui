@@ -12,19 +12,19 @@ const EmptyStateDisabled = () => {
     test("textarea should be rendered correctly", () => {
       StateTest.TextArea.renderDisabled();
     });
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should be empty", StateTest.TextArea.empty);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be invisible",
@@ -39,19 +39,19 @@ const EmptyStateDisabledHovered = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderDisabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should be empty", StateTest.TextArea.empty);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be invisible",
@@ -66,19 +66,19 @@ const EmptyState = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should be empty", StateTest.TextArea.empty);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be invisible",
@@ -93,19 +93,19 @@ const EmptyStateHovered = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should be empty", StateTest.TextArea.empty);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be visible",
@@ -120,15 +120,18 @@ const ThumbnailNoPrompt = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
-    test("thumbnail buttons should be rendered", StateTest.Thumnail.uploaded);
+    test("thumbnail buttons should be rendered", StateTest.Thumbnail.uploaded);
     test("text area content should be empty", StateTest.TextArea.empty);
-    test("upload canvas should be an image", StateTest.Thumnail.isAnImage);
-    test("thumbnail buttons should be invisible", StateTest.Thumnail.unhovered);
+    test("upload canvas should be an image", StateTest.Thumbnail.isAnImage);
+    test(
+      "thumbnail buttons should be invisible",
+      StateTest.Thumbnail.unhovered
+    );
     test(
       "prompt element buttons should be invisible",
       StateTest.PromptButtons.unhovered
@@ -142,15 +145,15 @@ const ThumbnailNoPromptHovered = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
-    test("thumbnail buttons should be rendered", StateTest.Thumnail.uploaded);
+    test("thumbnail buttons should be rendered", StateTest.Thumbnail.uploaded);
     test("text area content should be empty", StateTest.TextArea.empty);
-    test("upload canvas should be an image", StateTest.Thumnail.isAnImage);
-    test("thumbnail buttons should be visible", StateTest.Thumnail.hovered);
+    test("upload canvas should be an image", StateTest.Thumbnail.isAnImage);
+    test("thumbnail buttons should be visible", StateTest.Thumbnail.hovered);
     test(
       "prompt element buttons should be visible",
       StateTest.PromptButtons.hovered
@@ -164,15 +167,18 @@ const ThumbnailPrompt = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
-    test("thumbnail buttons should be rendered", StateTest.Thumnail.uploaded);
+    test("thumbnail buttons should be rendered", StateTest.Thumbnail.uploaded);
     test("text area content should have content", StateTest.TextArea.typed);
-    test("upload canvas should be an image", StateTest.Thumnail.isAnImage);
-    test("thumbnail buttons should be invisible", StateTest.Thumnail.unhovered);
+    test("upload canvas should be an image", StateTest.Thumbnail.isAnImage);
+    test(
+      "thumbnail buttons should be invisible",
+      StateTest.Thumbnail.unhovered
+    );
     test(
       "prompt element buttons should be invisible",
       StateTest.PromptButtons.unhovered
@@ -186,15 +192,15 @@ const ThumbnailPromptHovered = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
-    test("thumbnail buttons should be rendered", StateTest.Thumnail.uploaded);
+    test("thumbnail buttons should be rendered", StateTest.Thumbnail.uploaded);
     test("text area content should have content", StateTest.TextArea.typed);
-    test("upload canvas should be an image", StateTest.Thumnail.isAnImage);
-    test("thumbnail buttons should be visible", StateTest.Thumnail.hovered);
+    test("upload canvas should be an image", StateTest.Thumbnail.isAnImage);
+    test("thumbnail buttons should be visible", StateTest.Thumbnail.hovered);
     test(
       "prompt element buttons should be visible",
       StateTest.PromptButtons.hovered
@@ -208,19 +214,19 @@ const NoThumbnailPrompt = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should have content", StateTest.TextArea.typed);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be invisible",
@@ -235,19 +241,19 @@ const NoThumbnailPromptHovered = () => {
       "textarea should be rendered correctly",
       StateTest.TextArea.renderEnabled
     );
-    test("upload canvas rendered correctly", StateTest.Thumnail.rendered);
+    test("upload canvas rendered correctly", StateTest.Thumbnail.rendered);
     test(
       "prompt element buttons should be rendered",
       StateTest.PromptButtons.rendered
     );
     test(
       "thumbnail buttons should not be rendered",
-      StateTest.Thumnail.unUploaded
+      StateTest.Thumbnail.unUploaded
     );
     test("text area content should have content", StateTest.TextArea.typed);
     test(
       "upload canvas should be an upload button",
-      StateTest.Thumnail.isNotAnImage
+      StateTest.Thumbnail.isNotAnImage
     );
     test(
       "prompt element buttons should be visible",
@@ -320,6 +326,5 @@ const TestFromEnabled = () => {
     EmptyStateDisabled();
   });
 };
-
 
 TestFromEnabled();

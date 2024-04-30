@@ -44,7 +44,7 @@ const Validate = {
 
 let Action = ActionFactory(userEvent);
 
-describe("Given a textare initially empty", () => {
+describe("Given a textarea initially empty", () => {
   beforeEach(() => {
     render(
       <TextAreaWithSubmitAndEdit initPrompt={EMPTYPROMPT} onClick={() => {}} />
@@ -52,8 +52,8 @@ describe("Given a textare initially empty", () => {
   });
   test("textarea rendered correctly", Validate.textArea.rendered);
   test("textarea content is empty", Validate.textArea.toHaveContent(""));
-  test("submitbutton is rendered correctly", Validate.submitButton.rendered);
-  test("submitbutton is disabled", Validate.submitButton.isDisabled);
+  test("submit button is rendered correctly", Validate.submitButton.rendered);
+  test("submit button is disabled", Validate.submitButton.isDisabled);
   describe("when type Hello", () => {
     beforeEach(Action.typeFirstPrompt);
     test(
@@ -82,7 +82,7 @@ describe("Given a textare initially empty", () => {
   });
 });
 
-describe("When given a textform intially not empty", () => {
+describe("When given a text form initially not empty", () => {
   beforeEach(() => {
     render(
       <TextAreaWithSubmitAndEdit
