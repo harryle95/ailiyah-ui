@@ -63,7 +63,8 @@ const Root = React.memo(
       };
     };
 
-    const addElement = () => {
+    const addElement = (e: React.MouseEvent) => {
+      e.preventDefault();
       let newId = crypto.randomUUID();
       setObjectById<boolean>(newId, true, setEditingStates);
       setObjectById<PromptElementDataType>(

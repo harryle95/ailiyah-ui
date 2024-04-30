@@ -5,14 +5,14 @@ import { FormDataType, StateType } from "./Prompt.types";
 import React from "react";
 
 export function PromptForm({
-  initialFormData,
-  editing,
+  initialFormData = undefined,
+  editing = true,
   onSubmit = (e) => {
     e.preventDefault();
     alert("Submitting Form");
   },
 }: {
-  initialFormData: FormDataType;
+  initialFormData?: FormDataType;
   editing: boolean;
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }) {
@@ -39,17 +39,15 @@ export function PromptForm({
   });
 
   return (
-    <ThemeProvider value={theme}>
-      <form onSubmit={onSubmit}>
-        <Root
-          editingStates={editingStates}
-          setEditingStates={setEditingStates}
-          formData={formData}
-          setFormData={setFormData}
-        >
-          <PromptButtonGroup />
-        </Root>
-      </form>
-    </ThemeProvider>
+    <form onSubmit={onSubmit}>
+      <Root
+        editingStates={editingStates}
+        setEditingStates={setEditingStates}
+        formData={formData}
+        setFormData={setFormData}
+      >
+        <PromptButtonGroup />
+      </Root>
+    </form>
   );
 }

@@ -3,6 +3,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { styled } from "@ailiyah-ui/factory";
 import { mockImage, replacementMockImage } from "./PromptElement.helper";
 import { PromptForm } from "./Prompt.helper";
+import { ThemeProvider } from "@ailiyah-ui/context";
+import { theme } from "./theme";
 
 const meta: Meta<typeof PromptForm> = {
   title: "Prompt",
@@ -11,7 +13,9 @@ const meta: Meta<typeof PromptForm> = {
   decorators: [
     (Story) => (
       <styled.div twWidth="w-[600px]" twHeight="h-[600px]">
-        <Story />
+        <ThemeProvider value={theme}>
+          <Story />
+        </ThemeProvider>
       </styled.div>
     ),
   ],
