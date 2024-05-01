@@ -16,7 +16,6 @@ const [_Root, useTextBoxContext] = createStateBox<
   BaseStateBoxProps
 >("TextBox", undefined, {
   twWidth: "w-full",
-  twPosition: "relative",
 });
 
 function getState(active: boolean) {
