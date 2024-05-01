@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/prompt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "styled prompt component",
   "main": "./src/index.ts",
   "type": "module",
@@ -16,6 +16,7 @@
     "@ailiyah-ui/upload": "*",
     "@ailiyah-ui/text": "*",
     "@ailiyah-ui/box": "*",
+    "@ailiyah-ui/thumbnail": "*",
     "react": "^18.2.0"
   }
 }

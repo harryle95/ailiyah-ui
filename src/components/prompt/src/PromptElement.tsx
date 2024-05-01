@@ -1,7 +1,5 @@
 import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
-import {
-  PromptElementOwnProps,
-} from "./PromptElement.types";
+import { PromptElementOwnProps } from "./PromptElement.types";
 import React from "react";
 import { DeleteButton, EditButton } from "@ailiyah-ui/button";
 import {
@@ -86,12 +84,16 @@ const PromptElement = React.memo(
           themeName="PromptElementButtonGroup"
         >
           <EditButton
-            onClick={() => setEditing()}
+            onClick={(e) => {
+              e.preventDefault();
+              setEditing();
+            }}
             themeName="PromptElementEditButton"
             tooltipContent="Edit"
           />
           <DeleteButton
             onClick={(e) => {
+              e.preventDefault();
               removeElement(e);
             }}
             themeName="PromptElementDeleteButton"

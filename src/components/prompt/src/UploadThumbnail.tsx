@@ -1,5 +1,5 @@
 import { TailwindComponentProps } from "@ailiyah-ui/factory";
-import * as Thumbnail from "../../thumbnail/src/Thumbnail";
+import * as Thumbnail from "@ailiyah-ui/thumbnail";
 import React from "react";
 import * as Upload from "@ailiyah-ui/upload";
 import * as Button from "@ailiyah-ui/button";
