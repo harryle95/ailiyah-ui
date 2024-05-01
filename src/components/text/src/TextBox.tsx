@@ -16,7 +16,7 @@ const [_Root, useTextBoxContext] = createStateBox<
   BaseStateBoxProps
 >("TextBox", undefined, {
   twWidth: "w-full",
-  twPosition: "relative"
+  twPosition: "relative",
 });
 
 function getState(active: boolean) {
@@ -136,12 +136,13 @@ const Component = React.forwardRef<
   HTMLDivElement,
   PrimitiveProps.DivProps & TailwindProps & LRLocationProps
 >((props, ref) => {
-  const { compLocation, twPosition="absolute", children, ...rest } = props;
+  const { compLocation, twPosition = "absolute", children, ...rest } = props;
   const order = compLocation === "left" ? "top-0 left-0" : "top-0 right-0";
   const { activeState } = useTextBoxContext();
   return (
     <styled.div
       twOrder={order}
+      twPosition={twPosition}
       {...rest}
       data-state={getState(activeState)}
       ref={ref}
