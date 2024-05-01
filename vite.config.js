@@ -5,7 +5,16 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   test: {
     coverage: {
+      thresholds: {
+        lines: 60,
+        branches: 60,
+        functions: 60,
+        statements: 60
+      },
+      enabled: true,
       provider: "istanbul",
+      reporter: ['json-summary', 'json', 'text'],
+      reportOnFailure: true,
       include: ["src/components/**"],
       exclude: [
         "**/*.stories.[jt]sx",
