@@ -125,7 +125,7 @@ const StateTest = {
       ComponentTest.promptFormSubmitButton.isVisible()
     },
     wasSubmitted: () => expect(submitSpy).toHaveBeenCalledOnce(),
-    wasNotSubmitted: () => expect(submitSpy).not.toHaveBeenCalledTimes(0),
+    wasNotSubmitted: () => expect(submitSpy).toHaveBeenCalledTimes(0),
     havePromptCount: (count: number) => {
       return () =>
         expect(document.querySelectorAll(".PromptElementTextArea").length).toBe(

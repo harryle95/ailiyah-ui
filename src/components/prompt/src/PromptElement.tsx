@@ -88,6 +88,7 @@ const PromptElement = React.memo(
               e.preventDefault();
               setEditing();
             }}
+            type="button"
             themeName="PromptElementEditButton"
             tooltipContent="Edit"
           />
@@ -96,6 +97,7 @@ const PromptElement = React.memo(
               e.preventDefault();
               removeElement(e);
             }}
+            type="button"
             themeName="PromptElementDeleteButton"
             tooltipContent="Delete"
           />

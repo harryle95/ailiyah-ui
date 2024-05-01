@@ -151,12 +151,12 @@ const Cancel = React.forwardRef<HTMLButtonElement, CancelTriggerProps>(
 
     return tooltipContent ? (
       <Tooltip tooltipContent={tooltipContent}>
-        <styled.button {...rest} ref={ref} onClick={removeFile}>
+        <styled.button {...rest} ref={ref} onClick={removeFile} type="button">
           {children}
         </styled.button>
       </Tooltip>
     ) : (
-      <styled.button {...rest} ref={ref} onClick={removeFile}>
+      <styled.button {...rest} ref={ref} onClick={removeFile} type="button">
         {children}
       </styled.button>
     );

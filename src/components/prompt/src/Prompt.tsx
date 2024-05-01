@@ -1,10 +1,6 @@
 import { PrimitiveProps, TailwindProps } from "@ailiyah-ui/utils";
 import React from "react";
-import {
-  StateType,
-  PromptRootOwnProps,
-  FormObjectType,
-} from "./Prompt.types";
+import { StateType, PromptRootOwnProps, FormObjectType } from "./Prompt.types";
 import { PromptElementDataType } from "./PromptElement.types";
 import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
 import { PromptElement } from "./PromptElement";
@@ -123,6 +119,7 @@ const ButtonGroup = React.memo(
       return (
         <styled.div themeName="PromptButtonGroup" ref={ref} {...props}>
           <styled.button
+            type="button"
             themeName="PromptButtonGroupNewButton"
             onClick={
               addElement as unknown as React.MouseEventHandler<HTMLButtonElement>
@@ -130,7 +127,10 @@ const ButtonGroup = React.memo(
           >
             Add Prompt
           </styled.button>
-          <styled.button themeName="PromptButtonGroupSubmitButton">
+          <styled.button
+            type="submit"
+            themeName="PromptButtonGroupSubmitButton"
+          >
             Submit
           </styled.button>
         </styled.div>
