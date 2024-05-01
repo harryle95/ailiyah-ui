@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/upload",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "styled upload component",
   "main": "./src/index.ts",
   "type": "module",
