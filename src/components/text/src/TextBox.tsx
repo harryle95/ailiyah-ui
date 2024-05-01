@@ -16,8 +16,7 @@ const [_Root, useTextBoxContext] = createStateBox<
   BaseStateBoxProps
 >("TextBox", undefined, {
   twWidth: "w-full",
-  twFlex: "flex",
-  twAlignItems: "items-center",
+  twPosition: "relative"
 });
 
 function getState(active: boolean) {
@@ -105,7 +104,6 @@ const Content = React.forwardRef<
     twWhitespace = "whitespace-nowrap",
     twOverflow = "overflow-clip",
     twWidth = "w-full",
-    twOrder = "order-2",
     children,
     ...rest
   } = props;
@@ -115,7 +113,6 @@ const Content = React.forwardRef<
     <styled.div
       twOverflow={twOverflow}
       twWhitespace={twWhitespace}
-      twOrder={twOrder}
       twWidth={twWidth}
       {...rest}
       ref={ref}
@@ -139,8 +136,8 @@ const Component = React.forwardRef<
   HTMLDivElement,
   PrimitiveProps.DivProps & TailwindProps & LRLocationProps
 >((props, ref) => {
-  const { compLocation, children, ...rest } = props;
-  const order = compLocation === "left" ? "order-1" : "order-3";
+  const { compLocation, twPosition="absolute", children, ...rest } = props;
+  const order = compLocation === "left" ? "top-0 left-0" : "top-0 right-0";
   const { activeState } = useTextBoxContext();
   return (
     <styled.div
