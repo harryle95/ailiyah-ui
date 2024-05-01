@@ -27,6 +27,20 @@ jobs:
       run: npm ci 
     - name: run unit tests
       run: npm test
+    - name: "upload coverage"
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-${{ matrix.node-version }}
+        path: coverage
+    - name: "upload coverage artifacts"
+      uses: actions/download-artifact@v4
+      with:
+        name: coverage-${{ github.head_ref }}
+        path: coverage
+    - uses: actions/download-artifact@v4
+      with:
+        name: coverage-main
+        path: coverage-main
     - name: 'Report Coverage'
       # Set if: always() to also generate the report if tests are failing
       # Only works if you set `reportOnFailure: true` in your vite config as specified above
