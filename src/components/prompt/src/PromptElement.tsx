@@ -1,7 +1,6 @@
 import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
 import {
   PromptElementOwnProps,
-  PromptElementDataType,
 } from "./PromptElement.types";
 import React from "react";
 import { DeleteButton, EditButton } from "@ailiyah-ui/button";
@@ -15,7 +14,7 @@ import {
 import { CornerLocationProps } from "@ailiyah-ui/utils";
 import { UploadThumbnail } from "./UploadThumbnail";
 import { TextArea } from "./TextArea";
-import { FormDataType, StateType } from "./Prompt.types";
+import { FormDataType } from "./Prompt.types";
 
 const [Root, useRootContext] = createStateBox("Root", undefined, {
   twPosition: "relative",

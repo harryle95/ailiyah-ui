@@ -2,7 +2,6 @@ import { PrimitiveProps, TailwindProps } from "@ailiyah-ui/utils";
 import React from "react";
 import {
   StateType,
-  FormDataType,
   PromptRootOwnProps,
   FormObjectType,
 } from "./Prompt.types";
@@ -10,7 +9,6 @@ import { PromptElementDataType } from "./PromptElement.types";
 import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
 import { PromptElement } from "./PromptElement";
 import { createContext } from "@ailiyah-ui/context";
-import { createStateBox } from "@ailiyah-ui/box";
 
 function setObjectById<T>(
   promptId: string,
@@ -118,7 +116,7 @@ const Root = React.memo(
   })
 );
 
-const PromptButtonGroup = React.memo(
+const ButtonGroup = React.memo(
   React.forwardRef<HTMLDivElement, TailwindComponentProps<"div">>(
     (props, ref) => {
       const { addElement } = usePromptContext();
@@ -141,4 +139,4 @@ const PromptButtonGroup = React.memo(
   )
 );
 
-export { Root, PromptButtonGroup };
+export { Root, ButtonGroup };

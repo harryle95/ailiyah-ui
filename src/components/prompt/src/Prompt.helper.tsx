@@ -1,4 +1,4 @@
-import { Root, PromptButtonGroup } from "./Prompt";
+import { Root, ButtonGroup } from "./Prompt";
 import { styled } from "@ailiyah-ui/factory";
 import { FormDataType, StateType } from "./Prompt.types";
 import React from "react";
@@ -45,7 +45,7 @@ export function PromptForm({
         formData={formData}
         setFormData={setFormData}
       >
-        <PromptButtonGroup />
+        <ButtonGroup />
       </Root>
     </styled.form>
   );

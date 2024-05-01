@@ -1,0 +1,21 @@
+{
+  "name": "@ailiyah-ui/prompt",
+  "version": "0.0.1",
+  "description": "styled prompt component",
+  "main": "./src/index.ts",
+  "type": "module",
+  "module": "./src/index.ts",
+  "author": "Hoang Son Le",
+  "license": "MIT ",
+  "dependencies": {
+    "@ailiyah-ui/utils": "*",
+    "@ailiyah-ui/context": "*",
+    "@ailiyah-ui/factory": "*",
+    "@ailiyah-ui/tooltip": "*",
+    "@ailiyah-ui/button": "*",
+    "@ailiyah-ui/upload": "*",
+    "@ailiyah-ui/text": "*",
+    "@ailiyah-ui/box": "*",
+    "react": "^18.2.0"
+  }
+}
