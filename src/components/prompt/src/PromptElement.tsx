@@ -77,6 +77,7 @@ const PromptElement = React.memo(
             prompt={prompt}
             setPrompt={setPrompt}
             themeName="PromptElementTextArea"
+            required={true}
           />
         </Content>
         <Component

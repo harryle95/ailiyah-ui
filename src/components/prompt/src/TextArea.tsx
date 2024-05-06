@@ -22,7 +22,6 @@ const TextArea = React.memo(
         onChange={onChange}
         placeholder={prompt}
         value={prompt}
-        required={true}
       />
     );
     const textdisplay = (
