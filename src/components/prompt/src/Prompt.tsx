@@ -1,10 +1,15 @@
 import { PrimitiveProps, TailwindProps } from "@ailiyah-ui/utils";
 import React from "react";
-import { StateType, PromptRootOwnProps, FormObjectType } from "./Prompt.types";
+import { PromptRootOwnProps, FormObjectType } from "./Prompt.types";
 import { PromptElementDataType } from "./PromptElement.types";
-import { TailwindComponentProps, styled } from "@ailiyah-ui/factory";
+import {
+  TailwindComponentProps,
+  createElement,
+  styled,
+} from "@ailiyah-ui/factory";
 import { PromptElement } from "./PromptElement";
 import { createContext } from "@ailiyah-ui/context";
+import { createBox } from "@ailiyah-ui/box";
 
 function setObjectById<T>(
   promptId: string,
@@ -39,49 +44,28 @@ const Root = React.memo(
     HTMLDivElement,
     PrimitiveProps.DivProps & TailwindProps & PromptRootOwnProps
   >((props, ref) => {
-    const {
-      formData,
-      setFormData,
-      editingStates,
-      setEditingStates,
-      children,
-      ...rest
-    } = props;
-
-    const setEditingByPromptId = React.useCallback(
-      (promptId: string) => {
-        return () => {
-          setEditingStates((prevState: StateType) => {
-            console.log("Click on editing");
-            return { ...prevState, [promptId]: !prevState[promptId] };
-          });
-        };
-      },
-      [setEditingStates]
-    );
+    const { formData, setFormData, editing = true, children, ...rest } = props;
 
     const addElement = React.useCallback(
       (e: React.MouseEvent) => {
         e.preventDefault();
         let newId = crypto.randomUUID();
-        setObjectById<boolean>(newId, true, setEditingStates);
         setObjectById<PromptElementDataType>(
           newId,
           { thumbnail: undefined, prompt: "" },
           setFormData
         );
       },
-      [setObjectById, setFormData, setEditingStates]
+      [setObjectById, setFormData]
     );
 
     const removeElementByPromptId = React.useCallback(
       (promptId: string) => {
         return () => {
-          removeObjectById(promptId, setEditingStates);
           removeObjectById(promptId, setFormData);
         };
       },
-      [removeObjectById, setEditingStates, setFormData]
+      [removeObjectById, setFormData]
     );
 
     const providerValue = React.useMemo(() => {
@@ -89,15 +73,6 @@ const Root = React.memo(
         addElement: addElement,
       };
     }, [addElement]);
-
-    const setEditingMap: FormObjectType<Function> = React.useMemo(
-      () =>
-        Object.keys(formData).reduce((acc, key) => {
-          acc[key] = setEditingByPromptId(key);
-          return acc;
-        }, {} as FormObjectType<Function>),
-      [...Object.keys(formData), setEditingByPromptId]
-    );
 
     const removeElementMap: FormObjectType<Function> = React.useMemo(
       () =>
@@ -116,9 +91,8 @@ const Root = React.memo(
               Object.entries(formData).map(([key, value], _) => {
                 return (
                   <PromptElement
+                    editing={editing}
                     key={key}
-                    editing={editingStates[key]}
-                    setEditing={setEditingMap[key]}
                     promptId={key}
                     setFormData={setFormData}
                     thumbnail={value.thumbnail}
@@ -138,31 +112,34 @@ const Root = React.memo(
   })
 );
 
-const ButtonGroup = React.memo(
-  React.forwardRef<HTMLDivElement, TailwindComponentProps<"div">>(
+const Button = styled("button", {
+  themeName: "PromptButtonGroupButton",
+});
+
+const AddButton = React.memo(
+  React.forwardRef<HTMLButtonElement, TailwindComponentProps<"button">>(
     (props, ref) => {
       const { addElement } = usePromptContext();
+      const { children, ...rest } = props;
       return (
-        <styled.div themeName="PromptButtonGroup" ref={ref} {...props}>
-          <styled.button
-            type="button"
-            themeName="PromptButtonGroupNewButton"
-            onClick={
-              addElement as unknown as React.MouseEventHandler<HTMLButtonElement>
-            }
-          >
-            Add Prompt
-          </styled.button>
-          <styled.button
-            type="submit"
-            themeName="PromptButtonGroupSubmitButton"
-          >
-            Submit
-          </styled.button>
-        </styled.div>
+        <styled.button
+          type="button"
+          themeName="PromptButtonGroupButton"
+          {...rest}
+          ref={ref}
+          onClick={
+            addElement as unknown as React.MouseEventHandler<HTMLButtonElement>
+          }
+        >
+          {children}
+        </styled.button>
       );
     }
   )
 );
 
-export { Root, ButtonGroup };
+const ButtonGroup = createBox("ButtonGroup", {
+  themeName: "PromptButtonGroup",
+});
+
+export { Root, ButtonGroup, AddButton, Button };

@@ -25,12 +25,25 @@ const renderWithNoThumbnail = async () => {
   renderAction(initialFormData, true);
 };
 
+const renderWithNoThumbnailDisabled = async () => {
+  const initialFormData = {};
+  renderAction(initialFormData, false);
+};
+
 const renderWithTwoThumbnails = async () => {
   const initialFormData = {
     0: { thumbnail: first, prompt: FIRSTTYPE },
     1: { thumbnail: first, prompt: SECONDTYPE },
   };
   renderAction(initialFormData, true);
+};
+
+const renderWithTwoThumbnailsDisabled = async () => {
+  const initialFormData = {
+    0: { thumbnail: first, prompt: FIRSTTYPE },
+    1: { thumbnail: first, prompt: SECONDTYPE },
+  };
+  renderAction(initialFormData, false);
 };
 
 const renderWithOneThumbnail = async () => {
@@ -40,6 +53,22 @@ const renderWithOneThumbnail = async () => {
   };
   renderAction(initialFormData, true);
 };
+
+const renderWithOneThumbnailDisabled = async () => {
+  const initialFormData = {
+    1: { thumbnail: first, prompt: FIRSTTYPE },
+    0: { thumbnail: undefined, prompt: "" },
+  };
+  renderAction(initialFormData, false);
+};
+
+describe("When render without content but disabled", async () => {
+  beforeEach(renderWithNoThumbnailDisabled);
+  test(
+    "Prompt components should not be rendered",
+    StateTest.PromptForm.notRendered
+  );
+});
 
 describe("When render without content", async () => {
   beforeEach(renderWithNoThumbnail);
@@ -77,7 +106,32 @@ describe("When render without content", async () => {
   });
 });
 
-describe("when render with one thumbnail", async () => {
+describe("When render with one thumbnail disabled", async () => {
+  beforeEach(renderWithOneThumbnailDisabled);
+  test(
+    "Prompt components should not be rendered",
+    StateTest.PromptForm.notRendered
+  );
+  test("Prompt count should be 2", StateTest.PromptForm.havePromptCount(2));
+  test(
+    "First thumbnail an upload",
+    StateTest.PromptForm.hasPromptElementThumbnailBeAnUploadForm(0)
+  );
+  test(
+    "First content is empty",
+    StateTest.PromptForm.hasPromptElementTextAreaContent(0, "")
+  );
+  test(
+    "Second thumbnail an image",
+    StateTest.PromptForm.hasPromptElementThumbnailBeAnImage(1)
+  );
+  test(
+    "Second textarea is not empty",
+    StateTest.PromptForm.hasPromptElementTextAreaContent(1, FIRSTTYPE)
+  );
+});
+
+describe("When render with one thumbnail", async () => {
   beforeEach(renderWithOneThumbnail);
   test("Prompt components should be rendered", StateTest.PromptForm.rendered);
   test("Prompt count should be 2", StateTest.PromptForm.havePromptCount(2));
@@ -88,11 +142,11 @@ describe("when render with one thumbnail", async () => {
   test(
     "First content is empty",
     StateTest.PromptForm.hasPromptElementTextAreaContent(0, "")
-  ),
-    test(
-      "Second thumbnail an image",
-      StateTest.PromptForm.hasPromptElementThumbnailBeAnImage(1)
-    );
+  );
+  test(
+    "Second thumbnail an image",
+    StateTest.PromptForm.hasPromptElementThumbnailBeAnImage(1)
+  );
   test(
     "Second textarea is not empty",
     StateTest.PromptForm.hasPromptElementTextAreaContent(1, FIRSTTYPE)
@@ -159,6 +213,31 @@ describe("when render with one thumbnail", async () => {
       StateTest.PromptForm.hasPromptElementTextAreaContent(0, mockPrompt)();
     });
   });
+});
+
+describe("When render with two thumbnails disabled", async () => {
+  beforeEach(renderWithTwoThumbnailsDisabled);
+  test(
+    "Prompt components should not be rendered",
+    StateTest.PromptForm.notRendered
+  );
+  test("Prompt count should be 2", StateTest.PromptForm.havePromptCount(2));
+  test(
+    "First thumbnail an image",
+    StateTest.PromptForm.hasPromptElementThumbnailBeAnImage(0)
+  );
+  test(
+    "First content is set",
+    StateTest.PromptForm.hasPromptElementTextAreaContent(0, FIRSTTYPE)
+  ),
+    test(
+      "Second thumbnail an image",
+      StateTest.PromptForm.hasPromptElementThumbnailBeAnImage(1)
+    );
+  test(
+    "Second textarea is not empty",
+    StateTest.PromptForm.hasPromptElementTextAreaContent(1, SECONDTYPE)
+  );
 });
 
 describe("when render with two thumbnails", async () => {
