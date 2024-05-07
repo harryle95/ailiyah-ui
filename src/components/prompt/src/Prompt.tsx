@@ -80,7 +80,7 @@ const Root = React.memo(
           acc[key] = removeElementByPromptId(key);
           return acc;
         }, {} as FormObjectType<Function>),
-      [...Object.keys(formData), removeElementByPromptId]
+      [JSON.stringify(Object.keys(formData)), removeElementByPromptId]
     );
 
     return (

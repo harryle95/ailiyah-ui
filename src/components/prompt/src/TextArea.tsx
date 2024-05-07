@@ -14,7 +14,6 @@ const TextArea = React.memo(
     let { prompt, setPrompt, editing = true, ...rest } = props;
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
       setPrompt(e.currentTarget.value);
-
     const renderedTextArea = (
       <_TextArea.TextArea
         {...rest}
