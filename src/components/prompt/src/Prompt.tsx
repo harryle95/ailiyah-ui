@@ -96,7 +96,8 @@ const Root = React.memo(
                     setEditing={setEditing}
                     promptId={key}
                     setFormData={setFormData}
-                    formData={value}
+                    thumbnail={value.thumbnail}
+                    prompt={value.prompt}
                     removeElement={removeElement}
                   />
                 );

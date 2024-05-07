@@ -3,11 +3,10 @@ interface PromptElementDataType {
   prompt?: string;
 }
 
-interface PromptElementOwnProps {
+interface PromptElementOwnProps extends PromptElementDataType {
   promptId: string;
   editing: boolean;
   setEditing: Function;
-  formData: PromptElementDataType;
   setFormData: Function;
   removeElement?: Function;
 }

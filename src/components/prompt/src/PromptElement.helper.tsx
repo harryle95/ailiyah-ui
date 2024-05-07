@@ -38,14 +38,15 @@ function TestComponent({
   const [formData, setFormData] = React.useState(initialFormData);
   const [editing, setEditing] = React.useState(() => initialEditing);
   const setEditingState = () => {
-    setEditing((currentState)=>!currentState)
-  }
+    setEditing((currentState) => !currentState);
+  };
   const promptId = "1";
   return (
     <ThemeProvider value={value}>
       <PromptElement
         editing={editing}
-        formData={formData[promptId]}
+        prompt={formData[promptId].prompt}
+        thumbnail={formData[promptId].thumbnail}
         setEditing={setEditingState}
         setFormData={setFormData}
         promptId={promptId}
