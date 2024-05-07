@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { mockPrompt } from "./PromptElement.helper";
 
 export const submitSpy = vi.fn((e) => {
-  e.preventDefault()
+  e.preventDefault();
 });
 
 const SetupAction = {
@@ -119,10 +119,10 @@ const ComponentTest = {
 const StateTest = {
   PromptForm: {
     rendered: () => {
-      ComponentTest.promptFormAddButton.isInTheDocument()
-      ComponentTest.promptFormAddButton.isVisible()
-      ComponentTest.promptFormSubmitButton.isInTheDocument()
-      ComponentTest.promptFormSubmitButton.isVisible()
+      ComponentTest.promptFormAddButton.isInTheDocument();
+      ComponentTest.promptFormAddButton.isVisible();
+      ComponentTest.promptFormSubmitButton.isInTheDocument();
+      ComponentTest.promptFormSubmitButton.isVisible();
     },
     wasSubmitted: () => expect(submitSpy).toHaveBeenCalledOnce(),
     wasNotSubmitted: () => expect(submitSpy).toHaveBeenCalledTimes(0),
