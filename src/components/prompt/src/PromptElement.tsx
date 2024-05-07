@@ -37,7 +37,6 @@ const PromptElement = React.memo(
   >((props, ref) => {
     const {
       editing,
-      setEditing,
       thumbnail,
       prompt,
       setFormData,
@@ -89,29 +88,22 @@ const PromptElement = React.memo(
             required={true}
           />
         </Content>
-        <Component
-          compLocation="bottom-right"
-          themeName="PromptElementButtonGroup"
-        >
-          <EditButton
-            onClick={(e) => {
-              e.preventDefault();
-              setEditing();
-            }}
-            type="button"
-            themeName="PromptElementEditButton"
-            tooltipContent="Edit"
-          />
-          <DeleteButton
-            onClick={(e) => {
-              e.preventDefault();
-              removeElement(e);
-            }}
-            type="button"
-            themeName="PromptElementDeleteButton"
-            tooltipContent="Delete"
-          />
-        </Component>
+        {editing && (
+          <Component
+            compLocation="bottom-right"
+            themeName="PromptElementButtonGroup"
+          >
+            <DeleteButton
+              onClick={(e) => {
+                e.preventDefault();
+                removeElement(e);
+              }}
+              type="button"
+              themeName="PromptElementDeleteButton"
+              tooltipContent="Delete"
+            />
+          </Component>
+        )}
       </Root>
     );
   })

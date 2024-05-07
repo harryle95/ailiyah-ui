@@ -321,10 +321,6 @@ const TestFromEnabled = () => {
       ThumbnailPrompt();
     });
   });
-  describe("when click on edit", () => {
-    beforeEach(SetupAction.clickEdit);
-    EmptyStateDisabled();
-  });
 };
 
 TestFromEnabled();
