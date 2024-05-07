@@ -38,30 +38,39 @@ const PromptElement = React.memo(
     const {
       editing,
       setEditing,
-      formData,
+      thumbnail,
+      prompt,
       setFormData,
       promptId,
       removeElement = () => {},
       ...rest
     } = props;
-    const { thumbnail = undefined, prompt = "" } = formData;
 
-    const setThumbnail = (newThumbnail: File) => {
-      setFormData((currentFormData: FormDataType) => {
-        return {
-          ...currentFormData,
-          [promptId]: { ...currentFormData[promptId], thumbnail: newThumbnail },
-        };
-      });
-    };
-    const setPrompt = (newPrompt: string) => {
-      setFormData((currentFormData: FormDataType) => {
-        return {
-          ...currentFormData,
-          [promptId]: { ...currentFormData[promptId], prompt: newPrompt },
-        };
-      });
-    };
+    const setThumbnail = React.useCallback(
+      (newThumbnail: File) => {
+        setFormData((currentFormData: FormDataType) => {
+          return {
+            ...currentFormData,
+            [promptId]: {
+              ...currentFormData[promptId],
+              thumbnail: newThumbnail,
+            },
+          };
+        });
+      },
+      [promptId, setFormData]
+    );
+    const setPrompt = React.useCallback(
+      (newPrompt: string) => {
+        setFormData((currentFormData: FormDataType) => {
+          return {
+            ...currentFormData,
+            [promptId]: { ...currentFormData[promptId], prompt: newPrompt },
+          };
+        });
+      },
+      [promptId, setFormData]
+    );
 
     return (
       <Root initialState={false} themeName="PromptElementRoot" ref={ref}>
