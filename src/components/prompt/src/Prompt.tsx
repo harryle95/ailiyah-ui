@@ -48,32 +48,41 @@ const Root = React.memo(
       ...rest
     } = props;
 
-    const setEditingByPromptId = (promptId: string) => {
-      return () => {
-        setEditingStates((prevState: StateType) => {
-          console.log("Click on editing");
-          return { ...prevState, [promptId]: !prevState[promptId] };
-        });
-      };
-    };
+    const setEditingByPromptId = React.useCallback(
+      (promptId: string) => {
+        return () => {
+          setEditingStates((prevState: StateType) => {
+            console.log("Click on editing");
+            return { ...prevState, [promptId]: !prevState[promptId] };
+          });
+        };
+      },
+      [setEditingStates]
+    );
 
-    const addElement = (e: React.MouseEvent) => {
-      e.preventDefault();
-      let newId = crypto.randomUUID();
-      setObjectById<boolean>(newId, true, setEditingStates);
-      setObjectById<PromptElementDataType>(
-        newId,
-        { thumbnail: undefined, prompt: "" },
-        setFormData
-      );
-    };
+    const addElement = React.useCallback(
+      (e: React.MouseEvent) => {
+        e.preventDefault();
+        let newId = crypto.randomUUID();
+        setObjectById<boolean>(newId, true, setEditingStates);
+        setObjectById<PromptElementDataType>(
+          newId,
+          { thumbnail: undefined, prompt: "" },
+          setFormData
+        );
+      },
+      [setObjectById, setFormData, setEditingStates]
+    );
 
-    const removeElementByPromptId = (promptId: string) => {
-      return () => {
-        removeObjectById(promptId, setEditingStates);
-        removeObjectById(promptId, setFormData);
-      };
-    };
+    const removeElementByPromptId = React.useCallback(
+      (promptId: string) => {
+        return () => {
+          removeObjectById(promptId, setEditingStates);
+          removeObjectById(promptId, setFormData);
+        };
+      },
+      [removeObjectById, setEditingStates, setFormData]
+    );
 
     const providerValue = React.useMemo(() => {
       return {
@@ -81,24 +90,40 @@ const Root = React.memo(
       };
     }, [addElement]);
 
+    const setEditingMap: FormObjectType<Function> = React.useMemo(
+      () =>
+        Object.keys(formData).reduce((acc, key) => {
+          acc[key] = setEditingByPromptId(key);
+          return acc;
+        }, {} as FormObjectType<Function>),
+      [...Object.keys(formData), setEditingByPromptId]
+    );
+
+    const removeElementMap: FormObjectType<Function> = React.useMemo(
+      () =>
+        Object.keys(formData).reduce((acc, key) => {
+          acc[key] = removeElementByPromptId(key);
+          return acc;
+        }, {} as FormObjectType<Function>),
+      [...Object.keys(formData), removeElementByPromptId]
+    );
+
     return (
       <PromptContextProvider value={providerValue}>
         <styled.div {...rest} ref={ref} themeName="PromptRoot">
           <styled.div themeName="PromptContent">
             {formData && Object.keys(formData).length > 0 ? (
               Object.entries(formData).map(([key, value], _) => {
-                const setEditing = setEditingByPromptId(key);
-                const removeElement = removeElementByPromptId(key);
                 return (
                   <PromptElement
                     key={key}
                     editing={editingStates[key]}
-                    setEditing={setEditing}
+                    setEditing={setEditingMap[key]}
                     promptId={key}
                     setFormData={setFormData}
                     thumbnail={value.thumbnail}
                     prompt={value.prompt}
-                    removeElement={removeElement}
+                    removeElement={removeElementMap[key]}
                   />
                 );
               })
