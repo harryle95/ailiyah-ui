@@ -41,20 +41,14 @@ const SetupAction = {
       document.querySelector(".PromptElementDeleteButton")!
     );
   },
-  clickEdit: async () => {
-    await userEvent.click(document.querySelector(".PromptElementEditButton")!);
-    await userEvent.unhover(
-      document.querySelector(".PromptElementEditButton")!
-    );
-  },
   clickNewPrompt: async () => {
     await userEvent.click(
-      document.querySelector(".PromptButtonGroupNewButton")!
+      document.querySelector(".PromptButtonGroupButton.Add")!
     );
   },
   clickSubmit: async () => {
     await userEvent.click(
-      document.querySelector(".PromptButtonGroupSubmitButton")!
+      document.querySelector(".PromptButtonGroupButton.Submit")!
     );
   },
 };
@@ -89,7 +83,6 @@ function createTextContentTest(selectorKey: string, textContent: string) {
 }
 
 const ComponentTest = {
-  promptElementEditButton: createComponentTestSuite(".PromptElementEditButton"),
   promptElementDeleteButton: createComponentTestSuite(
     ".PromptElementDeleteButton"
   ),
@@ -110,9 +103,9 @@ const ComponentTest = {
   },
   thumbnailUploadButton: createComponentTestSuite(".ThumbnailUploadButton"),
   thumbnailDeleteButton: createComponentTestSuite(".ThumbnailDeleteButton"),
-  promptFormAddButton: createComponentTestSuite(".PromptButtonGroupNewButton"),
+  promptFormAddButton: createComponentTestSuite(".PromptButtonGroupButton.Add"),
   promptFormSubmitButton: createComponentTestSuite(
-    ".PromptButtonGroupSubmitButton"
+    ".PromptButtonGroupButton.Submit"
   ),
 };
 
@@ -123,6 +116,10 @@ const StateTest = {
       ComponentTest.promptFormAddButton.isVisible();
       ComponentTest.promptFormSubmitButton.isInTheDocument();
       ComponentTest.promptFormSubmitButton.isVisible();
+    },
+    notRendered: () => {
+      ComponentTest.promptFormAddButton.isNotInTheDocument();
+      ComponentTest.promptFormSubmitButton.isNotInTheDocument();
     },
     wasSubmitted: () => expect(submitSpy).toHaveBeenCalledOnce(),
     wasNotSubmitted: () => expect(submitSpy).toHaveBeenCalledTimes(0),
@@ -154,15 +151,12 @@ const StateTest = {
   },
   PromptButtons: {
     rendered: () => {
-      ComponentTest.promptElementEditButton.isInTheDocument();
       ComponentTest.promptElementDeleteButton.isInTheDocument();
     },
     unhovered: () => {
-      ComponentTest.promptElementEditButton.isInvisible();
       ComponentTest.promptElementDeleteButton.isInvisible();
     },
     hovered: () => {
-      ComponentTest.promptElementEditButton.isVisible();
       ComponentTest.promptElementDeleteButton.isVisible();
     },
   },
