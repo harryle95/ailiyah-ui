@@ -1,6 +1,6 @@
 {
   "name": "@ailiyah-ui/prompt",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "styled prompt component",
   "main": "./src/index.ts",
   "type": "module",
