@@ -32,15 +32,7 @@ export const theme: PresetTheme = {
     twTextColor:
       "text-neutral-700 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300",
   },
-  PromptButtonGroupNewButton: {
-    twBackgroundColor:
-      "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
-    twPadding: "py-2 px-3",
-    twBorderWidth: "border-2",
-    twBorderRadius: "rounded-lg",
-    twWidth: "w-[120px]",
-  },
-  PromptButtonGroupSubmitButton: {
+  PromptButtonGroupButton: {
     twBackgroundColor:
       "bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600",
     twPadding: "py-2 px-3",
@@ -103,7 +95,7 @@ export const theme: PresetTheme = {
     twHeight: "h-4/5",
     twPadding: "p-2",
     twBorderRadius: "rounded-md",
-    twBackgroundColor: "bg-neutral-50"
+    twBackgroundColor: "bg-neutral-50",
   },
   PromptForm: {
     twFlexGrow: "flex-grow",
@@ -120,6 +112,6 @@ export const theme: PresetTheme = {
     twBorderRadius: "rounded-md",
     twPadding: "py-4 pl-4 pr-9",
     twResize: "resize-none",
-    twOther: "scrollbar-thin"
-  }
+    twOther: "scrollbar-thin",
+  },
 };
